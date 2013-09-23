@@ -4,7 +4,8 @@ from django.conf.urls import patterns, include, url
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns('ugc.core.views',
+    url(r'^$', 'homepage', name='homepage'),
     # Examples:
     # url(r'^$', 'ugc.views.home', name='home'),
     # url(r'^ugc/', include('ugc.foo.urls')),
