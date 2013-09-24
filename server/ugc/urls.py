@@ -6,6 +6,7 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('ugc.core.views',
     url(r'^$', 'homepage', name='homepage'),
+    url(r'^publicacao/$', 'detail', name='detail')
     # Examples:
     # url(r'^$', 'ugc.views.home', name='home'),
     # url(r'^ugc/', include('ugc.foo.urls')),
