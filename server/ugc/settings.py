@@ -131,6 +131,8 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'south',
+    'widget_tweaks',
     'ugc.core',
 )
 
@@ -170,3 +172,13 @@ LOGGING = {
         },
     }
 }
+
+SOUTH_TESTS_MIGRATE = False
+
+# Email
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'thiagodornelesrs@gmail.com'
+EMAIL_HOST_PASSWORD = 'th#2go29'
+EMAIL_PORT = 587
+EMAIL_SUBJECT_PREFIX = '[vc reporter]'

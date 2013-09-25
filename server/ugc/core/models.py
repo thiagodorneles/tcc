@@ -1,15 +1,13 @@
 # coding: utf-8
-# from django.db import models
-# from django.utils.translation import ugettext_lazy as _
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
-# class Publishs(models.Model):
+# class Publish(models.Model):
 #     title = models.CharField(_('Título'), max_length=100)
+#     description = models.TextField(_('Descrição'))
 #     date_time = models.DateTimeField(_('DataHora'))
 #     location = models.CharField(_('Localização'), max_length=50, blank=True)
-#     description = models.TextField(_('Descrição'))
 #     status = models.BooleanField(_('Status'))
-#     tag = models.ForeignKey('Tags', null=True)
-#     tag = models.ForeignKey('Tags', null=True)
     
 #     class Meta:
 #         ordering = ['-date_time']
@@ -21,6 +19,7 @@
 
 # class Tags(models.Model):
 #     tag = models.CharField(_('Tag'), max_length=30)
+#     publish = models.ForeignK
     
 #     def __unicode__(self):
 #         return self.tag
