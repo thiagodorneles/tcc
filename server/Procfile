@@ -1,1 +1,1 @@
-web: gnicorn usc.wsgi
+web: gunicorn ugc.wsgi
