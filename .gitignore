@@ -4,3 +4,4 @@
 *.db
 .DS_Store
 server/static
+server/ugc/static/*
