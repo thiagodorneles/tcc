@@ -3,5 +3,5 @@
 *.sqlite
 *.db
 .DS_Store
-server/static
+server/*
 server/ugc/static/*

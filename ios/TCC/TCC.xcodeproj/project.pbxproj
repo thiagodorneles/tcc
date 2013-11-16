@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E15ABEB1829F1DD00BB0F13 /* avatar_baixa.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5E15ABEA1829F1DD00BB0F13 /* avatar_baixa.jpg */; };
+		5E4C80441829D4FF00368270 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E4C80431829D4FF00368270 /* BaseViewController.m */; };
 		5EBC500017EFD57B0082BFB7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EBC4FFF17EFD57B0082BFB7 /* Foundation.framework */; };
 		5EBC500217EFD57B0082BFB7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EBC500117EFD57B0082BFB7 /* CoreGraphics.framework */; };
 		5EBC500417EFD57B0082BFB7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EBC500317EFD57B0082BFB7 /* UIKit.framework */; };
@@ -34,6 +36,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5E15ABEA1829F1DD00BB0F13 /* avatar_baixa.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = avatar_baixa.jpg; sourceTree = "<group>"; };
+		5E4C80421829D4FF00368270 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseViewController.h; path = Views/BaseViewController.h; sourceTree = "<group>"; };
+		5E4C80431829D4FF00368270 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseViewController.m; path = Views/BaseViewController.m; sourceTree = "<group>"; };
 		5EBC4FFC17EFD57B0082BFB7 /* TCC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TCC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EBC4FFF17EFD57B0082BFB7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5EBC500117EFD57B0082BFB7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -117,6 +122,8 @@
 				5EBC501117EFD57B0082BFB7 /* Main.storyboard */,
 				5EBC501417EFD57B0082BFB7 /* TDViewController.h */,
 				5EBC501517EFD57B0082BFB7 /* TDViewController.m */,
+				5E4C80421829D4FF00368270 /* BaseViewController.h */,
+				5E4C80431829D4FF00368270 /* BaseViewController.m */,
 				5EBC501717EFD57C0082BFB7 /* Images.xcassets */,
 				5EBC500617EFD57B0082BFB7 /* Supporting Files */,
 			);
@@ -126,6 +133,7 @@
 		5EBC500617EFD57B0082BFB7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5E15ABEA1829F1DD00BB0F13 /* avatar_baixa.jpg */,
 				5EBC500717EFD57B0082BFB7 /* TCC-Info.plist */,
 				5EBC500817EFD57B0082BFB7 /* InfoPlist.strings */,
 				5EBC500B17EFD57B0082BFB7 /* main.m */,
@@ -200,6 +208,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Thiago Dorneles";
 				TargetAttributes = {
+					5EBC4FFB17EFD57B0082BFB7 = {
+						DevelopmentTeam = 48B8RQ289Y;
+					};
 					5EBC501C17EFD57C0082BFB7 = {
 						TestTargetID = 5EBC4FFB17EFD57B0082BFB7;
 					};
@@ -231,6 +242,7 @@
 			files = (
 				5EBC501817EFD57C0082BFB7 /* Images.xcassets in Resources */,
 				5EBC500A17EFD57B0082BFB7 /* InfoPlist.strings in Resources */,
+				5E15ABEB1829F1DD00BB0F13 /* avatar_baixa.jpg in Resources */,
 				5EBC501317EFD57B0082BFB7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -251,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EBC501617EFD57B0082BFB7 /* TDViewController.m in Sources */,
+				5E4C80441829D4FF00368270 /* BaseViewController.m in Sources */,
 				5EBC501017EFD57B0082BFB7 /* TDAppDelegate.m in Sources */,
 				5EBC500C17EFD57B0082BFB7 /* main.m in Sources */,
 			);
@@ -379,10 +392,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TCC/TCC-Prefix.pch";
 				INFOPLIST_FILE = "TCC/TCC-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -392,10 +408,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TCC/TCC-Prefix.pch";
 				INFOPLIST_FILE = "TCC/TCC-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -461,6 +480,7 @@
 				5EBC503017EFD57C0082BFB7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5EBC503117EFD57C0082BFB7 /* Build configuration list for PBXNativeTarget "TCCTests" */ = {
 			isa = XCConfigurationList;
@@ -469,6 +489,7 @@
 				5EBC503317EFD57C0082BFB7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
