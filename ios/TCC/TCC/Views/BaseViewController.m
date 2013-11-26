@@ -18,6 +18,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.view.tintColor = [UIColor redColor];
         // Custom initialization
     }
     return self;
@@ -27,6 +28,11 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    [[UITabBar appearance] setTintColor:[UIColor redColor]];
+//    UITabBarItem *novo  = [self.tabBar.items objectAtIndex:1];
+//    novo.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+    
 }
 
 - (void)didReceiveMemoryWarning
