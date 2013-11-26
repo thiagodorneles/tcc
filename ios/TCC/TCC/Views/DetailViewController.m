@@ -20,7 +20,7 @@
 @implementation DetailViewController
 
 @synthesize publish;
-@synthesize labelTitle, labelUser, labelDate, labelTags, textDescription, imagePicture;
+@synthesize labelTitle, labelUser, labelDate, labelTags, labelDescription, imagePicture;
 //@synthesize  activityPopover;
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -44,11 +44,14 @@
     self.tableView.allowsSelection = NO;
     
     // Carregando os dados
+    labelTitle.numberOfLines = 0;
+    labelDescription.numberOfLines = 0;
+    
     labelTitle.text = self.publish.title;
     [labelTitle sizeToFit];
     labelUser.text = self.publish.user_name;
     labelDate.text = [inFormat stringFromDate:self.publish.date];
-    textDescription.text = self.publish.description;
+    labelDescription.text = self.publish.description;
     
     if (self.publish.tags)
     {
@@ -57,12 +60,11 @@
         labelTags.text = tag;
     }
     
-    
 //    [labelTitle sizeToFit];
     [labelUser sizeToFit];
     [labelDate sizeToFit];
     [labelTags sizeToFit];
-    [textDescription sizeToFit];
+    [labelDescription sizeToFit];
 }
 
 - (void)didReceiveMemoryWarning

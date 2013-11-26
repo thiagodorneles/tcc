@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelUser;
 @property (weak, nonatomic) IBOutlet UILabel *labelDate;
 @property (weak, nonatomic) IBOutlet UILabel *labelTags;
-@property (weak, nonatomic) IBOutlet UITextView *textDescription;
+@property (weak, nonatomic) IBOutlet UILabel *labelDescription;
 @property (weak, nonatomic) IBOutlet UIImageView *imagePicture;
 //@property (weak, nonatomic) IBOutlet UIBarButtonItem *buttonShare;
 //@property (weak, nonatomic) IBOutlet MKMapView *mapView;

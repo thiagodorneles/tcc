@@ -537,13 +537,13 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="149"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Manifestantes realizam protesto na Avenida Assis Brasil por causa dos alagamentos redidenciais" translatesAutoresizingMaskIntoConstraints="NO" id="1Sb-jo-L9V">
-                                                    <rect key="frame" x="15" y="11" width="290" height="63"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3sH-Jj-cej">
+                                                    <rect key="frame" x="20" y="10" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                </textView>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -582,10 +582,10 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
                     <connections>
                         <outlet property="imagePicture" destination="PeC-cm-85n" id="GE2-aL-79P"/>
                         <outlet property="labelDate" destination="Es5-yh-CSS" id="ZwO-2Z-8G7"/>
+                        <outlet property="labelDescription" destination="3sH-Jj-cej" id="IM2-k6-XPB"/>
                         <outlet property="labelTags" destination="dD3-7d-Iju" id="WB7-Jh-KKn"/>
                         <outlet property="labelTitle" destination="c7p-6M-OxM" id="7OJ-rF-DbI"/>
                         <outlet property="labelUser" destination="TLJ-B3-lTi" id="zed-el-LzW"/>
-                        <outlet property="textDescription" destination="1Sb-jo-L9V" id="Kih-4W-rhv"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Go4-q7-FXy" userLabel="First Responder" sceneMemberID="firstResponder"/>
