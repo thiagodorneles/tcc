@@ -7,12 +7,45 @@
 //
 
 #import "TDAppDelegate.h"
+#import "Publish.h"
+#import "BaseRequest.h"
+#import "constants.h"
+#import <RestKit/RestKit.h>
 
 @implementation TDAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [[UITabBar appearance] setTintColor:[UIColor redColor]];
+    [[UIBarButtonItem appearance] setTintColor:[UIColor redColor]];
+    
+    // Initialize RestKit
+    RKObjectManager *objectManager = [RKObjectManager managerWithBaseURLString:@"http://192.168.1.20:8000/api/"];
+    
+    // Enable automatic network activity indicator management
+    objectManager.client.requestQueue.showsNetworkActivityIndicatorWhenBusy = YES;
+    
+    // Setup our object mappings
+    RKObjectMapping *imovelMapping = [RKObjectMapping mappingForClass:[Publish class]];
+    [imovelMapping mapKeyPath:@"title" toAttribute:@"title"];
+    [imovelMapping mapKeyPath:@"description" toAttribute:@"description"];
+    [imovelMapping mapKeyPath:@"location" toAttribute:@"location"];
+    [imovelMapping mapKeyPath:@"city" toAttribute:@"city"];
+    [imovelMapping mapKeyPath:@"quant_views" toAttribute:@"quant_views"];
+    [imovelMapping mapKeyPath:@"quant_blocks" toAttribute:@"quant_blocks"];
+    [imovelMapping mapKeyPath:@"user" toAttribute:@"user"];
+    [imovelMapping mapKeyPath:@"tags" toAttribute:@"tags"];
+    [imovelMapping mapKeyPath:@"created_at" toAttribute:@"created_at"];
+    
+    [objectManager.mappingProvider setMapping:imovelMapping forKeyPath:@"results"];
+    
+    RKObjectMapping *requestMapping = [RKObjectMapping mappingForClass:[BaseRequest class]];
+    [requestMapping mapKeyPath:@"count" toAttribute:@"count"];
+    [requestMapping mapKeyPath:@"next" toAttribute:@"next"];
+    [objectManager.mappingProvider setMapping:requestMapping forKeyPath:@""];
+
+    
     return YES;
 }
 							
