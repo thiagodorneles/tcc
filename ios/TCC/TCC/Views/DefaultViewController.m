@@ -42,14 +42,12 @@
     self.clearsSelectionOnViewWillAppear = YES;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-//    [self sendRequest];
     [self sendRequestWithURL:@"/publishs/" isLoadMore:false];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - RestKit Requesting Data
@@ -67,41 +65,6 @@
     if(!loadMore)
         self.publishData = nil;
 }
-
-
-//- (void)sendRequest
-//{
-//    [self presentHUD];
-//    
-//    NSURL *url = [NSURL URLWithString:@"http://127.0.0.1:8000/api/publishs/"];
-//    NSData *data = [NSData dataWithContentsOfURL:url];
-//    NSArray *lista = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-//    
-//    publishData = [NSMutableArray new];
-//    
-//    NSDateFormatter *formatDate = [NSDateFormatter new];
-//    [formatDate setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-//    
-//    for (NSDictionary *item in lista) {
-//        // Adjust Date format from server
-//        NSString *strDate = [item objectForKey:@"created_at"];
-//        strDate = [strDate stringByReplacingOccurrencesOfString:@"T" withString:@" "];
-//        strDate = [strDate substringWithRange:NSMakeRange(0, [strDate length] - 4)];
-//        
-//        Publish *p = [Publish new];
-//        p.title = [item objectForKey:@"title"];
-//        p.description = [item objectForKey:@"description"];
-//        p.city = [item objectForKey:@"city"];
-//        p.location = [item objectForKey:@"location"];
-//        p.created_at = [formatDate dateFromString:strDate];
-//        
-//        [publishData addObject:p];
-//    }
-//    
-//    [self.tableView reloadData];
-//    [self dismissHUD];
-//    
-//}
 
 #pragma mark - RestKit Delegate
 - (void)objectLoader:(RKObjectLoader *)objectLoader didFailWithError:(NSError *)error
@@ -180,7 +143,7 @@
     cell.image.image = [UIImage imageNamed:@"acidente"];
     cell.labelTitle.numberOfLines = 0;
     cell.labelTitle.text = publish.title;
-    cell.labelUser.text = publish.user;
+    cell.labelUser.text = publish.user_name;
     cell.labelTags.text = [publish.tags componentsJoinedByString:@", "];
 //    cell.labelDate.text= publish.date;
     
@@ -231,6 +194,5 @@
 //        [segue.destinationViewController setValue:detail forUndefinedKey:@"publish"];
     }
 }
-
 
 @end

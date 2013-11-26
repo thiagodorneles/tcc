@@ -10,4 +10,6 @@
 
 @implementation User
 
+@synthesize pk, name, email;
+
 @end

@@ -20,7 +20,8 @@
 @property NSString *city;
 @property NSInteger quant_views;
 @property NSInteger quant_blocks;
-@property NSString *user;
+@property NSInteger user;
+@property NSString *user_name;
 @property NSMutableArray *tags;
 
 // Location

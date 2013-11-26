@@ -46,7 +46,7 @@
     // Carregando os dados
     labelTitle.text = self.publish.title;
     [labelTitle sizeToFit];
-    labelUser.text = self.publish.user;
+    labelUser.text = self.publish.user_name;
     labelDate.text = [inFormat stringFromDate:self.publish.date];
     textDescription.text = self.publish.description;
     

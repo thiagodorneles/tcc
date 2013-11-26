@@ -21,7 +21,7 @@
     [[UIBarButtonItem appearance] setTintColor:[UIColor redColor]];
     
     // Initialize RestKit
-    RKObjectManager *objectManager = [RKObjectManager managerWithBaseURLString:@"http://192.168.1.20:8000/api/"];
+    RKObjectManager *objectManager = [RKObjectManager managerWithBaseURLString:@"http://127.0.0.1:8000/api/"];
     
     // Enable automatic network activity indicator management
     objectManager.client.requestQueue.showsNetworkActivityIndicatorWhenBusy = YES;
@@ -35,6 +35,7 @@
     [imovelMapping mapKeyPath:@"quant_views" toAttribute:@"quant_views"];
     [imovelMapping mapKeyPath:@"quant_blocks" toAttribute:@"quant_blocks"];
     [imovelMapping mapKeyPath:@"user" toAttribute:@"user"];
+    [imovelMapping mapKeyPath:@"user_name" toAttribute:@"user_name"];
     [imovelMapping mapKeyPath:@"tags" toAttribute:@"tags"];
     [imovelMapping mapKeyPath:@"created_at" toAttribute:@"created_at"];
     

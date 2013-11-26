@@ -12,6 +12,7 @@
 		5E0E58D41842656A00C0135C /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E58D31842656A00C0135C /* DetailViewController.m */; };
 		5E15ABEB1829F1DD00BB0F13 /* avatar_baixa.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5E15ABEA1829F1DD00BB0F13 /* avatar_baixa.jpg */; };
 		5E15DBAE183CC2B0008A6CD7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E15DBAD183CC2B0008A6CD7 /* LoginViewController.m */; };
+		5E20D8D3184557E200A67746 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E20D8D2184557E200A67746 /* User.m */; };
 		5E4C80441829D4FF00368270 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E4C80431829D4FF00368270 /* BaseViewController.m */; };
 		5E7AE1741841385800F2E276 /* Publish.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7AE1731841385800F2E276 /* Publish.m */; };
 		5E7AE17818413C0F00F2E276 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7AE17718413C0F00F2E276 /* CFNetwork.framework */; };
@@ -103,6 +104,8 @@
 		5E15ABEA1829F1DD00BB0F13 /* avatar_baixa.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = avatar_baixa.jpg; sourceTree = "<group>"; };
 		5E15DBAC183CC2B0008A6CD7 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Views/LoginViewController.h; sourceTree = "<group>"; };
 		5E15DBAD183CC2B0008A6CD7 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Views/LoginViewController.m; sourceTree = "<group>"; };
+		5E20D8D1184557E200A67746 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
+		5E20D8D2184557E200A67746 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
 		5E4C80421829D4FF00368270 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseViewController.h; path = Views/BaseViewController.h; sourceTree = "<group>"; };
 		5E4C80431829D4FF00368270 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseViewController.m; path = Views/BaseViewController.m; sourceTree = "<group>"; };
 		5E7AE1721841385800F2E276 /* Publish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Publish.h; path = Models/Publish.h; sourceTree = "<group>"; };
@@ -208,6 +211,8 @@
 				5E7AE1731841385800F2E276 /* Publish.m */,
 				5E0D499818429BAF007BDB31 /* BaseRequest.h */,
 				5E0D499918429BAF007BDB31 /* BaseRequest.m */,
+				5E20D8D1184557E200A67746 /* User.h */,
+				5E20D8D2184557E200A67746 /* User.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -474,6 +479,7 @@
 				5EBAB23E18419AF300A6A0DF /* MBProgressHUD.m in Sources */,
 				5EBC500C17EFD57B0082BFB7 /* main.m in Sources */,
 				5E15DBAE183CC2B0008A6CD7 /* LoginViewController.m in Sources */,
+				5E20D8D3184557E200A67746 /* User.m in Sources */,
 				5EBAC28C1842DB59001042B8 /* ProfileViewController.m in Sources */,
 				5EFD602F1841846B00C7EC21 /* DefaultViewController.m in Sources */,
 				5E0D499A18429BAF007BDB31 /* BaseRequest.m in Sources */,
