@@ -10,4 +10,8 @@
 
 @interface BaseRequest : NSObject
 
+@property NSInteger count;
+//@property NSInteger numeros_paginas;
+@property NSString *next;
+
 @end
