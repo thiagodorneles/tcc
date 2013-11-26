@@ -1,0 +1,171 @@
+
+/* Class = "IBUILabel"; text = "1h atrás"; ObjectID = "1h8-xX-NxD"; */
+"1h8-xX-NxD.text" = "1h atrás";
+
+/* Class = "IBUILabel"; text = "Fulano"; ObjectID = "2H0-AT-yI0"; */
+"2H0-AT-yI0.text" = "Fulano";
+
+/* Class = "IBUIBarButtonItem"; title = "Voltar"; ObjectID = "38G-kC-lyv"; */
+"38G-kC-lyv.title" = "Voltar";
+
+/* Class = "IBUILabel"; text = "Novo registro"; ObjectID = "48K-sK-g42"; */
+"48K-sK-g42.text" = "Novo registro";
+
+/* Class = "IBUILabel"; text = "3h atrás"; ObjectID = "4eg-N8-p4f"; */
+"4eg-N8-p4f.text" = "3h atrás";
+
+/* Class = "IBUILabel"; text = "Asa Branca"; ObjectID = "5Ov-m8-9Eu"; */
+"5Ov-m8-9Eu.text" = "Asa Branca";
+
+/* Class = "IBUILabel"; text = "Tags: protesto, bloqueio"; ObjectID = "5TR-2P-dcw"; */
+"5TR-2P-dcw.text" = "Tags: protesto, bloqueio";
+
+/* Class = "IBUILabel"; text = "vc reporter"; ObjectID = "6bq-dh-1TP"; */
+"6bq-dh-1TP.text" = "vc reporter";
+
+/* Class = "IBUILabel"; text = "transito, acidente"; ObjectID = "6gB-Mf-Dka"; */
+"6gB-Mf-Dka.text" = "transito, acidente";
+
+/* Class = "IBUITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "6kP-nk-DpF"; */
+"6kP-nk-DpF.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "IBUILabel"; text = "Twitter"; ObjectID = "8Ny-qc-Do1"; */
+"8Ny-qc-Do1.text" = "Twitter";
+
+/* Class = "IBUILabel"; text = "Sobre o aplicativo"; ObjectID = "8gu-tQ-vxR"; */
+"8gu-tQ-vxR.text" = "Sobre o aplicativo";
+
+/* Class = "IBUILabel"; text = "Facebook"; ObjectID = "AHO-tB-upQ"; */
+"AHO-tB-upQ.text" = "Facebook";
+
+/* Class = "IBUILabel"; text = "protesto, bloqueio"; ObjectID = "Ata-vf-bek"; */
+"Ata-vf-bek.text" = "protesto, bloqueio";
+
+/* Class = "IBUITextView"; text = "Manifestantes realizam protesto na Avenida Assis Brasil por causa dos alagamentos residenciais"; ObjectID = "Aur-r5-3Eq"; */
+"Aur-r5-3Eq.text" = "Manifestantes realizam protesto na Avenida Assis Brasil por causa dos alagamentos residenciais";
+
+/* Class = "IBUILabel"; text = "Redes sociais"; ObjectID = "Cof-5U-atK"; */
+"Cof-5U-atK.text" = "Redes sociais";
+
+/* Class = "IBUILabel"; text = "Facebook"; ObjectID = "ErA-wd-FNk"; */
+"ErA-wd-FNk.text" = "Facebook";
+
+/* Class = "IBUILabel"; text = "Protesto moradores"; ObjectID = "F15-Rj-wfO"; */
+"F15-Rj-wfO.text" = "Protesto moradores";
+
+/* Class = "IBUIBarButtonItem"; title = "Config"; ObjectID = "FO7-iT-n8B"; */
+"FO7-iT-n8B.title" = "Config";
+
+/* Class = "IBUINavigationItem"; title = "Detalhes"; ObjectID = "FR4-0q-jTX"; */
+"FR4-0q-jTX.title" = "Detalhes";
+
+/* Class = "IBUILabel"; text = "Nome do usuário"; ObjectID = "FqN-1B-PE3"; */
+"FqN-1B-PE3.text" = "Nome do usuário";
+
+/* Class = "IBUINavigationItem"; title = "Configurações"; ObjectID = "Iq0-M1-TtB"; */
+"Iq0-M1-TtB.title" = "Configurações";
+
+/* Class = "IBUILabel"; text = "Beltrano"; ObjectID = "Iw0-7s-gnc"; */
+"Iw0-7s-gnc.text" = "Beltrano";
+
+/* Class = "IBUILabel"; text = "Suporte"; ObjectID = "KdC-0z-qd9"; */
+"KdC-0z-qd9.text" = "Suporte";
+
+/* Class = "IBUINavigationItem"; title = "Noticias"; ObjectID = "Ldp-9q-8JS"; */
+"Ldp-9q-8JS.title" = "Noticias";
+
+/* Class = "IBUILabel"; text = "Alagamento em "; ObjectID = "Lum-0g-ZIK"; */
+"Lum-0g-ZIK.text" = "Alagamento em ";
+
+/* Class = "IBUILabel"; text = "Acidente Assis Brasil"; ObjectID = "MBF-4N-lAb"; */
+"MBF-4N-lAb.text" = "Acidente Assis Brasil";
+
+/* Class = "IBUILabel"; text = "20/10 10:00"; ObjectID = "PII-2y-HVY"; */
+"PII-2y-HVY.text" = "20/10 10:00";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Define se deve exibir diretamente a camera quando for registrar um novo evento"; ObjectID = "RKb-KD-vhx"; */
+"RKb-KD-vhx.headerTitle" = "Define se deve exibir diretamente a camera quando for registrar um novo evento";
+
+/* Class = "IBUITableViewController"; title = "Noticias"; ObjectID = "RT9-fo-Uqd"; */
+"RT9-fo-Uqd.title" = "Noticias";
+
+/* Class = "IBUIBarButtonItem"; title = "Sair"; ObjectID = "Rtk-XH-ZKf"; */
+"Rtk-XH-ZKf.title" = "Sair";
+
+/* Class = "IBUIBarButtonItem"; title = "Voltar"; ObjectID = "U0K-fa-SqU"; */
+"U0K-fa-SqU.title" = "Voltar";
+
+/* Class = "IBUILabel"; text = "Fulano"; ObjectID = "VGg-Ur-sEx"; */
+"VGg-Ur-sEx.text" = "Fulano";
+
+/* Class = "IBUILabel"; text = "Abrir camera"; ObjectID = "Vem-4i-ura"; */
+"Vem-4i-ura.text" = "Abrir camera";
+
+/* Class = "IBUILabel"; text = "Protesto moradores Asa Branca"; ObjectID = "Vmg-Mu-RSl"; */
+"Vmg-Mu-RSl.text" = "Protesto moradores Asa Branca";
+
+/* Class = "IBUILabel"; text = "Cachoeirinha"; ObjectID = "Vro-ne-hDi"; */
+"Vro-ne-hDi.text" = "Cachoeirinha";
+
+/* Class = "IBUINavigationItem"; title = "Sobre"; ObjectID = "Zd7-kh-EPX"; */
+"Zd7-kh-EPX.title" = "Sobre";
+
+/* Class = "IBUIBarButtonItem"; title = "Voltar"; ObjectID = "ZsJ-DC-s1D"; */
+"ZsJ-DC-s1D.title" = "Voltar";
+
+/* Class = "IBUIViewController"; title = "Perfil"; ObjectID = "bm9-6E-niO"; */
+"bm9-6E-niO.title" = "Perfil";
+
+/* Class = "IBUILabel"; text = "transito, tempestade"; ObjectID = "ccd-ZX-4ho"; */
+"ccd-ZX-4ho.text" = "transito, tempestade";
+
+/* Class = "IBUILabel"; text = "1.0"; ObjectID = "erT-Vl-s4Z"; */
+"erT-Vl-s4Z.text" = "1.0";
+
+/* Class = "IBUILabel"; text = "Desde 01/2013"; ObjectID = "i1u-qy-1Jd"; */
+"i1u-qy-1Jd.text" = "Desde 01/2013";
+
+/* Class = "IBUILabel"; text = "Fulano"; ObjectID = "ibp-LO-SEG"; */
+"ibp-LO-SEG.text" = "Fulano";
+
+/* Class = "IBUILabel"; text = "Fotos:"; ObjectID = "k6Y-jW-aAC"; */
+"k6Y-jW-aAC.text" = "Fotos:";
+
+/* Class = "IBUITabBarItem"; title = "Noticias"; ObjectID = "kOW-If-rW4"; */
+"kOW-If-rW4.title" = "Noticias";
+
+/* Class = "IBUILabel"; text = "Publicações:"; ObjectID = "mHx-c7-kzS"; */
+"mHx-c7-kzS.text" = "Publicações:";
+
+/* Class = "IBUINavigationItem"; title = "Perfil"; ObjectID = "mx4-PK-gTU"; */
+"mx4-PK-gTU.title" = "Perfil";
+
+/* Class = "IBUINavigationItem"; title = "Redes sociais"; ObjectID = "nGw-RK-yTk"; */
+"nGw-RK-yTk.title" = "Redes sociais";
+
+/* Class = "IBUINavigationItem"; title = "Novo"; ObjectID = "nHE-ec-4QW"; */
+"nHE-ec-4QW.title" = "Novo";
+
+/* Class = "IBUITabBarItem"; title = "Perfil"; ObjectID = "osb-Nq-P5U"; */
+"osb-Nq-P5U.title" = "Perfil";
+
+/* Class = "IBUILabel"; text = "Google+"; ObjectID = "pRL-mN-crL"; */
+"pRL-mN-crL.text" = "Google+";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Configuração para determinar se a cada registro será compartilhado automaticamente nas redes sociais"; ObjectID = "qI0-id-YYz"; */
+"qI0-id-YYz.headerTitle" = "Configuração para determinar se a cada registro será compartilhado automaticamente nas redes sociais";
+
+/* Class = "IBUITabBarItem"; title = "Novo"; ObjectID = "tpf-Zd-qXK"; */
+"tpf-Zd-qXK.title" = "Novo";
+
+/* Class = "IBUINavigationItem"; title = "Novo registro"; ObjectID = "v4v-gn-DO7"; */
+"v4v-gn-DO7.title" = "Novo registro";
+
+/* Class = "IBUILabel"; text = "Versão"; ObjectID = "wSd-RE-uzN"; */
+"wSd-RE-uzN.text" = "Versão";
+
+/* Class = "IBUILabel"; text = "Twitter"; ObjectID = "yqJ-H0-kWP"; */
+"yqJ-H0-kWP.text" = "Twitter";
+
+/* Class = "IBUILabel"; text = "2h atrás"; ObjectID = "zBX-2T-bFm"; */
+"zBX-2T-bFm.text" = "2h atrás";
