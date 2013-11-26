@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:TCC.xcodeproj">
+      location = "absolute:TCC/TCC.xcodeproj">
    </FileRef>
 </Workspace>
