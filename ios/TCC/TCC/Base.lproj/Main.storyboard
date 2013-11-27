@@ -604,26 +604,37 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="8KI-ku-Mmm" kind="relationship" relationship="rootViewController" id="6y6-zL-AR2"/>
+                        <segue destination="qiQ-ps-zSJ" kind="relationship" relationship="rootViewController" id="uAu-dq-Ibu"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dDi-QT-vrT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1585" y="-1172"/>
         </scene>
-        <!--Table View Controller - Novo-->
-        <scene sceneID="3vn-7j-L2y">
+        <!--New View Controller-->
+        <scene sceneID="2ty-6E-GCB">
             <objects>
-                <tableViewController id="8KI-ku-Mmm" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="Novo" id="nHE-ec-4QW">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="XVo-nA-38W"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="VCs-zN-zm5"/>
+                <viewController id="qiQ-ps-zSJ" customClass="NewViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eaK-Nf-TNL"/>
+                        <viewControllerLayoutGuide type="bottom" id="ss2-gD-a6i"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="myq-Im-SCg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="bIt-au-n40">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="wWr-qn-6Dg">
+                            <connections>
+                                <action selector="buttonSaveTouched:" destination="qiQ-ps-zSJ" id="8eY-5F-K7h"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
-                    <nil key="simulatedBottomBarMetrics"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hJf-QA-TE1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EDv-lQ-haZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2098" y="-1182"/>
+            <point key="canvasLocation" x="1980" y="-1168"/>
         </scene>
         <!--Navigation Controller - Noticias-->
         <scene sceneID="KPL-Wr-zd1">
