@@ -16,6 +16,7 @@
 		5E20D8DA184564F900A67746 /* NewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E20D8D9184564F900A67746 /* NewViewController.m */; };
 		5E20D8DF1845659B00A67746 /* JVFloatLabeledTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E20D8DC1845659B00A67746 /* JVFloatLabeledTextField.m */; };
 		5E20D8E01845659B00A67746 /* JVFloatLabeledTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E20D8DE1845659B00A67746 /* JVFloatLabeledTextView.m */; };
+		5E4338A51846A74D00E32D92 /* ConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E4338A41846A74D00E32D92 /* ConfigViewController.m */; };
 		5E4C80441829D4FF00368270 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E4C80431829D4FF00368270 /* BaseViewController.m */; };
 		5E7AE1741841385800F2E276 /* Publish.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7AE1731841385800F2E276 /* Publish.m */; };
 		5E7AE17818413C0F00F2E276 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7AE17718413C0F00F2E276 /* CFNetwork.framework */; };
@@ -115,6 +116,8 @@
 		5E20D8DC1845659B00A67746 /* JVFloatLabeledTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVFloatLabeledTextField.m; sourceTree = "<group>"; };
 		5E20D8DD1845659B00A67746 /* JVFloatLabeledTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVFloatLabeledTextView.h; sourceTree = "<group>"; };
 		5E20D8DE1845659B00A67746 /* JVFloatLabeledTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVFloatLabeledTextView.m; sourceTree = "<group>"; };
+		5E4338A31846A74D00E32D92 /* ConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfigViewController.h; path = Views/ConfigViewController.h; sourceTree = "<group>"; };
+		5E4338A41846A74D00E32D92 /* ConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfigViewController.m; path = Views/ConfigViewController.m; sourceTree = "<group>"; };
 		5E4C80421829D4FF00368270 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseViewController.h; path = Views/BaseViewController.h; sourceTree = "<group>"; };
 		5E4C80431829D4FF00368270 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseViewController.m; path = Views/BaseViewController.m; sourceTree = "<group>"; };
 		5E7AE1721841385800F2E276 /* Publish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Publish.h; path = Models/Publish.h; sourceTree = "<group>"; };
@@ -213,6 +216,8 @@
 				5EBAC28B1842DB59001042B8 /* ProfileViewController.m */,
 				5E20D8D8184564F900A67746 /* NewViewController.h */,
 				5E20D8D9184564F900A67746 /* NewViewController.m */,
+				5E4338A31846A74D00E32D92 /* ConfigViewController.h */,
+				5E4338A41846A74D00E32D92 /* ConfigViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -500,6 +505,7 @@
 				5E0E58D0184241C600C0135C /* PublishCell.m in Sources */,
 				5E20D8DF1845659B00A67746 /* JVFloatLabeledTextField.m in Sources */,
 				5E7AE1741841385800F2E276 /* Publish.m in Sources */,
+				5E4338A51846A74D00E32D92 /* ConfigViewController.m in Sources */,
 				5E0E58D41842656A00C0135C /* DetailViewController.m in Sources */,
 				5EBAB23E18419AF300A6A0DF /* MBProgressHUD.m in Sources */,
 				5EBC500C17EFD57B0082BFB7 /* main.m in Sources */,

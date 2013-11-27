@@ -165,22 +165,23 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     return YES;
 }
 
--(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-{
-    text = [text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    
-    if ([text isEqualToString:@""])
-    {
-        return FALSE;
-    }
-    else
-    {
-        [textView resignFirstResponder];
-        [self buttonSaveTouched:self];
-        return TRUE;
-    }
-}
+//-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+//{
+//    text = [text stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+//    
+//    if ([text isEqualToString:@""])
+//    {
+//        return FALSE;
+//    }
+//    else
+//    {
+//        [textView resignFirstResponder];
+//        [self buttonSaveTouched:self];
+//        return TRUE;
+//    }
+//}
+
 -(BOOL)textViewShouldEndEditing:(UITextView *)textView
 {
     return TRUE;
@@ -189,6 +190,10 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 - (IBAction)buttonSaveTouched:(id)sender
 {
     [self presentHUD];
+    
+    [self.titleField resignFirstResponder];
+    [self.tagsField resignFirstResponder];
+    [self.descriptionField resignFirstResponder];
     
     Publish *publish = [Publish new];
     publish.title = self.titleField.text;
