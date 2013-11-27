@@ -49,8 +49,7 @@
             [mailController.navigationBar setTintColor:[UIColor redColor]];
             mailController.mailComposeDelegate = self;
             [mailController setToRecipients:[NSArray arrayWithObject:@"thiagodornelesrs@gmail.com"]];
-            [self presentViewController:mailController animated:YES completion:NULL];
-            
+            [self presentViewController:mailController animated:YES completion:NULL];            
         }
     }
     

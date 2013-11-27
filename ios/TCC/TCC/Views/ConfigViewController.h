@@ -11,4 +11,5 @@
 @interface ConfigViewController : UITableViewController
 
 - (IBAction)buttonContactTouched:(id)sender;
+
 @end
