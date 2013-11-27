@@ -38,17 +38,27 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    self.refreshControl =[[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     self.clearsSelectionOnViewWillAppear = YES;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self sendRequestWithURL:URL_DEFAULT isLoadMore:false];
+
+}
+
+- (void)refresh:(UIRefreshControl *)refreshControl {
+    [self sendRequestWithURL:URL_DEFAULT isLoadMore:false];
+    [refreshControl endRefreshing];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
 }
+
+
 
 #pragma mark - RestKit Requesting Data
 - (void)sendRequestWithURL:(NSString*)URL isLoadMore:(BOOL)loadMore
@@ -105,16 +115,16 @@
     // O python envia uma data completa que o parser do RestKit nao consegue
     // converter. Esse bloco entao pega o campo 'created_at' que eh string
     // e joga para o campo date.
-    NSDateFormatter *formatDate = [NSDateFormatter new];
-    [formatDate setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    for (NSInteger i = 0; i < [self.publishData count]; i++) {
-        Publish *item = [self.publishData objectAtIndex:i];
-        NSString *strDate = item.created_at;
-        strDate = [strDate stringByReplacingOccurrencesOfString:@"T" withString:@" "];
-        strDate = [strDate substringWithRange:NSMakeRange(0, [strDate length] - 4)];
-        item.date = [formatDate dateFromString:strDate];
-        [self.publishData replaceObjectAtIndex:i withObject:item];
-    }
+//    NSDateFormatter *formatDate = [NSDateFormatter new];
+//    [formatDate setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//    for (NSInteger i = 0; i < [self.publishData count]; i++) {
+//        Publish *item = [self.publishData objectAtIndex:i];
+//        NSString *strDate = item.created_at;
+//        strDate = [strDate stringByReplacingOccurrencesOfString:@"T" withString:@" "];
+//        strDate = [strDate substringWithRange:NSMakeRange(0, [strDate length] - 4)];
+//        item.date = [formatDate dateFromString:strDate];
+//        [self.publishData replaceObjectAtIndex:i withObject:item];
+//    }
     
     [tableView reloadData];
 }

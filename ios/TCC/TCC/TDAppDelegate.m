@@ -8,6 +8,7 @@
 
 #import "TDAppDelegate.h"
 #import "Publish.h"
+#import "User.h"
 #import "BaseRequest.h"
 #import "constants.h"
 #import <RestKit/RestKit.h>
@@ -20,32 +21,43 @@
     [[UITabBar appearance] setTintColor:[UIColor redColor]];
     [[UIBarButtonItem appearance] setTintColor:[UIColor redColor]];
     
+//    // Inicializando objeto User
+//    User *user = [User new];
+//    user.pk = 1;
+//    user.name = @"Thiago Dorneles";
+    
+    
     // Initialize RestKit
-    RKObjectManager *objectManager = [RKObjectManager managerWithBaseURLString:@"http://127.0.0.1:8000/api/"];
+    RKObjectManager *objectManager = [RKObjectManager managerWithBaseURLString:URL_SERVER];
     
     // Enable automatic network activity indicator management
     objectManager.client.requestQueue.showsNetworkActivityIndicatorWhenBusy = YES;
     
     // Setup our object mappings
-    RKObjectMapping *imovelMapping = [RKObjectMapping mappingForClass:[Publish class]];
-    [imovelMapping mapKeyPath:@"title" toAttribute:@"title"];
-    [imovelMapping mapKeyPath:@"description" toAttribute:@"description"];
-    [imovelMapping mapKeyPath:@"location" toAttribute:@"location"];
-    [imovelMapping mapKeyPath:@"city" toAttribute:@"city"];
-    [imovelMapping mapKeyPath:@"quant_views" toAttribute:@"quant_views"];
-    [imovelMapping mapKeyPath:@"quant_blocks" toAttribute:@"quant_blocks"];
-    [imovelMapping mapKeyPath:@"user" toAttribute:@"user"];
-    [imovelMapping mapKeyPath:@"user_name" toAttribute:@"user_name"];
-    [imovelMapping mapKeyPath:@"tags" toAttribute:@"tags"];
-    [imovelMapping mapKeyPath:@"created_at" toAttribute:@"created_at"];
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+//    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    [dateFormatter setDateFormat:@"YYYY-MM-DDTHH:mm:ss.sssZ"];
+    [RKObjectMapping addDefaultDateFormatter:dateFormatter];
     
-    [objectManager.mappingProvider setMapping:imovelMapping forKeyPath:@"results"];
+    RKObjectMapping *publishMapping = [RKObjectMapping mappingForClass:[Publish class]];
+    [publishMapping mapKeyPath:@"title" toAttribute:@"title"];
+    [publishMapping mapKeyPath:@"description" toAttribute:@"description"];
+    [publishMapping mapKeyPath:@"location" toAttribute:@"location"];
+    [publishMapping mapKeyPath:@"city" toAttribute:@"city"];
+    [publishMapping mapKeyPath:@"quant_views" toAttribute:@"quant_views"];
+    [publishMapping mapKeyPath:@"quant_blocks" toAttribute:@"quant_blocks"];
+    [publishMapping mapKeyPath:@"user" toAttribute:@"user"];
+    [publishMapping mapKeyPath:@"user_name" toAttribute:@"user_name"];
+    [publishMapping mapKeyPath:@"tags" toAttribute:@"tags"];
+    [publishMapping mapKeyPath:@"created_at" toAttribute:@"date"];
+    [objectManager.mappingProvider setMapping:publishMapping forKeyPath:@"results"];
+    [objectManager.router routeClass:[Publish class] toResourcePath:@"/publishs/"];
+    [objectManager.router routeClass:[Publish class] toResourcePath:@"/publishs/" forMethod:RKRequestMethodPOST];
     
     RKObjectMapping *requestMapping = [RKObjectMapping mappingForClass:[BaseRequest class]];
     [requestMapping mapKeyPath:@"count" toAttribute:@"count"];
     [requestMapping mapKeyPath:@"next" toAttribute:@"next"];
     [objectManager.mappingProvider setMapping:requestMapping forKeyPath:@""];
-
     
     return YES;
 }
