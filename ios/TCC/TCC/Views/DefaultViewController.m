@@ -42,7 +42,7 @@
     self.clearsSelectionOnViewWillAppear = YES;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    [self sendRequestWithURL:@"/publishs/" isLoadMore:false];
+    [self sendRequestWithURL:URL_DEFAULT isLoadMore:false];
 }
 
 - (void)didReceiveMemoryWarning
