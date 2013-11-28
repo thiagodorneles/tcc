@@ -586,9 +586,7 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
                             <outlet property="delegate" destination="Gio-aV-Tve" id="LTs-4m-GcB"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="8iv-Iz-on1">
-                        <barButtonItem key="rightBarButtonItem" image="share" id="KXv-6g-yts"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="8iv-Iz-on1"/>
                     <connections>
                         <outlet property="imagePicture" destination="PeC-cm-85n" id="GE2-aL-79P"/>
                         <outlet property="labelDate" destination="Es5-yh-CSS" id="ZwO-2Z-8G7"/>
@@ -744,7 +742,6 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
         <image name="home" width="28" height="28"/>
         <image name="login" width="320" height="300"/>
         <image name="plus" width="28" height="28"/>
-        <image name="share" width="21" height="28"/>
         <image name="twitter_signin" width="214" height="31"/>
         <image name="user" width="28" height="28"/>
     </resources>

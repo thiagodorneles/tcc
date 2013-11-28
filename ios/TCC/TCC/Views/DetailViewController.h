@@ -10,7 +10,7 @@
 #import "Publish.h"
 //#import <UIKit/UIActivityViewController.h>
 
-@interface DetailViewController : UITableViewController <UITableViewDataSource>
+@interface DetailViewController : UITableViewController <UITableViewDataSource, UIActionSheetDelegate>
 
 @property Publish *publish;
 @property (weak, nonatomic) IBOutlet UILabel *labelTitle;
@@ -19,9 +19,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelTags;
 @property (weak, nonatomic) IBOutlet UILabel *labelDescription;
 @property (weak, nonatomic) IBOutlet UIImageView *imagePicture;
-//@property (weak, nonatomic) IBOutlet UIBarButtonItem *buttonShare;
 //@property (weak, nonatomic) IBOutlet MKMapView *mapView;
-
-//- (IBAction)buttonSharedTouched:(id)sender;
 
 @end

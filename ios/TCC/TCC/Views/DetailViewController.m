@@ -23,6 +23,8 @@
 @synthesize labelTitle, labelUser, labelDate, labelTags, labelDescription, imagePicture;
 //@synthesize  activityPopover;
 
+#pragma mark - View
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -42,6 +44,22 @@
     [inFormat setDateFormat:@"dd/MM HH:mm"];
     
     self.tableView.allowsSelection = NO;
+    
+    UIBarButtonItem *buttonShare = [[UIBarButtonItem alloc] init];
+    buttonShare.image = [UIImage imageNamed:@"share"];
+    buttonShare.style = UIBarButtonItemStylePlain;
+    buttonShare.target = self;
+    buttonShare.action = @selector(buttonSharedTouched:);
+    
+    UIBarButtonItem *buttonBlock = [[UIBarButtonItem alloc] init];
+    buttonBlock.image = [UIImage imageNamed:@"block"];
+    buttonBlock.style = UIBarButtonItemStylePlain;
+    buttonBlock.target = self;
+    buttonBlock.action = @selector(buttonBlockedTouched:);
+    
+    NSMutableArray *arrayButtons = [NSMutableArray arrayWithObjects:buttonShare, buttonBlock, nil];
+    self.navigationItem.rightBarButtonItems = arrayButtons;
+    
     
     // Carregando os dados
     labelTitle.numberOfLines = 0;
@@ -71,8 +89,13 @@
 {
     [super didReceiveMemoryWarning];
 }
+
+#pragma mark - Buttons navigation bar
+
 - (IBAction)buttonSharedTouched:(id)sender {
-//    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self.publish] applicationActivities:nil];
+    NSLog(@"Shared");
+    
+    //    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self.publish] applicationActivities:nil];
 //    
 //    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
 //        //iPhone, present activity view controller as is.
@@ -92,6 +115,23 @@
 //        }
 //    }
 }
+
+- (IBAction)buttonBlockedTouched:(id)sender {
+    NSLog(@"Block");
+    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:@"Avisar conteúdo impróprio" delegate:self cancelButtonTitle:@"Cancelar" destructiveButtonTitle:@"Confirmar" otherButtonTitles:nil];
+    [action showInView:self.view];
+}
+
+#pragma mark - UIActionSheet
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        NSLog(@"Bloquear");
+    }
+}
+
+#pragma mark - TableView DataSources
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
