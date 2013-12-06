@@ -7,6 +7,8 @@
 //
 
 #import "ProfileViewController.h"
+#import "PublishCell.h"
+#import "Publish.h"
 
 @interface ProfileViewController ()
 
@@ -52,44 +54,39 @@
     return 3;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    static NSString *CellIdentifier = @"PublishCell";
+    PublishCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    cell.frame = CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height);
+    
+    cell.image.image = [UIImage imageNamed:@"acidente"];
+    cell.labelTitle.text = @"Teste";
+    cell.labelTags.text = @"Teste";
+    cell.labelUser.text = @"Teste";
+    
+//    Publish *publish = [self.publishData objectAtIndex:indexPath.row];
+//    
+//    cell.image.frame = CGRectMake(0, 7, 126, 91);
+//    cell.image.image = [UIImage imageNamed:@"acidente"];
+//    cell.labelTitle.numberOfLines = 0;
+//    cell.labelTitle.text = publish.title;
+//    cell.labelUser.text = publish.user_name;
+//    cell.labelTags.text = [publish.tags componentsJoinedByString:@", "];
+//    //    cell.labelDate.text= publish.date;
+//    
+//    [cell.labelTitle sizeToFit];
+//    [cell.labelTags sizeToFit];
+//    [cell.labelUser sizeToFit];
+    
+    return cell;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    return 110.0f;
 }
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 /*
 #pragma mark - Navigation
