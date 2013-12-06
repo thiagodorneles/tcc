@@ -10,6 +10,6 @@
 
 @implementation User
 
-@synthesize pk, name, email;
+@synthesize pk, name, email, twitter_id, twitter_token,twitter_user, publishs;
 
 @end

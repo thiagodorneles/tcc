@@ -13,5 +13,9 @@
 @property NSInteger pk;
 @property NSString *name;
 @property NSString *email;
+@property NSString *twitter_id;
+@property NSString *twitter_token;
+@property NSString *twitter_user;
+@property NSMutableArray *publishs;
 
 @end
