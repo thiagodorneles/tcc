@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import <RestKit/RestKit.h>
+#import "User.h"
 
 @interface TDAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+- (void)saveCustomObject:(User *)object key:(NSString *)key;
+- (User *)loadCustomObjectWithKey:(NSString *)key;
 
 @end

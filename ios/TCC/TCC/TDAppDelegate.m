@@ -8,7 +8,6 @@
 
 #import "TDAppDelegate.h"
 #import "Publish.h"
-#import "User.h"
 #import "BaseRequest.h"
 #import "constants.h"
 #import <RestKit/RestKit.h>
@@ -21,24 +20,27 @@
     [[UITabBar appearance] setTintColor:[UIColor redColor]];
     [[UIBarButtonItem appearance] setTintColor:[UIColor redColor]];
     
-//    // Inicializando objeto User
-//    User *user = [User new];
-//    user.pk = 1;
-//    user.name = @"Thiago Dorneles";
+    // Inicializando objeto User
+    User *user = [User new];
+    user.pk = 1;
+    user.name = @"Thiago Dorneles";
+    user.email = @"thiagodornelesrs@gmail.com";
+    user.created_at = [NSDate date];
+    user.twitter_user = @"thiagodorneles";
+    [self saveCustomObject:user key:@"user"];
     
+    
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"YYYY-MM-DDTHH:mm:ss.sssZ"];
     
     // Initialize RestKit
     RKObjectManager *objectManager = [RKObjectManager managerWithBaseURLString:URL_SERVER];
-    
-    // Enable automatic network activity indicator management
+    [RKObjectMapping addDefaultDateFormatter:dateFormatter];
     objectManager.client.requestQueue.showsNetworkActivityIndicatorWhenBusy = YES;
     
-    // Setup our object mappings
-    NSDateFormatter *dateFormatter = [NSDateFormatter new];
-//    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
-    [dateFormatter setDateFormat:@"YYYY-MM-DDTHH:mm:ss.sssZ"];
-    [RKObjectMapping addDefaultDateFormatter:dateFormatter];
-    
+    // -------------------------------------------------------------------------------------
+    // Mapeamento do objeto de Publish
+    // -------------------------------------------------------------------------------------
     RKObjectMapping *publishMapping = [RKObjectMapping mappingForClass:[Publish class]];
     [publishMapping mapKeyPath:@"title" toAttribute:@"title"];
     [publishMapping mapKeyPath:@"description" toAttribute:@"description"];
@@ -52,12 +54,30 @@
     [publishMapping mapKeyPath:@"created_at" toAttribute:@"date"];
     [objectManager.mappingProvider setMapping:publishMapping forKeyPath:@"results"];
     [objectManager.router routeClass:[Publish class] toResourcePath:@"/publishs/"];
-    [objectManager.router routeClass:[Publish class] toResourcePath:@"/publishs/" forMethod:RKRequestMethodPOST];
+//    [objectManager.router routeClass:[Publish class] toResourcePath:@"/publishs/" forMethod:RKRequestMethodPOST];
     
+    // -------------------------------------------------------------------------------------
+    // Mapeamento do objeto de BaseRequest
+    // -------------------------------------------------------------------------------------
     RKObjectMapping *requestMapping = [RKObjectMapping mappingForClass:[BaseRequest class]];
     [requestMapping mapKeyPath:@"count" toAttribute:@"count"];
     [requestMapping mapKeyPath:@"next" toAttribute:@"next"];
     [objectManager.mappingProvider setMapping:requestMapping forKeyPath:@""];
+    
+    // -------------------------------------------------------------------------------------
+    // Mapeamento do objeto de User
+    // -------------------------------------------------------------------------------------
+//    RKObjectMapping *userMapping = [RKObjectMapping mappingForClass:[User class]];
+//    [userMapping mapKeyPath:@"id" toAttribute:@"pk"];
+//    [userMapping mapKeyPath:@"name" toAttribute:@"name"];
+//    [userMapping mapKeyPath:@"email" toAttribute:@"email"];
+//    [userMapping mapKeyPath:@"created_at" toAttribute:@"created_at"];
+//    [userMapping mapKeyPath:@"image_url" toAttribute:@"image_url"];
+//    [userMapping mapKeyPath:@"twitter_id" toAttribute:@"twitter_id"];
+//    [userMapping mapKeyPath:@"twitter_user" toAttribute:@"twitter_user"];
+//    [userMapping mapKeyPath:@"twitter_token" toAttribute:@"twitter_token"];
+//    [userMapping mapKeyPath:@"publishs" toRelationship:@"publishs" withMapping:publishMapping];
+//    [objectManager.mappingProvider setMapping:userMapping forKeyPath:@"results"];
     
     return YES;
 }
@@ -87,6 +107,21 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)saveCustomObject:(User *)object key:(NSString *)key {
+    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:object];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:encodedObject forKey:key];
+    [defaults synchronize];
+    
+}
+
+- (User *)loadCustomObjectWithKey:(NSString *)key {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *encodedObject = [defaults objectForKey:key];
+    User *object = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
+    return object;
 }
 
 @end
