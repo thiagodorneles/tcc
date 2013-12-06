@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface User : NSObject
+@interface User : NSObject <NSCoding> {}
 
 @property NSInteger pk;
 @property NSString *name;
 @property NSString *email;
+@property NSDate *created_at;
 @property NSString *twitter_id;
 @property NSString *twitter_token;
 @property NSString *twitter_user;

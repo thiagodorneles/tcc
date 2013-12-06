@@ -10,6 +10,19 @@
 
 @implementation User
 
-@synthesize pk, name, email, twitter_id, twitter_token,twitter_user, publishs;
+@synthesize pk, name, email, created_at, twitter_id, twitter_token,twitter_user, publishs;
+
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    self = [super init];
+    if(self) {
+        self.pk = [decoder decodeIntegerForKey:@"user_pk"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeInt:self.pk forKey:@"user_pk"];
+}
 
 @end
