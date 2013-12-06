@@ -24,69 +24,6 @@
             </objects>
             <point key="canvasLocation" x="1036" y="-473"/>
         </scene>
-        <!--View Controller - Perfil-->
-        <scene sceneID="bze-oW-R9Y">
-            <objects>
-                <viewController title="Perfil" id="bm9-6E-niO" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="mp1-7m-0Ca">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <sections>
-                            <tableViewSection id="CAs-dA-JjP">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="108" id="f30-Oe-WVO">
-                                        <rect key="frame" x="0.0" y="64" width="320" height="108"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="f30-Oe-WVO" id="PHM-le-JiH">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="107"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nome do usuário" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FqN-1B-PE3">
-                                                    <rect key="frame" x="115" y="9" width="132" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="avatar_baixa.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Za5-rn-Ktt">
-                                                    <rect key="frame" x="13" y="4" width="94" height="99"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Desde 01/2013" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i1u-qy-1Jd">
-                                                    <rect key="frame" x="115" y="43" width="111" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Publicações: 2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mHx-c7-kzS">
-                                                    <rect key="frame" x="115" y="77" width="157" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection id="y7Y-eP-CGp">
-                                <cells/>
-                            </tableViewSection>
-                        </sections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Perfil" id="mx4-PK-gTU">
-                        <barButtonItem key="leftBarButtonItem" title="Sair" id="Rtk-XH-ZKf"/>
-                        <barButtonItem key="rightBarButtonItem" image="config" id="FO7-iT-n8B">
-                            <connections>
-                                <segue destination="cXc-A6-Xce" kind="push" id="tKi-Kp-Nbd"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3Wp-hw-NC3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2116" y="335"/>
-        </scene>
         <!--Config View Controller - Configurações-->
         <scene sceneID="DSs-DZ-b1e">
             <objects>
@@ -529,7 +466,7 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="149"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PeC-cm-85n">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="acidente" translatesAutoresizingMaskIntoConstraints="NO" id="PeC-cm-85n">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="149"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
@@ -598,7 +535,7 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Go4-q7-FXy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2545" y="-473"/>
+            <point key="canvasLocation" x="2585" y="-473"/>
         </scene>
         <!--Navigation Controller - Novo-->
         <scene sceneID="5wo-jN-qOm">
@@ -679,12 +616,80 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="bm9-6E-niO" kind="relationship" relationship="rootViewController" id="gWO-T7-93g"/>
+                        <segue destination="rPk-bf-izU" kind="relationship" relationship="rootViewController" id="lEj-Pt-YQi"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eiW-bD-gDv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1590" y="329"/>
+        </scene>
+        <!--Profile View Controller - Perfil-->
+        <scene sceneID="SFz-rB-5y8">
+            <objects>
+                <tableViewController id="rPk-bf-izU" customClass="ProfileViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="wvL-zi-lSF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PublishCell" rowHeight="110" id="2Oi-Np-HGB" customClass="PublishCell">
+                                <rect key="frame" x="0.0" y="86" width="320" height="110"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Oi-Np-HGB" id="r8D-ri-QT5">
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="109"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ba7-T7-FcN">
+                                            <rect key="frame" x="0.0" y="7" width="93" height="91"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qMz-SD-Jkb">
+                                            <rect key="frame" x="134" y="6" width="42" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zh-Qh-wdx">
+                                            <rect key="frame" x="134" y="63" width="150" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h4b-QN-K4K">
+                                            <rect key="frame" x="134" y="81" width="162" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="image" destination="Ba7-T7-FcN" id="nlQ-Nv-9SD"/>
+                                    <outlet property="labelDate" destination="h4b-QN-K4K" id="KO6-TV-Kqd"/>
+                                    <outlet property="labelTags" destination="7zh-Qh-wdx" id="Hwi-3I-hde"/>
+                                    <outlet property="labelTitle" destination="qMz-SD-Jkb" id="oFH-5B-341"/>
+                                    <segue destination="Gio-aV-Tve" kind="push" id="f1B-eE-oEq"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="rPk-bf-izU" id="8Wq-dW-nTY"/>
+                            <outlet property="delegate" destination="rPk-bf-izU" id="TRr-zA-8Kl"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Perfil" id="C3p-0E-iUp">
+                        <barButtonItem key="leftBarButtonItem" title="Sair" id="IQa-LP-0vY"/>
+                        <barButtonItem key="rightBarButtonItem" image="config" id="fsZ-Gy-RcV">
+                            <connections>
+                                <segue destination="cXc-A6-Xce" kind="push" id="07K-sW-zAH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dYD-RZ-Rko" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2027" y="328"/>
         </scene>
         <!--Table View Controller - Novo registro-->
         <scene sceneID="96B-75-1CN">
@@ -736,7 +741,7 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
         </scene>
     </scenes>
     <resources>
-        <image name="avatar_baixa.jpg" width="64" height="64"/>
+        <image name="acidente" width="1488" height="1252"/>
         <image name="config" width="28" height="28"/>
         <image name="facebook_signin" width="214" height="29"/>
         <image name="home" width="28" height="28"/>
@@ -751,4 +756,7 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="f1B-eE-oEq"/>
+    </inferredMetricsTieBreakers>
 </document>
