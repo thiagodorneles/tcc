@@ -201,7 +201,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     publish.tags = [NSMutableArray arrayWithArray:[[self.tagsField.text lowercaseString] componentsSeparatedByString:@","]];
     publish.user = 1;
     
-    RKObjectManager *manager = [RKObjectManager managerWithBaseURLString:@"http://plataformaugc.herokuapp.com/api/"];
+    RKObjectManager *manager = [RKObjectManager managerWithBaseURLString:URL_SERVER];
     manager.acceptMIMEType = RKMIMETypeJSON;
     manager.serializationMIMEType = RKMIMETypeJSON;
     
@@ -219,26 +219,10 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     [manager.router routeClass:[Publish class] toResourcePath:@"/publishs/" forMethod:RKRequestMethodPOST];
     
     [manager postObject:publish delegate:self];
-    
-    
-//    NSArray *tags = [[self.tagsField.text lowercaseString] componentsSeparatedByString:@","];
-//    NSData *data = [NSJSONSerialization dataWithJSONObject:tags options:kNilOptions error:nil];
-//    NSMutableArray *array = [NSMutableArray arrayWithObjects:@[@"acidente", @"protesto@"], nil];
-//
-//    client = [[RKClient alloc] initWithBaseURLString:@"http://127.0.0.1:8000/api"];
-//    RKParams *params = [[RKParams params] initWithDictionary:@{@"title": self.titleField.text,
-//                                                                @"description": self.descriptionField.text,
-//                                                                @"user" : @"1"}];
-    
-    
-//    UIImage* image = [UIImage imageNamed:@"acidente"];
-//    NSData *imageData = UIImagePNGRepresentation(image);
-//    [params setData:imageData MIMEType:@"image/png" forParam:@"image"];
-    
-//    [client post:@"/publishs/" params:params delegate:self];
 }
 
 - (void)requestDidStartLoad:(RKRequest *)request {
+    NSLog(@"requestDidStartLoad");
 
 }
 
