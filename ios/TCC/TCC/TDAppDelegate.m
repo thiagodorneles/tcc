@@ -21,19 +21,24 @@
     [[UIBarButtonItem appearance] setTintColor:[UIColor redColor]];
     
     // Inicializando objeto User
-    User *user = [User new];
-    user.pk = 1;
-    user.name = @"Thiago Dorneles";
-    user.email = @"thiagodornelesrs@gmail.com";
-    user.created_at = [NSDate date];
-    user.twitter_user = @"thiagodorneles";
-    [self saveCustomObject:user key:@"user"];
-    
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"user"])
+    {
+        User *user = [User new];
+        user.pk = 1;
+        user.name = @"Thiago Dorneles";
+        user.email = @"thiagodornelesrs@gmail.com";
+        user.created_at = [NSDate date];
+        user.twitter_user = @"thiagodorneles";
+        [self saveCustomObject:user key:@"user"];
+    }
     
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat:@"YYYY-MM-DDTHH:mm:ss.sssZ"];
-    
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+
+    // -------------------------------------------------------------------------------------
     // Initialize RestKit
+    // -------------------------------------------------------------------------------------
     RKObjectManager *objectManager = [RKObjectManager managerWithBaseURLString:URL_SERVER];
     [RKObjectMapping addDefaultDateFormatter:dateFormatter];
     objectManager.client.requestQueue.showsNetworkActivityIndicatorWhenBusy = YES;
@@ -54,7 +59,7 @@
     [publishMapping mapKeyPath:@"created_at" toAttribute:@"date"];
     [objectManager.mappingProvider setMapping:publishMapping forKeyPath:@"results"];
     [objectManager.router routeClass:[Publish class] toResourcePath:@"/publishs/"];
-//    [objectManager.router routeClass:[Publish class] toResourcePath:@"/publishs/" forMethod:RKRequestMethodPOST];
+    [objectManager.router routeClass:[Publish class] toResourcePath:@"/publishs/" forMethod:RKRequestMethodPOST];
     
     // -------------------------------------------------------------------------------------
     // Mapeamento do objeto de BaseRequest
@@ -67,17 +72,18 @@
     // -------------------------------------------------------------------------------------
     // Mapeamento do objeto de User
     // -------------------------------------------------------------------------------------
-//    RKObjectMapping *userMapping = [RKObjectMapping mappingForClass:[User class]];
-//    [userMapping mapKeyPath:@"id" toAttribute:@"pk"];
-//    [userMapping mapKeyPath:@"name" toAttribute:@"name"];
-//    [userMapping mapKeyPath:@"email" toAttribute:@"email"];
-//    [userMapping mapKeyPath:@"created_at" toAttribute:@"created_at"];
-//    [userMapping mapKeyPath:@"image_url" toAttribute:@"image_url"];
-//    [userMapping mapKeyPath:@"twitter_id" toAttribute:@"twitter_id"];
-//    [userMapping mapKeyPath:@"twitter_user" toAttribute:@"twitter_user"];
-//    [userMapping mapKeyPath:@"twitter_token" toAttribute:@"twitter_token"];
-//    [userMapping mapKeyPath:@"publishs" toRelationship:@"publishs" withMapping:publishMapping];
-//    [objectManager.mappingProvider setMapping:userMapping forKeyPath:@"results"];
+    RKObjectMapping *userMapping = [RKObjectMapping mappingForClass:[User class]];
+    [userMapping mapKeyPath:@"id" toAttribute:@"pk"];
+    [userMapping mapKeyPath:@"name" toAttribute:@"name"];
+    [userMapping mapKeyPath:@"email" toAttribute:@"email"];
+    [userMapping mapKeyPath:@"created_at" toAttribute:@"created_at"];
+    [userMapping mapKeyPath:@"image_url" toAttribute:@"image_url"];
+    [userMapping mapKeyPath:@"twitter_id" toAttribute:@"twitter_id"];
+    [userMapping mapKeyPath:@"twitter_user" toAttribute:@"twitter_user"];
+    [userMapping mapKeyPath:@"twitter_token" toAttribute:@"twitter_token"];
+    [userMapping mapKeyPath:@"publishs" toRelationship:@"publishs" withMapping:publishMapping];
+    [objectManager.mappingProvider setMapping:userMapping forKeyPath:@""];
+    [objectManager.router routeClass:[User class] toResourcePath:@"/users/"];
     
     return YES;
 }
@@ -108,6 +114,8 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+#pragma mark - Custom Methods
 
 - (void)saveCustomObject:(User *)object key:(NSString *)key {
     NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:object];
