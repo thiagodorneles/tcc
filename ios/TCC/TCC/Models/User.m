@@ -17,12 +17,16 @@
     self = [super init];
     if(self) {
         self.pk = [decoder decodeIntegerForKey:@"user_pk"];
+        self.name = [decoder decodeObjectForKey:@"user_name"];
+        self.created_at = [decoder decodeObjectForKey:@"user_created_at"];
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeInt:self.pk forKey:@"user_pk"];
+    [encoder encodeObject:self.name forKey:@"user_name"];
+    [encoder encodeObject:self.created_at forKey:@"user_created_at"];
 }
 
 @end

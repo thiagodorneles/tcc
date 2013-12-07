@@ -14,6 +14,7 @@
 @property NSString *name;
 @property NSString *email;
 @property NSDate *created_at;
+@property NSString *image_url;
 @property NSString *twitter_id;
 @property NSString *twitter_token;
 @property NSString *twitter_user;
