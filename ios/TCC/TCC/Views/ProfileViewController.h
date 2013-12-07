@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ProfileViewController : UITableViewController
+@property (weak, nonatomic) IBOutlet UILabel *labelUserName;
+@property (weak, nonatomic) IBOutlet UILabel *labelUserCreated;
+@property (weak, nonatomic) IBOutlet UILabel *labelTotalPublishs;
+@property (weak, nonatomic) IBOutlet UIImageView *imageUser;
 
 @end
