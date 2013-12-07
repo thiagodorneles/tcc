@@ -314,9 +314,15 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="Pesquisar" id="yt7-p8-W5K">
+                            <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="barTintColor" red="0.90588235289999997" green="0.023529411760000001" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell autoresizesSubviews="NO" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PublishCell" rowHeight="110" id="0Nz-xb-Ju7" customClass="PublishCell">
-                                <rect key="frame" x="0.0" y="86" width="320" height="110"/>
+                                <rect key="frame" x="0.0" y="130" width="320" height="110"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Nz-xb-Ju7" id="VlF-EH-qSG">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="109"/>
@@ -369,11 +375,8 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
                             <outlet property="delegate" destination="RT9-fo-Uqd" id="4ZK-fo-g7Y"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Noticias" id="Ldp-9q-8JS">
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="SCD-TR-HKW"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Noticias" id="Me0-y4-awh"/>
                     <connections>
-                        <outlet property="buttonSearch" destination="SCD-TR-HKW" id="Ba0-2y-JZI"/>
                         <outlet property="searchDisplayController" destination="OB5-Rx-41T" id="dVl-fn-h6U"/>
                         <outlet property="tableView" destination="nl5-YO-eq1" id="M2p-ER-4Vh"/>
                     </connections>
@@ -382,6 +385,7 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
                 <searchDisplayController id="OB5-Rx-41T">
                     <connections>
                         <outlet property="delegate" destination="RT9-fo-Uqd" id="brq-ke-mxn"/>
+                        <outlet property="searchBar" destination="yt7-p8-W5K" id="Fm1-Ij-J2l"/>
                         <outlet property="searchContentsController" destination="RT9-fo-Uqd" id="GPK-8z-zFT"/>
                         <outlet property="searchResultsDataSource" destination="RT9-fo-Uqd" id="DbW-1R-5OO"/>
                         <outlet property="searchResultsDelegate" destination="RT9-fo-Uqd" id="Za7-dz-ttz"/>
@@ -794,6 +798,6 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="x8H-RB-I42"/>
+        <segue reference="fcH-oZ-P2l"/>
     </inferredMetricsTieBreakers>
 </document>
