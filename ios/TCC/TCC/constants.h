@@ -13,5 +13,6 @@
 //#define URL_SERVER @"http://plataformaugc.herokuapp.com/api/"
 #define URL_DEFAULT @"/publishs/"
 #define URL_SEARCH @"/search/"
+#define URL_USERS @"/users/%d/"
 
 #endif
