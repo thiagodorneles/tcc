@@ -31,7 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.clearsSelectionOnViewWillAppear = NO;
+    self.clearsSelectionOnViewWillAppear = YES;
 }
 
 - (void)didReceiveMemoryWarning
