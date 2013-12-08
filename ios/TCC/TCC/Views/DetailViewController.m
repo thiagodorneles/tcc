@@ -7,10 +7,12 @@
 //
 
 #import "DetailViewController.h"
+#import <RestKit/RestKit.h>
+#import "ProgressHUD.h"
 
 //#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
-@interface DetailViewController ()
+@interface DetailViewController () <RKObjectLoaderDelegate>
 
 
 //@property (strong, nonatomic) UIPopoverController *activityPopover;
@@ -83,6 +85,13 @@
     [labelDate sizeToFit];
     [labelTags sizeToFit];
     [labelDescription sizeToFit];
+    
+    RKObjectManager *manager = [RKObjectManager sharedManager];
+//    [manager getObject:self.publish delegate:self];
+    
+    RKURL *KURL = [RKURL URLWithBaseURL:[manager baseURL] resourcePath:[NSString stringWithFormat:@"/publishs/%d/", self.publish.pk]];
+    [manager loadObjectsAtResourcePath:[KURL resourcePath] delegate:self];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -127,6 +136,9 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0) {
+        [ProgressHUD show:@"Informando bloqueio..."];
+        RKObjectManager *manager = [RKObjectManager sharedManager];
+        [manager postObject:self.publish delegate:self];
         NSLog(@"Bloquear");
     }
 }
@@ -139,6 +151,27 @@
         return 4;
     }
     return 3;
+}
+
+#pragma mark - RestKit
+
+- (void)objectLoader:(RKObjectLoader *)objectLoader didFailWithError:(NSError *)error
+{
+    NSLog(@"error = %@", [error description]);
+}
+
+- (void)objectLoader:(RKObjectLoader *)objectLoader didLoadObjects:(NSArray *)objects
+{
+    [ProgressHUD dismiss];
+    [ProgressHUD showSuccess:@"Obrigado!"];
+    
+    Publish *p = (Publish*)[objects objectAtIndex:0];
+    if (p.quant_blocks >= 3) {
+        [self.navigationController popViewControllerAnimated:YES];
+//        [NSNotificationCenter defaultCenter] 
+    }
+    [NSThread sleepForTimeInterval:1];
+    [ProgressHUD dismiss];
 }
 
 @end
