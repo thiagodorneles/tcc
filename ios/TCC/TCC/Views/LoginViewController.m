@@ -79,8 +79,8 @@
 {
     RKObjectManager *objectManager = [RKObjectManager sharedManager];
     [objectManager postObject:user delegate:self];
-    [user saveLocal];
 }
+
 
 #pragma mark - Buttons Events
 
@@ -150,8 +150,6 @@
                                     user.image_url = [profileData objectForKey:@"profile_image_url"];
                                     [self saveUser:user];
                                     [ProgressHUD dismiss];
-                                    [self dismissViewControllerAnimated:YES completion:nil];
-                                    
                                 }
                                 else {
                                     [ProgressHUD dismiss];
@@ -178,6 +176,9 @@
 -(void)objectLoader:(RKObjectLoader *)objectLoader didLoadObjects:(NSArray *)objects
 {
     [ProgressHUD dismiss];
+    User *user = (User*)[objects objectAtIndex:0];
+    [user saveLocal];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didFailWithError:(NSError *)error
@@ -206,6 +207,7 @@
     
     [self saveUser:user];
     [ProgressHUD dismiss];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 //    FBProfilePictureView *profilePicture = [FBProfilePictureView new];
 //    profilePicture.profileID = user.facebook_id;
