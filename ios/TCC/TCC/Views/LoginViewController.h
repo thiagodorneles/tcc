@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface LoginViewController : UIViewController
+- (IBAction)buttonFacebookTouched:(id)sender;
+- (IBAction)buttonTwitterTouched:(id)sender;
 
 @end
