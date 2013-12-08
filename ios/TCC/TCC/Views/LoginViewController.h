@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface LoginViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIView *viewFacebook;
 - (IBAction)buttonFacebookTouched:(id)sender;
 - (IBAction)buttonTwitterTouched:(id)sender;
 

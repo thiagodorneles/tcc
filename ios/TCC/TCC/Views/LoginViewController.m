@@ -18,28 +18,26 @@
 
 @implementation LoginViewController
 
-//- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-//{
-//    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-//    if (self) {
-//        // Custom initialization
-//    }
-//    return self;
-//}
+@synthesize viewFacebook;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
     self.view.backgroundColor = [UIColor colorWithRed:231 green:76 blue:60 alpha:1 ];
     [super viewDidLoad];
-    
     FBLoginView *facebookLogin = [FBLoginView new];
-    facebookLogin.frame = CGRectOffset(facebookLogin.frame, 5, 25);
+//    facebookLogin.frame = self.viewFacebook.frame;
     facebookLogin.delegate = self;
-    [self.view addSubview:facebookLogin];
+    [self.viewFacebook addSubview:facebookLogin];
     [facebookLogin sizeToFit];
-    
-    
-	// Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning
