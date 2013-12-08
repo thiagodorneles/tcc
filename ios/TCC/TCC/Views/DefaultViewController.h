@@ -15,4 +15,5 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *buttonSearch;
 @property (nonatomic, strong) BaseRequest *request_info;
 
+
 @end
