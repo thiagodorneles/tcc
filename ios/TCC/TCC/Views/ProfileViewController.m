@@ -12,13 +12,12 @@
 #import "TDAppDelegate.h"
 #import <RestKit/RestKit.h>
 #import "constants.h"
-#import "MBProgressHUD.h"
 #import "DetailViewController.h"
+#import "ProgressHUD.h"
 
 @interface ProfileViewController () <RKObjectLoaderDelegate, RKRequestDelegate>
 
 @property User *user;
-@property (nonatomic, strong) MBProgressHUD *HUD;
 
 @end
 
@@ -61,6 +60,7 @@
 
 -(void)sendRequest:(NSString*)URL
 {
+    [ProgressHUD show:@"Carregando..."];
     RKObjectManager *objectManager = [RKObjectManager sharedManager];
     RKURL *KURL = [RKURL URLWithBaseURL:[objectManager baseURL] resourcePath:URL];
     [objectManager loadObjectsAtResourcePath:[KURL resourcePath] delegate:self];
@@ -89,6 +89,7 @@
     self.user = (User*)[array objectAtIndex:0];
     self.labelTotalPublishs.text = [NSString stringWithFormat:@"Publicações: %d", [self.user.publishs count]];
     [self.tableView reloadData];
+    [ProgressHUD dismiss];
 }
 
 #pragma mark - Table view data source

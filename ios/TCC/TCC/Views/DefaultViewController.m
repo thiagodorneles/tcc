@@ -11,22 +11,20 @@
 #import "User.h"
 #import "constants.h"
 #import <RestKit/RestKit.h>
-#import "MBProgressHUD.h"
+#import "ProgressHUD.h"
 #import "PublishCell.h"
 #import "DetailViewController.h"
 #import "LoginViewController.h"
 
 @interface DefaultViewController () <RKObjectLoaderDelegate, RKRequestDelegate>
 
-
-@property (nonatomic, strong) MBProgressHUD *HUD;
 @property NSMutableArray *publishData;
 
 @end
 
 @implementation DefaultViewController
 
-@synthesize HUD, tableView, publishData;
+@synthesize tableView, publishData;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -61,7 +59,7 @@
 #pragma mark - RestKit Requesting Data
 - (void)sendRequestWithURL:(NSString*)URL isLoadMore:(BOOL)loadMore
 {
-    [self presentHUD];
+    [ProgressHUD show:@"Carregando..."];
     
     RKObjectManager *objectManager = [RKObjectManager sharedManager];
     NSDictionary *parameters = nil;
@@ -77,8 +75,7 @@
 #pragma mark - RestKit Delegate
 - (void)objectLoader:(RKObjectLoader *)objectLoader didFailWithError:(NSError *)error
 {
-    [self dismissHUD];
-    [self timeout];
+    [ProgressHUD dismiss];
     NSLog(@"Error: %@", [error localizedDescription]);
 }
 
@@ -89,7 +86,7 @@
 - (void)objectLoader:(RKObjectLoader *)objectLoader didLoadObjects:(NSArray *)objects
 {
     NSMutableArray *array = [NSMutableArray arrayWithArray:objects];
-    [self dismissHUD];
+    [ProgressHUD dismiss];
 //
     // Get Pagina and Numero_Paginas data
     NSMutableArray *requestArray = [NSMutableArray array];
@@ -154,27 +151,6 @@
     return 110.0f;
 }
 
-#pragma mark - MBProgressHUD
-
-- (void)presentHUD
-{
-    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    HUD.mode = MBProgressHUDModeIndeterminate;
-    HUD.labelText = @"Carregando...";
-    [HUD show:YES];
-}
-
-- (void)timeout
-{
-    [HUD hide:YES afterDelay:2.0];
-    HUD = nil;
-}
-
-- (void)dismissHUD
-{
-    [HUD hide:YES afterDelay:2.0];
-    HUD = nil;
-}
 
 #pragma mark - Navigation
 

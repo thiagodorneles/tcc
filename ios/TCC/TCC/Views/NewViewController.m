@@ -12,7 +12,7 @@
 #import <RestKit/RestKit.h>
 #import "Publish.h"
 #import "constants.h"
-#import "MBProgressHUD.h"
+#import "ProgressHUD.h"
 
 const static CGFloat kJVFieldHeight = 44.0f;
 const static CGFloat kJVFieldHMargin = 10.0f;
@@ -24,7 +24,6 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     RKClient *client;
 }
 
-@property (nonatomic, strong) MBProgressHUD *HUD;
 @property JVFloatLabeledTextField *titleField, *tagsField;
 @property JVFloatLabeledTextView *descriptionField;
 
@@ -32,7 +31,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
 @implementation NewViewController
 
-@synthesize titleField, tagsField, descriptionField, HUD;
+@synthesize titleField, tagsField, descriptionField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -189,7 +188,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
 - (IBAction)buttonSaveTouched:(id)sender
 {
-    [self presentHUD];
+    [ProgressHUD show:@"Enviando..."];
     
     [self.titleField resignFirstResponder];
     [self.tagsField resignFirstResponder];
@@ -232,48 +231,19 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
 - (void)request:(RKRequest *)request didLoadResponse:(RKResponse *)response {
     [self.descriptionField resignFirstResponder];
-//    [self dismissHUD];
-    [MBProgressHUD hideHUDForView:self.view animated:NO];
+    [ProgressHUD dismiss];
+
     
     if ([response statusCode] == 201) {
-        HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        HUD.labelText = @"Sucesso!";
-        [HUD show:YES];
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 2.01 * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            // Do something...
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-        });
+        [ProgressHUD showSuccess:@"Sucesso!"];
     }
     
 }
 - (void)objectLoader:(RKObjectLoader *)objectLoader didFailWithError:(NSError *)error
 {
-    [self dismissHUD];
+    [ProgressHUD dismiss];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erro" message:@"Não foi possível completar a operação." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
-}
-
-#pragma mark - MBProgressHUD
-
-- (void)presentHUD
-{
-    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    HUD.mode = MBProgressHUDModeIndeterminate;
-    HUD.labelText = @"Carregando...";
-    [HUD show:YES];
-}
-
-- (void)timeout
-{
-    [HUD hide:YES afterDelay:2.0];
-    HUD = nil;
-}
-
-- (void)dismissHUD
-{
-    [HUD hide:YES afterDelay:2.0];
-    HUD = nil;
 }
 
 @end
