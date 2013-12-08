@@ -158,7 +158,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mPM-E8-zC4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2649" y="-473"/>
+            <point key="canvasLocation" x="2759" y="-473"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="PJ1-Qc-CsV">
@@ -173,11 +173,11 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="login" translatesAutoresizingMaskIntoConstraints="NO" id="CKK-ga-jmU">
-                                <rect key="frame" x="0.0" y="123" width="320" height="251"/>
+                                <rect key="frame" x="26" y="-9" width="320" height="300"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afB-j0-NHN">
-                                <rect key="frame" x="26" y="348" width="269" height="31"/>
+                                <rect key="frame" x="0.0" y="82" width="214" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="twitter_signin">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -187,7 +187,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pqJ-4r-roE">
-                                <rect key="frame" x="53" y="298" width="215" height="31"/>
+                                <rect key="frame" x="95" y="102" width="0.0" height="0.0"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -200,7 +200,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M38-5C-kSj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2674" y="-1900"/>
+            <point key="canvasLocation" x="2759" y="-1902"/>
         </scene>
         <!--Table View Controller - Redes sociais-->
         <scene sceneID="Lt1-1h-D6g">
@@ -556,7 +556,7 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Go4-q7-FXy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2674" y="-1193"/>
+            <point key="canvasLocation" x="2759" y="-1193"/>
         </scene>
         <!--Navigation Controller - Novo-->
         <scene sceneID="5wo-jN-qOm">
@@ -571,7 +571,7 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="qiQ-ps-zSJ" kind="modal" id="iVJ-ub-bE7"/>
+                        <segue destination="qiQ-ps-zSJ" kind="relationship" relationship="rootViewController" id="ySc-XQ-IV1"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dDi-QT-vrT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -598,7 +598,6 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EDv-lQ-haZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -732,7 +731,11 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Perfil" id="C3p-0E-iUp">
-                        <barButtonItem key="leftBarButtonItem" title="Sair" id="IQa-LP-0vY"/>
+                        <barButtonItem key="leftBarButtonItem" title="Sair" id="IQa-LP-0vY">
+                            <connections>
+                                <segue destination="As2-jI-daa" kind="modal" id="9zo-ia-hdF"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="config" id="fsZ-Gy-RcV">
                             <connections>
                                 <segue destination="cXc-A6-Xce" kind="push" id="07K-sW-zAH"/>
@@ -796,7 +799,7 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sWh-xc-cf9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3348" y="272"/>
+            <point key="canvasLocation" x="3874" y="272"/>
         </scene>
     </scenes>
     <resources>
@@ -816,6 +819,7 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="x8H-RB-I42"/>
+        <segue reference="CIC-wv-GvJ"/>
+        <segue reference="fcH-oZ-P2l"/>
     </inferredMetricsTieBreakers>
 </document>
