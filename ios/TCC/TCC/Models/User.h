@@ -18,6 +18,13 @@
 @property NSString *twitter_id;
 @property NSString *twitter_token;
 @property NSString *twitter_user;
+@property NSString *facebook_id;
+@property NSString *facebook_token;
+@property NSString *facebook_user;
 @property NSMutableArray *publishs;
+
++(User *)getUser;
+-(void)saveLocal;
++(void)removeLocal;
 
 @end
