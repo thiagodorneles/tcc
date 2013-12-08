@@ -45,17 +45,24 @@
     NSDateFormatter *format = [NSDateFormatter new];
     [format setDateFormat:@"MM/yyyy"];
     
-    self.clearsSelectionOnViewWillAppear = YES;
+
     self.labelUserName.text = self.user.name;
     self.labelUserCreated.text = [NSString stringWithFormat:@"Desde: %@", [format stringFromDate:self.user.created_at]];
-    
+
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    self.clearsSelectionOnViewWillAppear = YES;
     [self sendRequest:[NSString stringWithFormat:URL_USERS, self.user.pk]];
 }
-
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+- (void)refresh:(UIRefreshControl *)refreshControl {
+    [self sendRequest:[NSString stringWithFormat:URL_USERS, self.user.pk]];
+    [refreshControl endRefreshing];
 }
 
 -(void)sendRequest:(NSString*)URL
