@@ -12,6 +12,7 @@
 		5E0E58D41842656A00C0135C /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E58D31842656A00C0135C /* DetailViewController.m */; };
 		5E15ABEB1829F1DD00BB0F13 /* avatar_baixa.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5E15ABEA1829F1DD00BB0F13 /* avatar_baixa.jpg */; };
 		5E15DBAE183CC2B0008A6CD7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E15DBAD183CC2B0008A6CD7 /* LoginViewController.m */; };
+		5E1F368018539B9400DD9BB2 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1F367F18539B9400DD9BB2 /* FacebookSDK.framework */; };
 		5E20D8D3184557E200A67746 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E20D8D2184557E200A67746 /* User.m */; };
 		5E20D8DA184564F900A67746 /* NewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E20D8D9184564F900A67746 /* NewViewController.m */; };
 		5E20D8DF1845659B00A67746 /* JVFloatLabeledTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E20D8DC1845659B00A67746 /* JVFloatLabeledTextField.m */; };
@@ -108,6 +109,7 @@
 		5E15ABEA1829F1DD00BB0F13 /* avatar_baixa.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = avatar_baixa.jpg; sourceTree = "<group>"; };
 		5E15DBAC183CC2B0008A6CD7 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Views/LoginViewController.h; sourceTree = "<group>"; };
 		5E15DBAD183CC2B0008A6CD7 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Views/LoginViewController.m; sourceTree = "<group>"; };
+		5E1F367F18539B9400DD9BB2 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		5E20D8D1184557E200A67746 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
 		5E20D8D2184557E200A67746 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
 		5E20D8D8184564F900A67746 /* NewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewViewController.h; path = Views/NewViewController.h; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				5E7AE17C18413C2F00F2E276 /* libxml2.dylib in Frameworks */,
 				5E7AE18018413C3D00F2E276 /* QuartzCore.framework in Frameworks */,
 				5E859403183D174200738FCC /* MapKit.framework in Frameworks */,
+				5E1F368018539B9400DD9BB2 /* FacebookSDK.framework in Frameworks */,
 				5EBC500217EFD57B0082BFB7 /* CoreGraphics.framework in Frameworks */,
 				5EBC500417EFD57B0082BFB7 /* UIKit.framework in Frameworks */,
 				5EBAB22B18418F9500A6A0DF /* libRestKit.a in Frameworks */,
@@ -275,6 +278,7 @@
 		5EBC4FFE17EFD57B0082BFB7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5E1F367F18539B9400DD9BB2 /* FacebookSDK.framework */,
 				5E20D8E1184565A900A67746 /* JVFloatLabeledText */,
 				5EFD607318418EEF00C7EC21 /* RestKit.xcodeproj */,
 				5EBAB23B18419AF300A6A0DF /* MBProgressHUD */,
@@ -646,17 +650,21 @@
 		5EBC502F17EFD57C0082BFB7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/thiagodorneles/Projects/tcc/ios/TCC,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TCC/TCC-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../Headers\"";
 				INFOPLIST_FILE = "TCC/TCC-Info.plist";
 				LIBRARY_SEARCH_PATHS = "";
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -667,17 +675,21 @@
 		5EBC503017EFD57C0082BFB7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/thiagodorneles/Projects/tcc/ios/TCC,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TCC/TCC-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../Headers\"";
 				INFOPLIST_FILE = "TCC/TCC-Info.plist";
 				LIBRARY_SEARCH_PATHS = "";
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

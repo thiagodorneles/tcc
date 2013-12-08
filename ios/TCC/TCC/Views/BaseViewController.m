@@ -7,8 +7,10 @@
 //
 
 #import "BaseViewController.h"
+#import "NewViewController.h"
+#import "LoginViewController.h"
 
-@interface BaseViewController ()
+@interface BaseViewController () <UITabBarDelegate, UITabBarControllerDelegate>
 
 @end
 
@@ -24,15 +26,29 @@
     return self;
 }
 
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
+{
+//    if ([item.title isEqualToString:@"Novo"]) {
+//        NewViewController *newViewController  = [NewViewController new];
+//        [self presentViewController:newViewController animated:YES completion:nil];
+//    }
+    NSLog(@"selecionou");
+}
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
+{
+    NSLog(@"bbb");
+    return YES;
+}
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    NSLog(@"aaaa");
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    
-    [[UITabBar appearance] setTintColor:[UIColor redColor]];
-//    UITabBarItem *novo  = [self.tabBar.items objectAtIndex:1];
-//    novo.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-    
+	[[UITabBar appearance] setTintColor:[UIColor redColor]];
 }
 
 - (void)didReceiveMemoryWarning
