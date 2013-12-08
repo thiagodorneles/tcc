@@ -18,6 +18,8 @@
 		5E20D8DF1845659B00A67746 /* JVFloatLabeledTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E20D8DC1845659B00A67746 /* JVFloatLabeledTextField.m */; };
 		5E20D8E01845659B00A67746 /* JVFloatLabeledTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E20D8DE1845659B00A67746 /* JVFloatLabeledTextView.m */; };
 		5E4338A51846A74D00E32D92 /* ConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E4338A41846A74D00E32D92 /* ConfigViewController.m */; };
+		5E47A42218542DAF00685BF2 /* ProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5E47A41F18542DAF00685BF2 /* ProgressHUD.bundle */; };
+		5E47A42318542DAF00685BF2 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E47A42118542DAF00685BF2 /* ProgressHUD.m */; };
 		5E4C80441829D4FF00368270 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E4C80431829D4FF00368270 /* BaseViewController.m */; };
 		5E7AE1741841385800F2E276 /* Publish.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7AE1731841385800F2E276 /* Publish.m */; };
 		5E7AE17818413C0F00F2E276 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7AE17718413C0F00F2E276 /* CFNetwork.framework */; };
@@ -29,7 +31,6 @@
 		5E7AE18418413C5000F2E276 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7AE18318413C5000F2E276 /* SystemConfiguration.framework */; };
 		5E859403183D174200738FCC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E859402183D174200738FCC /* MapKit.framework */; };
 		5EBAB22B18418F9500A6A0DF /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EFD607C18418EF000C7EC21 /* libRestKit.a */; };
-		5EBAB23E18419AF300A6A0DF /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EBAB23D18419AF300A6A0DF /* MBProgressHUD.m */; };
 		5EBAC28C1842DB59001042B8 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EBAC28B1842DB59001042B8 /* ProfileViewController.m */; };
 		5EBC500017EFD57B0082BFB7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EBC4FFF17EFD57B0082BFB7 /* Foundation.framework */; };
 		5EBC500217EFD57B0082BFB7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EBC500117EFD57B0082BFB7 /* CoreGraphics.framework */; };
@@ -44,6 +45,7 @@
 		5EBC502117EFD57C0082BFB7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EBC500317EFD57B0082BFB7 /* UIKit.framework */; };
 		5EBC502917EFD57C0082BFB7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5EBC502717EFD57C0082BFB7 /* InfoPlist.strings */; };
 		5EBC502B17EFD57C0082BFB7 /* TCCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC502A17EFD57C0082BFB7 /* TCCTests.m */; };
+		5EEAAD6418540D1F009091B6 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EEAAD6318540D1F009091B6 /* Social.framework */; };
 		5EFD602F1841846B00C7EC21 /* DefaultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EFD602E1841846B00C7EC21 /* DefaultViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -120,6 +122,9 @@
 		5E20D8DE1845659B00A67746 /* JVFloatLabeledTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVFloatLabeledTextView.m; sourceTree = "<group>"; };
 		5E4338A31846A74D00E32D92 /* ConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfigViewController.h; path = Views/ConfigViewController.h; sourceTree = "<group>"; };
 		5E4338A41846A74D00E32D92 /* ConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfigViewController.m; path = Views/ConfigViewController.m; sourceTree = "<group>"; };
+		5E47A41F18542DAF00685BF2 /* ProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ProgressHUD.bundle; sourceTree = "<group>"; };
+		5E47A42018542DAF00685BF2 /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
+		5E47A42118542DAF00685BF2 /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
 		5E4C80421829D4FF00368270 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseViewController.h; path = Views/BaseViewController.h; sourceTree = "<group>"; };
 		5E4C80431829D4FF00368270 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseViewController.m; path = Views/BaseViewController.m; sourceTree = "<group>"; };
 		5E7AE1721841385800F2E276 /* Publish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Publish.h; path = Models/Publish.h; sourceTree = "<group>"; };
@@ -132,8 +137,6 @@
 		5E7AE18118413C4600F2E276 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		5E7AE18318413C5000F2E276 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		5E859402183D174200738FCC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		5EBAB23C18419AF300A6A0DF /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		5EBAB23D18419AF300A6A0DF /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		5EBAC28A1842DB59001042B8 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileViewController.h; path = Views/ProfileViewController.h; sourceTree = "<group>"; };
 		5EBAC28B1842DB59001042B8 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileViewController.m; path = Views/ProfileViewController.m; sourceTree = "<group>"; };
 		5EBC4FFC17EFD57B0082BFB7 /* TCC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TCC.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,6 +156,7 @@
 		5EBC502617EFD57C0082BFB7 /* TCCTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TCCTests-Info.plist"; sourceTree = "<group>"; };
 		5EBC502817EFD57C0082BFB7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5EBC502A17EFD57C0082BFB7 /* TCCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCCTests.m; sourceTree = "<group>"; };
+		5EEAAD6318540D1F009091B6 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		5EFD602C1841827100C7EC21 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		5EFD602D1841846B00C7EC21 /* DefaultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DefaultViewController.h; path = Views/DefaultViewController.h; sourceTree = "<group>"; };
 		5EFD602E1841846B00C7EC21 /* DefaultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DefaultViewController.m; path = Views/DefaultViewController.m; sourceTree = "<group>"; };
@@ -164,6 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EEAAD6418540D1F009091B6 /* Social.framework in Frameworks */,
 				5E7AE17818413C0F00F2E276 /* CFNetwork.framework in Frameworks */,
 				5E7AE17A18413C2100F2E276 /* CoreData.framework in Frameworks */,
 				5E7AE18218413C4600F2E276 /* Security.framework in Frameworks */,
@@ -234,6 +239,17 @@
 			name = Cell;
 			sourceTree = "<group>";
 		};
+		5E47A41E18542DAF00685BF2 /* ProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				5E47A41F18542DAF00685BF2 /* ProgressHUD.bundle */,
+				5E47A42018542DAF00685BF2 /* ProgressHUD.h */,
+				5E47A42118542DAF00685BF2 /* ProgressHUD.m */,
+			);
+			name = ProgressHUD;
+			path = ../Libraries/ProgressHUD;
+			sourceTree = "<group>";
+		};
 		5E7AE1711841383200F2E276 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,15 +261,6 @@
 				5E20D8D2184557E200A67746 /* User.m */,
 			);
 			name = Models;
-			sourceTree = "<group>";
-		};
-		5EBAB23B18419AF300A6A0DF /* MBProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				5EBAB23C18419AF300A6A0DF /* MBProgressHUD.h */,
-				5EBAB23D18419AF300A6A0DF /* MBProgressHUD.m */,
-			);
-			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		5EBC4FF317EFD57B0082BFB7 = {
@@ -278,10 +285,11 @@
 		5EBC4FFE17EFD57B0082BFB7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5E1F367F18539B9400DD9BB2 /* FacebookSDK.framework */,
-				5E20D8E1184565A900A67746 /* JVFloatLabeledText */,
 				5EFD607318418EEF00C7EC21 /* RestKit.xcodeproj */,
-				5EBAB23B18419AF300A6A0DF /* MBProgressHUD */,
+				5E20D8E1184565A900A67746 /* JVFloatLabeledText */,
+				5E47A41E18542DAF00685BF2 /* ProgressHUD */,
+				5EEAAD6318540D1F009091B6 /* Social.framework */,
+				5E1F367F18539B9400DD9BB2 /* FacebookSDK.framework */,
 				5E7AE18318413C5000F2E276 /* SystemConfiguration.framework */,
 				5E7AE18118413C4600F2E276 /* Security.framework */,
 				5E7AE17F18413C3D00F2E276 /* QuartzCore.framework */,
@@ -484,6 +492,7 @@
 				5EBC501817EFD57C0082BFB7 /* Images.xcassets in Resources */,
 				5EBC500A17EFD57B0082BFB7 /* InfoPlist.strings in Resources */,
 				5E15ABEB1829F1DD00BB0F13 /* avatar_baixa.jpg in Resources */,
+				5E47A42218542DAF00685BF2 /* ProgressHUD.bundle in Resources */,
 				5EBC501317EFD57B0082BFB7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -508,10 +517,10 @@
 				5EBC501017EFD57B0082BFB7 /* TDAppDelegate.m in Sources */,
 				5E0E58D0184241C600C0135C /* PublishCell.m in Sources */,
 				5E20D8DF1845659B00A67746 /* JVFloatLabeledTextField.m in Sources */,
+				5E47A42318542DAF00685BF2 /* ProgressHUD.m in Sources */,
 				5E7AE1741841385800F2E276 /* Publish.m in Sources */,
 				5E4338A51846A74D00E32D92 /* ConfigViewController.m in Sources */,
 				5E0E58D41842656A00C0135C /* DetailViewController.m in Sources */,
-				5EBAB23E18419AF300A6A0DF /* MBProgressHUD.m in Sources */,
 				5EBC500C17EFD57B0082BFB7 /* main.m in Sources */,
 				5E20D8E01845659B00A67746 /* JVFloatLabeledTextView.m in Sources */,
 				5E15DBAE183CC2B0008A6CD7 /* LoginViewController.m in Sources */,
