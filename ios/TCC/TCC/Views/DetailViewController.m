@@ -9,6 +9,7 @@
 #import "DetailViewController.h"
 #import <RestKit/RestKit.h>
 #import "ProgressHUD.h"
+#import "PublishBlock.h"
 
 //#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
@@ -87,9 +88,7 @@
     [labelDescription sizeToFit];
     
     RKObjectManager *manager = [RKObjectManager sharedManager];
-//    [manager getObject:self.publish delegate:self];
-    
-    RKURL *KURL = [RKURL URLWithBaseURL:[manager baseURL] resourcePath:[NSString stringWithFormat:@"/publishs/%d/", self.publish.pk]];
+    RKURL *KURL = [RKURL URLWithBaseURL:[manager baseURL] resourcePath:[NSString stringWithFormat:@"/publishs/%ld/", (long)self.publish.pk]];
     [manager loadObjectsAtResourcePath:[KURL resourcePath] delegate:self];
 
 }
@@ -137,8 +136,23 @@
 {
     if (buttonIndex == 0) {
         [ProgressHUD show:@"Informando bloqueio..."];
-        RKObjectManager *manager = [RKObjectManager sharedManager];
-        [manager postObject:self.publish delegate:self];
+        RKObjectManager *objectManager = [RKObjectManager sharedManager];
+        
+        // -------------------------------------------------------------------------------------
+        // Mapeamento do objeto de Publish para BLOCK
+        // -------------------------------------------------------------------------------------
+        RKObjectMapping *blockMapping = [RKObjectMapping mappingForClass:[PublishBlock class]];
+        [blockMapping mapKeyPath:@"id" toAttribute:@"pk"];
+        [blockMapping  mapKeyPath:@"quant_blocks" toAttribute:@"quant_blocks"];
+        [objectManager.mappingProvider setMapping:blockMapping forKeyPath:@""];
+        
+        RKObjectMapping *blockSerializer = [blockMapping inverseMapping];
+        [objectManager.mappingProvider setSerializationMapping:blockSerializer forClass:[PublishBlock class]];
+        [objectManager.router routeClass:[PublishBlock class] toResourcePath:@"/block/" forMethod:RKRequestMethodPOST];
+        
+        PublishBlock *publishBlock = [PublishBlock new];
+        publishBlock.pk = self.publish.pk;
+        [objectManager postObject:publishBlock delegate:self];
         NSLog(@"Bloquear");
     }
 }
@@ -162,15 +176,15 @@
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didLoadObjects:(NSArray *)objects
 {
-    [ProgressHUD dismiss];
-    [ProgressHUD showSuccess:@"Obrigado!"];
-    
-    Publish *p = (Publish*)[objects objectAtIndex:0];
-    if (p.quant_blocks >= 3) {
-        [self.navigationController popViewControllerAnimated:YES];
-//        [NSNotificationCenter defaultCenter] 
+    if ([[objectLoader resourcePath] rangeOfString:@"publishs"].location == NSNotFound) {
+        [ProgressHUD showSuccess:@"Obrigado!"];
+        PublishBlock *p = (PublishBlock*)[objects objectAtIndex:0];
+        if (p.quant_blocks >= 3) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        [NSThread sleepForTimeInterval:5];
+
     }
-    [NSThread sleepForTimeInterval:1];
     [ProgressHUD dismiss];
 }
 

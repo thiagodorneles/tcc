@@ -68,10 +68,10 @@
 -(void)sendRequest:(NSString*)URL
 {
     [ProgressHUD show:@"Carregando..."];
+    self.user.publishs = nil;
     RKObjectManager *objectManager = [RKObjectManager sharedManager];
     RKURL *KURL = [RKURL URLWithBaseURL:[objectManager baseURL] resourcePath:URL];
     [objectManager loadObjectsAtResourcePath:[KURL resourcePath] delegate:self];
-    self.user.publishs = nil;
 }
 
 #pragma mark - RestKit Delegate
@@ -94,7 +94,9 @@
 {
     NSMutableArray *array = [NSMutableArray arrayWithArray:objects];
     self.user = (User*)[array objectAtIndex:0];
-    self.labelTotalPublishs.text = [NSString stringWithFormat:@"Publicações: %d", [self.user.publishs count]];
+    if (self.user.publishs != nil) {
+        self.labelTotalPublishs.text = [NSString stringWithFormat:@"Publicações: %d", [self.user.publishs count]];
+    }
     [self.tableView reloadData];
     [ProgressHUD dismiss];
 }
@@ -108,7 +110,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.user.publishs count];
+    if (self.user.publishs != nil)
+        return [self.user.publishs count];
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
