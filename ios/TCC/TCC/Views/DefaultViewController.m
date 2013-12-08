@@ -35,15 +35,29 @@
     return self;
 }
 
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if ([User getUser] && [self.publishData count] < 1) {
+        [self sendRequestWithURL:URL_DEFAULT isLoadMore:false];
+    }
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if ([User getUser] == nil) {
+        [self performSegueWithIdentifier:@"login" sender:self];
+    }
+    
     self.refreshControl =[[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     self.clearsSelectionOnViewWillAppear = YES;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    [self sendRequestWithURL:URL_DEFAULT isLoadMore:false];
 }
 
 - (void)refresh:(UIRefreshControl *)refreshControl {
@@ -162,7 +176,6 @@
         Publish *detail = [publishData objectAtIndex:indexPath.row];
         DetailViewController *detailView = segue.destinationViewController;
         detailView.publish = detail;
-//        [segue.destinationViewController setValue:detail forUndefinedKey:@"publish"];
     }
 }
 

@@ -9,6 +9,7 @@
 #import "BaseViewController.h"
 #import "NewViewController.h"
 #import "LoginViewController.h"
+#import "User.h"
 
 @interface BaseViewController () <UITabBarDelegate, UITabBarControllerDelegate>
 
@@ -43,12 +44,15 @@
 {
     NSLog(@"aaaa");
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	[[UITabBar appearance] setTintColor:[UIColor redColor]];
+    [[UITabBar appearance] setTintColor:[UIColor redColor]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,7 +60,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 #pragma mark - Custom TabBar
 
 // Create a view controller and setup it's tab bar item with a title and image

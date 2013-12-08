@@ -150,6 +150,7 @@
                                     user.image_url = [profileData objectForKey:@"profile_image_url"];
                                     [self saveUser:user];
                                     [ProgressHUD dismiss];
+                                    [self dismissViewControllerAnimated:YES completion:nil];
                                     
                                 }
                                 else {
@@ -205,6 +206,7 @@
     
     [self saveUser:user];
     [ProgressHUD dismiss];
+    [self dismissViewControllerAnimated:YES completion:nil];
 //    FBProfilePictureView *profilePicture = [FBProfilePictureView new];
 //    profilePicture.profileID = user.facebook_id;
 }

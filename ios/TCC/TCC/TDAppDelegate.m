@@ -12,6 +12,7 @@
 #import "constants.h"
 #import <RestKit/RestKit.h>
 #import "LoginViewController.h"
+#import "BaseViewController.h"
 
 @implementation TDAppDelegate
 
@@ -90,8 +91,7 @@
     [objectManager.router routeClass:[User class] toResourcePath:@"/users/"];
     [objectManager.router routeClass:[User class] toResourcePath:@"/users/" forMethod:RKRequestMethodPOST];
     
-
-    
+//    self.window.rootViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"LoginView"];    
     return YES;
 }
 							
