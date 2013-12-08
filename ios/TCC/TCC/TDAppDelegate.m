@@ -26,7 +26,7 @@
 //    [self.window makeKeyAndVisible];
 //    return YES;
     
-    [User removeLocal];
+//    [User removeLocal];
     
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat:@"YYYY-MM-DDTHH:mm:ss.sssZ"];
@@ -43,6 +43,7 @@
     // Mapeamento do objeto de Publish
     // -------------------------------------------------------------------------------------
     RKObjectMapping *publishMapping = [RKObjectMapping mappingForClass:[Publish class]];
+    [publishMapping mapKeyPath:@"id" toAttribute:@"pk"];
     [publishMapping mapKeyPath:@"title" toAttribute:@"title"];
     [publishMapping mapKeyPath:@"description" toAttribute:@"description"];
     [publishMapping mapKeyPath:@"location" toAttribute:@"location"];

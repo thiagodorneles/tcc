@@ -12,6 +12,7 @@
 
 @interface Publish : NSObject <UIActivityItemSource>
 
+@property NSInteger pk;
 @property NSString *title;
 @property NSString *description;
 @property NSString *created_at;
