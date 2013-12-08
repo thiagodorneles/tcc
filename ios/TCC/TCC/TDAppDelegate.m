@@ -11,6 +11,7 @@
 #import "BaseRequest.h"
 #import "constants.h"
 #import <RestKit/RestKit.h>
+#import "LoginViewController.h"
 
 @implementation TDAppDelegate
 
@@ -20,17 +21,12 @@
     [[UITabBar appearance] setTintColor:[UIColor redColor]];
     [[UIBarButtonItem appearance] setTintColor:[UIColor redColor]];
     
-    // Inicializando objeto User
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"user"])
-    {
-        User *user = [User new];
-        user.pk = 1;
-        user.name = @"Thiago Dorneles";
-        user.email = @"thiagodornelesrs@gmail.com";
-        user.created_at = [NSDate date];
-        user.twitter_user = @"thiagodorneles";
-        [self saveCustomObject:user key:@"user"];
-    }
+//    LoginViewController *loginVC = [LoginViewController new];
+//    self.window.rootViewController = loginVC;
+//    [self.window makeKeyAndVisible];
+//    return YES;
+    
+    [User removeLocal];
     
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat:@"YYYY-MM-DDTHH:mm:ss.sssZ"];
@@ -81,9 +77,19 @@
     [userMapping mapKeyPath:@"twitter_id" toAttribute:@"twitter_id"];
     [userMapping mapKeyPath:@"twitter_user" toAttribute:@"twitter_user"];
     [userMapping mapKeyPath:@"twitter_token" toAttribute:@"twitter_token"];
+    [userMapping mapKeyPath:@"facebook_id" toAttribute:@"facebook_id"];
+    [userMapping mapKeyPath:@"facebook_user" toAttribute:@"facebook_user"];
+    [userMapping mapKeyPath:@"facebook_token" toAttribute:@"facebook_token"];
     [userMapping mapKeyPath:@"publishs" toRelationship:@"publishs" withMapping:publishMapping];
     [objectManager.mappingProvider setMapping:userMapping forKeyPath:@""];
+
+    RKObjectMapping *userSerializar = [userMapping inverseMapping];
+    [objectManager.mappingProvider setSerializationMapping:userSerializar forClass:[User class]];
+    
     [objectManager.router routeClass:[User class] toResourcePath:@"/users/"];
+    [objectManager.router routeClass:[User class] toResourcePath:@"/users/" forMethod:RKRequestMethodPOST];
+    
+
     
     return YES;
 }
@@ -130,6 +136,13 @@
     NSData *encodedObject = [defaults objectForKey:key];
     User *object = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
     return object;
+}
+
+-(void)removeCustomObject:(NSString *)key
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:key];
+    [defaults synchronize];
 }
 
 @end

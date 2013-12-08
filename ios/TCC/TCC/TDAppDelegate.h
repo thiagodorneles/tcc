@@ -15,5 +15,6 @@
 
 - (void)saveCustomObject:(User *)object key:(NSString *)key;
 - (User *)loadCustomObjectWithKey:(NSString *)key;
+- (void)removeCustomObject:(NSString *)key;
 
 @end
