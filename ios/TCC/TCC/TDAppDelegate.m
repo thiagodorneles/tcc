@@ -7,12 +7,13 @@
 //
 
 #import "TDAppDelegate.h"
-#import "Publish.h"
-#import "BaseRequest.h"
-#import "constants.h"
 #import <RestKit/RestKit.h>
 #import "LoginViewController.h"
 #import "BaseViewController.h"
+#import "Publish.h"
+#import "BaseRequest.h"
+#import "constants.h"
+
 
 @implementation TDAppDelegate
 
@@ -57,7 +58,7 @@
     [publishMapping mapKeyPath:@"created_at" toAttribute:@"date"];
     [objectManager.mappingProvider setMapping:publishMapping forKeyPath:@"results"];
     [objectManager.router routeClass:[Publish class] toResourcePath:@"/publishs/"];
-//    [objectManager.router routeClass:[Publish class] toResourcePath:@"/publishs/" forMethod:RKRequestMethodPOST];
+    [objectManager.router routeClass:[Publish class] toResourcePath:@"/publishs/" forMethod:RKRequestMethodPOST];
     
     // -------------------------------------------------------------------------------------
     // Mapeamento do objeto de BaseRequest
@@ -82,6 +83,7 @@
     [userMapping mapKeyPath:@"facebook_id" toAttribute:@"facebook_id"];
     [userMapping mapKeyPath:@"facebook_user" toAttribute:@"facebook_user"];
     [userMapping mapKeyPath:@"facebook_token" toAttribute:@"facebook_token"];
+//    [userMapping mapKeyPath:@"publishs" toAttribute:@"publishs"];
     [userMapping mapKeyPath:@"publishs" toRelationship:@"publishs" withMapping:publishMapping];
     [objectManager.mappingProvider setMapping:userMapping forKeyPath:@""];
 
@@ -90,18 +92,6 @@
     
     [objectManager.router routeClass:[User class] toResourcePath:@"/users/"];
     [objectManager.router routeClass:[User class] toResourcePath:@"/users/" forMethod:RKRequestMethodPOST];
-    
-    // -------------------------------------------------------------------------------------
-    // Mapeamento do objeto de Publish para BLOCK
-    // -------------------------------------------------------------------------------------
-    RKObjectMapping *blockMapping = [RKObjectMapping mappingForClass:[Publish class]];
-    [blockMapping mapKeyPath:@"id" toAttribute:@"pk"];
-    [blockMapping  mapKeyPath:@"quant_blocks" toAttribute:@"quant_blocks"];
-    [objectManager.mappingProvider setMapping:blockMapping forKeyPath:@""];
-    
-    RKObjectMapping *blockSerializer = [blockMapping inverseMapping];
-    [objectManager.mappingProvider setSerializationMapping:blockSerializer forClass:[Publish class]];
-    [objectManager.router routeClass:[Publish class] toResourcePath:@"/block/" forMethod:RKRequestMethodPOST];
     
 //    self.window.rootViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"LoginView"];    
     return YES;
