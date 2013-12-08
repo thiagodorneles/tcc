@@ -57,7 +57,7 @@
     [publishMapping mapKeyPath:@"created_at" toAttribute:@"date"];
     [objectManager.mappingProvider setMapping:publishMapping forKeyPath:@"results"];
     [objectManager.router routeClass:[Publish class] toResourcePath:@"/publishs/"];
-    [objectManager.router routeClass:[Publish class] toResourcePath:@"/publishs/" forMethod:RKRequestMethodPOST];
+//    [objectManager.router routeClass:[Publish class] toResourcePath:@"/publishs/" forMethod:RKRequestMethodPOST];
     
     // -------------------------------------------------------------------------------------
     // Mapeamento do objeto de BaseRequest
@@ -90,6 +90,18 @@
     
     [objectManager.router routeClass:[User class] toResourcePath:@"/users/"];
     [objectManager.router routeClass:[User class] toResourcePath:@"/users/" forMethod:RKRequestMethodPOST];
+    
+    // -------------------------------------------------------------------------------------
+    // Mapeamento do objeto de Publish para BLOCK
+    // -------------------------------------------------------------------------------------
+    RKObjectMapping *blockMapping = [RKObjectMapping mappingForClass:[Publish class]];
+    [blockMapping mapKeyPath:@"id" toAttribute:@"pk"];
+    [blockMapping  mapKeyPath:@"quant_blocks" toAttribute:@"quant_blocks"];
+    [objectManager.mappingProvider setMapping:blockMapping forKeyPath:@""];
+    
+    RKObjectMapping *blockSerializer = [blockMapping inverseMapping];
+    [objectManager.mappingProvider setSerializationMapping:blockSerializer forClass:[Publish class]];
+    [objectManager.router routeClass:[Publish class] toResourcePath:@"/block/" forMethod:RKRequestMethodPOST];
     
 //    self.window.rootViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"LoginView"];    
     return YES;
