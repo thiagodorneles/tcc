@@ -138,7 +138,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     
     self.tagsField = [[JVFloatLabeledTextField alloc] initWithFrame:
                       CGRectMake(kJVFieldHMargin, div1.frame.origin.y + div1.frame.size.height, self.view.frame.size.width -2 *kJVFieldHMargin, kJVFieldHeight)];
-    self.tagsField.placeholder = NSLocalizedString(@"Tags", @"");
+    self.tagsField.placeholder = NSLocalizedString(@"Tags (contextos separados por vírgulas)", @"");
     self.tagsField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
     self.tagsField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
     self.tagsField.floatingLabelTextColor = floatingLabelColor;
@@ -231,7 +231,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
                                                          delegate:self
                                                 cancelButtonTitle:@"Cancelar"
                                            destructiveButtonTitle:nil
-                                                otherButtonTitles:@"Camera", @"Rolo de camera", nil];
+                                                otherButtonTitles:@"Camera", @"Rolo de camera", @"Ver fotos", nil];
     [options showInView:self.view];
 }
 
@@ -307,7 +307,6 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
         case 0:
             [self takePhoto:FALSE];
             break;
-            
         case 1:
             [self takePhoto:TRUE];
             break;
@@ -434,6 +433,15 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     return imageCopy;
 }
 
+-(void)clearForm
+{
+    self.titleField.text = @"";
+    self.tagsField.text = @"";
+    self.descriptionField.text = @"";
+    self.photo = nil;
+    locationManager = nil;
+    btnLocalizacao.selected = NO;
+}
 
 -(BOOL)validForm
 {
@@ -502,9 +510,12 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didLoadObjects:(NSArray *)objects
 {
-    if ([[objectLoader resourcePath] rangeOfString:@"upload"].location == NSNotFound && self.photo != nil) {
-        Publish *p = (Publish*)[objects objectAtIndex:0];
-        [self uploadImage:p.pk];
+    if ([[objectLoader resourcePath] rangeOfString:@"upload"].location == NSNotFound) {
+        if (self.photo != nil) {
+            Publish *p = (Publish*)[objects objectAtIndex:0];
+            [self uploadImage:p.pk];
+        }
+        [self clearForm];
     }
 }
 
