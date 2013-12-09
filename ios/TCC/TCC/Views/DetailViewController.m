@@ -144,8 +144,11 @@
 {
     if (buttonIndex == 0) {
         [ProgressHUD show:@"Informando bloqueio..."];
-        RKObjectManager *objectManager = [RKObjectManager sharedManager];
-        
+
+        RKObjectManager *objectManager = [RKObjectManager managerWithBaseURLString:URL_SERVER];
+        objectManager.acceptMIMEType = RKMIMETypeJSON;
+        objectManager.serializationMIMEType = RKMIMETypeJSON;
+
         // -------------------------------------------------------------------------------------
         // Mapeamento do objeto de Publish para BLOCK
         // -------------------------------------------------------------------------------------
@@ -187,11 +190,11 @@
     if ([[objectLoader resourcePath] rangeOfString:@"publishs"].location == NSNotFound) {
         [ProgressHUD showSuccess:@"Obrigado!"];
         PublishBlock *p = (PublishBlock*)[objects objectAtIndex:0];
+        
         if (p.quant_blocks >= 3) {
             [self.navigationController popViewControllerAnimated:YES];
         }
         [NSThread sleepForTimeInterval:5];
-
     }
     [ProgressHUD dismiss];
 }
