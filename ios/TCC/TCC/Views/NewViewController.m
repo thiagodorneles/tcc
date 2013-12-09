@@ -205,6 +205,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     manager.serializationMIMEType = RKMIMETypeJSON;
     
     RKObjectMapping *publishMapping = [RKObjectMapping mappingForClass:[Publish class]];
+    [publishMapping mapKeyPath:@"id" toAttribute:@"pk"];
     [publishMapping mapKeyPath:@"title" toAttribute:@"title"];
     [publishMapping mapKeyPath:@"description" toAttribute:@"description"];
     [publishMapping mapKeyPath:@"user" toAttribute:@"user"];
@@ -218,14 +219,14 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     [manager.router routeClass:[Publish class] toResourcePath:@"/publishs/" forMethod:RKRequestMethodPOST];
     
     [manager postObject:publish delegate:self];
-    [self uploadImage:publish];
 }
 
--(void)uploadImage:(Publish*)publish
+-(void)uploadImage:(NSInteger)publish_id
 {
     client = [[RKClient alloc] initWithBaseURLString:URL_SERVER];
-    RKParams* params = [RKParams params];
-//    RKParams *params = [RKParams paramsWithDictionary:[NSDictionary dictionaryWithKeysAndObjects:@"publish_id", publish.pk, nil]];
+//    RKParams* params = [RKParams params];
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%d", publish_id] forKey:@"publish_id"];
+    RKParams *params = [RKParams paramsWithDictionary:dict];
 
     // Attach the Image from Image View
     UIImage* image = [UIImage imageNamed:@"acidente.png"];
@@ -252,13 +253,29 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 - (void)request:(RKRequest *)request didLoadResponse:(RKResponse *)response {
     [self.descriptionField resignFirstResponder];
     [ProgressHUD dismiss];
-
     
-    if ([response statusCode] == 201) {
-        [ProgressHUD showSuccess:@"Sucesso!"];
+    if ([[request resourcePath] rangeOfString:@"upload"].location == NSNotFound) {
+        if ([response statusCode] == 201) {
+            [ProgressHUD showSuccess:@"Sucesso!"];
+//            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[response body] options:nil error:nil];
+//            NSInteger publish_id = (NSInteger)[dict objectForKey:@"id"];
+//            [self uploadImage:publish_id];
+        }
+    }
+}
+
+- (void)objectLoader:(RKObjectLoader *)objectLoader didLoadObjects:(NSArray *)objects
+{
+    if ([[objectLoader resourcePath] rangeOfString:@"upload"].location == NSNotFound) {
+        Publish *p = (Publish*)[objects objectAtIndex:0];
+//        [ProgressHUD showSuccess:@"Sucesso!"];
+//        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[response body] options:nil error:nil];
+//        NSInteger publish_id = (NSInteger)[dict objectForKey:@"id"];
+        [self uploadImage:p.pk];
     }
     
 }
+
 - (void)objectLoader:(RKObjectLoader *)objectLoader didFailWithError:(NSError *)error
 {
     [ProgressHUD dismiss];
