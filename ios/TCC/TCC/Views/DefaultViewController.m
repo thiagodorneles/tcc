@@ -101,24 +101,27 @@
 {
     NSMutableArray *array = [NSMutableArray arrayWithArray:objects];
     [ProgressHUD dismiss];
-//
-    // Get Pagina and Numero_Paginas data
-    NSMutableArray *requestArray = [NSMutableArray array];
-    for(BaseRequest *item in array){
-        if([[item class] isSubclassOfClass:[BaseRequest class] ]) {
-            [requestArray addObject:item];
-            self.request_info = item;
+    
+    if ([array count] > 0)
+    {
+        // Get Pagina and Numero_Paginas data
+        NSMutableArray *requestArray = [NSMutableArray array];
+        for(BaseRequest *item in array){
+            if([[item class] isSubclassOfClass:[BaseRequest class] ]) {
+                [requestArray addObject:item];
+                self.request_info = item;
+            }
         }
+        
+        // Need to clean imoveis array from the BaseRequest class
+        [array removeObjectsInArray:requestArray];
+        if (!publishData)
+            publishData = [NSMutableArray new];
+        
+        [publishData addObjectsFromArray:array];
+        [self.tableView reloadData];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
     }
-    
-    // Need to clean imoveis array from the BaseRequest class
-    [array removeObjectsInArray:requestArray];
-    if (!publishData)
-        publishData = [NSMutableArray new];
-    
-    [publishData addObjectsFromArray:array];
-    [self.tableView reloadData];
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 #pragma mark - Table view data source
 
@@ -145,8 +148,13 @@
     
     Publish *publish = [self.publishData objectAtIndex:indexPath.row];
     
-    cell.image.frame = CGRectMake(0, 7, 126, 91);
-    cell.image.image = [UIImage imageNamed:@"acidente"];
+    if ([publish.thumbs count] > 0) {
+        NSString *imageUrl = [NSString stringWithFormat:@"%@%@", URL_MEDIA, [publish.thumbs objectAtIndex:0]];
+        NSURL *URL = [NSURL URLWithString:imageUrl];
+        NSData *data = [NSData dataWithContentsOfURL:URL];
+        cell.image.image = [UIImage imageWithData:data];
+    }
+    
     cell.labelTitle.numberOfLines = 0;
     cell.labelTitle.text = publish.title;
     cell.labelUser.text = publish.user_name;
