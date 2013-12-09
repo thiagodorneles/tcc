@@ -10,4 +10,7 @@
 
 @interface NewViewController : UIViewController
 
+- (IBAction)buttonSaveTouched:(id)sender;
+- (IBAction)buttonCancelTouched:(id)sender;
+
 @end

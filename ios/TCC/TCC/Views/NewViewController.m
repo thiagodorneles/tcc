@@ -13,15 +13,19 @@
 #import "Publish.h"
 #import "constants.h"
 #import "ProgressHUD.h"
+#import <CoreLocation/CoreLocation.h>
 
 const static CGFloat kJVFieldHeight = 44.0f;
 const static CGFloat kJVFieldHMargin = 10.0f;
 const static CGFloat kJVFieldFontSize = 16.0f;
 const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
-@interface NewViewController () <UITextFieldDelegate, UITextViewDelegate, RKObjectLoaderDelegate, RKRequestDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate>
+@interface NewViewController () <UITextFieldDelegate, UITextViewDelegate, RKObjectLoaderDelegate, RKRequestDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate>
 {
     RKClient *client;
+    UIButton *btnFotos, *btnLocalizacao;
+    CLLocationManager *locationManager;
+    BOOL firstView;
 }
 
 @property UIImage *photo;
@@ -34,6 +38,8 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
 @synthesize titleField, tagsField, descriptionField, photo;
 
+#pragma mark - View
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -43,13 +49,27 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     return self;
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.title = NSLocalizedString(@"Novo", @"");
-
     [self.view setTintColor:[UIColor blueColor]];
+    [self setTitle: NSLocalizedString(@"Novo", @"")];
+    [self createView];
+    firstView = TRUE;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+}
+
+-(void)createView
+{
     CGFloat topOffset = [[UIApplication sharedApplication] statusBarFrame].size.height + self.navigationController.navigationBar.frame.size.height;
     
     UIColor *floatingLabelColor = [UIColor grayColor];
@@ -62,9 +82,8 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     UIColor *corFundo = [UIColor colorWithRed:247 green:247 blue:247 alpha:1];
     
     
-    UIButton *btnLocalizacao = [UIButton new];
+    btnLocalizacao = [UIButton new];
     btnLocalizacao.frame = CGRectMake(kJVFieldHMargin, 10.0f, larguraBotoes, 40.0f);
-    btnLocalizacao.enabled = NO;
     [btnLocalizacao setTitle:@"Localização" forState:UIControlStateNormal];
     btnLocalizacao.layer.borderWidth = 1.0f;
     btnLocalizacao.layer.borderColor = [UIColor grayColor].CGColor;
@@ -73,12 +92,13 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     [btnLocalizacao setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     btnLocalizacao.backgroundColor = corFundo;
     btnLocalizacao.titleLabel.font = [UIFont systemFontOfSize:13.0f];
-    [btnLocalizacao setImage:[UIImage imageNamed:@"722-location-pin.png"] forState:UIControlStateNormal];
+    [btnLocalizacao setImage:[UIImage imageNamed:@"location.png"] forState:UIControlStateNormal];
+    [btnLocalizacao setImage:[UIImage imageNamed:@"location-selected.png"] forState:UIControlStateSelected];
     [btnLocalizacao setImageEdgeInsets:UIEdgeInsetsMake(10.0f, 00.0f, 10.0f, 10.0f)];
     [btnLocalizacao addTarget:self action:@selector(buttonLocationTouched:) forControlEvents:UIControlEventTouchUpInside];
     [buttons addSubview:btnLocalizacao];
     
-    UIButton *btnFotos = [UIButton new];
+    btnFotos = [UIButton new];
     btnFotos.highlighted =YES;
     btnFotos.frame = CGRectMake(btnLocalizacao.frame.origin.x + btnLocalizacao.frame.size.width + 10.0f, 10.0f, larguraBotoes, 40.0f);
     [btnFotos setTitle:@"Fotos" forState:UIControlStateNormal];
@@ -90,6 +110,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     btnFotos.backgroundColor = corFundo;
     btnFotos.titleLabel.font = [UIFont systemFontOfSize:13.0f];
     [btnFotos setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
+    [btnFotos setImage:[UIImage imageNamed:@"camera-selected.png"] forState:UIControlStateSelected];
     [btnFotos setImageEdgeInsets:UIEdgeInsetsMake(10.0f, 00.0f, 10.0f, 10.0f)];
     [btnFotos addTarget:self action:@selector(buttonCameraTouched:) forControlEvents:UIControlEventTouchUpInside];
     [buttons addSubview:btnFotos];
@@ -99,7 +120,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     
     
     self.titleField = [[JVFloatLabeledTextField alloc] initWithFrame:
-                                           CGRectMake(kJVFieldHMargin, buttons.frame.origin.y + buttons.frame.size.height, self.view.frame.size.width - 2 * kJVFieldHMargin, kJVFieldHeight)];
+                       CGRectMake(kJVFieldHMargin, buttons.frame.origin.y + buttons.frame.size.height, self.view.frame.size.width - 2 * kJVFieldHMargin, kJVFieldHeight)];
     self.titleField.placeholder = NSLocalizedString(@"Título", @"");
     self.titleField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
     self.titleField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
@@ -116,7 +137,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     [self.view addSubview:div1];
     
     self.tagsField = [[JVFloatLabeledTextField alloc] initWithFrame:
-                                           CGRectMake(kJVFieldHMargin, div1.frame.origin.y + div1.frame.size.height, self.view.frame.size.width -2 *kJVFieldHMargin, kJVFieldHeight)];
+                      CGRectMake(kJVFieldHMargin, div1.frame.origin.y + div1.frame.size.height, self.view.frame.size.width -2 *kJVFieldHMargin, kJVFieldHeight)];
     self.tagsField.placeholder = NSLocalizedString(@"Tags", @"");
     self.tagsField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
     self.tagsField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
@@ -133,9 +154,9 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     
     self.descriptionField = [[JVFloatLabeledTextView alloc] initWithFrame:CGRectZero];
     self.descriptionField.frame = CGRectMake(kJVFieldHMargin - self.descriptionField.textContainer.lineFragmentPadding,
-                                        div3.frame.origin.y + div3.frame.size.height,
-                                        self.view.frame.size.width - 2*kJVFieldHMargin + self.descriptionField.textContainer.lineFragmentPadding,
-                                        kJVFieldHeight*3);
+                                             div3.frame.origin.y + div3.frame.size.height,
+                                             self.view.frame.size.width - 2*kJVFieldHMargin + self.descriptionField.textContainer.lineFragmentPadding,
+                                             kJVFieldHeight*3);
     self.descriptionField.placeholder = NSLocalizedString(@"Descrição", @"");
     self.descriptionField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
     self.descriptionField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
@@ -143,12 +164,10 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     self.descriptionField.delegate = self;
     self.descriptionField.returnKeyType = UIReturnKeyDone;
     [self.view addSubview:self.descriptionField];
+
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
+#pragma mark - TextField Delegate
 
 -(BOOL)resignFirstResponder
 {
@@ -188,17 +207,81 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     return TRUE;
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+#pragma mark - Buttons events
+
+-(IBAction)buttonLocationTouched:(id)sender
 {
-    switch (buttonIndex) {
-        case 0:
-            [self takePhoto:FALSE];
-            break;
-            
-        case 1:
-            [self takePhoto:TRUE];
-            break;
+    if (btnLocalizacao.selected) {
+        locationManager = nil;
+        [btnLocalizacao setSelected:NO];
     }
+    else {
+        if (locationManager == nil) {
+            locationManager = [[CLLocationManager alloc] init];
+        }
+        
+        locationManager.delegate = self;
+        [locationManager startUpdatingLocation];
+    }
+}
+
+-(IBAction)buttonCameraTouched:(id)sender
+{
+    UIActionSheet *options = [[UIActionSheet alloc] initWithTitle:nil
+                                                         delegate:self
+                                                cancelButtonTitle:@"Cancelar"
+                                           destructiveButtonTitle:nil
+                                                otherButtonTitles:@"Camera", @"Rolo de camera", nil];
+    [options showInView:self.view];
+}
+
+- (IBAction)buttonCancelTouched:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)buttonSaveTouched:(id)sender
+{
+    if (![self validForm]) {
+        return;
+    }
+    
+    [ProgressHUD show:@"Enviando..."];
+    
+    [self.titleField resignFirstResponder];
+    [self.tagsField resignFirstResponder];
+    [self.descriptionField resignFirstResponder];
+    
+    Publish *publish = [Publish new];
+    publish.title = self.titleField.text;
+    publish.description = self.descriptionField.text;
+    publish.tags = [NSMutableArray arrayWithArray:[[self.tagsField.text lowercaseString] componentsSeparatedByString:@","]];
+    publish.user = 1;
+    
+    if (locationManager) {
+        publish.location = [NSString stringWithFormat:@"%f, %f", locationManager.location.coordinate.latitude, locationManager.location.coordinate.longitude];
+    }
+    
+    RKObjectManager *manager = [RKObjectManager managerWithBaseURLString:URL_SERVER];
+    manager.acceptMIMEType = RKMIMETypeJSON;
+    manager.serializationMIMEType = RKMIMETypeJSON;
+    
+    RKObjectMapping *publishMapping = [RKObjectMapping mappingForClass:[Publish class]];
+    [publishMapping mapKeyPath:@"id" toAttribute:@"pk"];
+    [publishMapping mapKeyPath:@"title" toAttribute:@"title"];
+    [publishMapping mapKeyPath:@"description" toAttribute:@"description"];
+    [publishMapping mapKeyPath:@"user" toAttribute:@"user"];
+    [publishMapping mapKeyPath:@"tags" toAttribute:@"tags"];
+    [publishMapping mapKeyPath:@"location" toAttribute:@"location"];
+    [manager.mappingProvider setMapping:publishMapping forKeyPath:@""];
+    
+    RKObjectMapping *publishSerializer = [publishMapping inverseMapping];
+    [manager.mappingProvider setSerializationMapping:publishSerializer forClass:[Publish class]];
+    
+    [manager.router routeClass:[Publish class] toResourcePath:@"/publishs/"];
+    [manager.router routeClass:[Publish class] toResourcePath:@"/publishs/" forMethod:RKRequestMethodPOST];
+    
+    [manager postObject:publish delegate:self];
 }
 
 -(void)takePhoto:(BOOL)openLibray {
@@ -218,7 +301,20 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     [self.navigationController presentViewController:imagePickerController animated:YES completion:nil];
 }
 
-#pragma mark - Image picker delegate methdos
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:
+            [self takePhoto:FALSE];
+            break;
+            
+        case 1:
+            [self takePhoto:TRUE];
+            break;
+    }
+}
+
+#pragma mark - Image picker delegate methods
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
@@ -339,55 +435,32 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 }
 
 
--(IBAction)buttonLocationTouched:(id)sender
+-(BOOL)validForm
 {
+    BOOL valid = true;
+    if ([self.titleField.text isEqualToString:@""]) {
+        valid = false;
+    }
     
+    if (valid && [self.descriptionField.text isEqualToString:@""] && self.photo == nil)
+    {
+        valid = false;
+    }
+    
+    
+    if (!valid) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Dados incompletos"
+                                                        message:@"Deve preencher os campos para poder enviar a noticia. Informe no mínimo o título e o descritivo ou uma imagem"
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK" 
+                                              otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    
+    return valid;
 }
 
--(IBAction)buttonCameraTouched:(id)sender
-{
-    UIActionSheet *options = [[UIActionSheet alloc] initWithTitle:nil
-                                                         delegate:self
-                                                cancelButtonTitle:@"Cancelar"
-                                           destructiveButtonTitle:nil
-                                                otherButtonTitles:@"Camera", @"Rolo de camera", nil];
-    [options showInView:self.view];
-}
-
-- (IBAction)buttonSaveTouched:(id)sender
-{
-    [ProgressHUD show:@"Enviando..."];
-    
-    [self.titleField resignFirstResponder];
-    [self.tagsField resignFirstResponder];
-    [self.descriptionField resignFirstResponder];
-    
-    Publish *publish = [Publish new];
-    publish.title = self.titleField.text;
-    publish.description = self.descriptionField.text;
-    publish.tags = [NSMutableArray arrayWithArray:[[self.tagsField.text lowercaseString] componentsSeparatedByString:@","]];
-    publish.user = 1;
-    
-    RKObjectManager *manager = [RKObjectManager managerWithBaseURLString:URL_SERVER];
-    manager.acceptMIMEType = RKMIMETypeJSON;
-    manager.serializationMIMEType = RKMIMETypeJSON;
-    
-    RKObjectMapping *publishMapping = [RKObjectMapping mappingForClass:[Publish class]];
-    [publishMapping mapKeyPath:@"id" toAttribute:@"pk"];
-    [publishMapping mapKeyPath:@"title" toAttribute:@"title"];
-    [publishMapping mapKeyPath:@"description" toAttribute:@"description"];
-    [publishMapping mapKeyPath:@"user" toAttribute:@"user"];
-    [publishMapping mapKeyPath:@"tags" toAttribute:@"tags"];
-    [manager.mappingProvider setMapping:publishMapping forKeyPath:@""];
-    
-    RKObjectMapping *publishSerializer = [publishMapping inverseMapping];
-    [manager.mappingProvider setSerializationMapping:publishSerializer forClass:[Publish class]];
-    
-    [manager.router routeClass:[Publish class] toResourcePath:@"/publishs/"];
-    [manager.router routeClass:[Publish class] toResourcePath:@"/publishs/" forMethod:RKRequestMethodPOST];
-    
-    [manager postObject:publish delegate:self];
-}
+#pragma mark - RestKit Delegate
 
 -(void)uploadImage:(NSInteger)publish_id
 {
@@ -396,15 +469,11 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     client = [[RKClient alloc] initWithBaseURLString:URL_SERVER];
     NSDictionary *dict = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%d", publish_id] forKey:@"publish_id"];
     RKParams *params = [RKParams paramsWithDictionary:dict];
-
+    
     // Attach the Image from Image View
     NSData* imageData = UIImagePNGRepresentation(self.photo);
     [params setData:imageData MIMEType:@"image/png" forParam:@"image"];
-
-    // Log info about the serialization
-//    NSLog(@"RKParams HTTPHeaderValueForContentType = %@", [params HTTPHeaderValueForContentType]);
-//    NSLog(@"RKParams HTTPHeaderValueForContentLength = %d", [params HTTPHeaderValueForContentLength]);
-
+    
     // Send it for processing!
     [client post:@"/upload/" params:params delegate:self];
 }
@@ -433,7 +502,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didLoadObjects:(NSArray *)objects
 {
-    if ([[objectLoader resourcePath] rangeOfString:@"upload"].location == NSNotFound) {
+    if ([[objectLoader resourcePath] rangeOfString:@"upload"].location == NSNotFound && self.photo != nil) {
         Publish *p = (Publish*)[objects objectAtIndex:0];
         [self uploadImage:p.pk];
     }
@@ -445,5 +514,29 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erro" message:@"Não foi possível completar a operação." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
 }
+
+#pragma mark - LocationManager Delegate
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    if (status == kCLAuthorizationStatusAuthorized) {
+        [locationManager stopUpdatingLocation];
+        btnLocalizacao.selected = YES;
+    }
+}
+
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    btnLocalizacao.selected = NO;
+    if ([error.domain isEqualToString: kCLErrorDomain] && error.code == kCLErrorDenied && firstView == FALSE) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Aviso"
+                                                        message:@"Não é possível determinar sua localização. Para isso vá em Ajustes do sistema e autorize o aplicativo a buscar sua localização"
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil, nil];
+        [alert show];
+    }
+}
+
 
 @end
