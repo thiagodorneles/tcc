@@ -155,6 +155,9 @@
         NSData *data = [NSData dataWithContentsOfURL:URL];
         cell.image.image = [UIImage imageWithData:data];
     }
+    else {
+        cell.image.image = [UIImage imageNamed:@"nao_disponivel"];
+    }
 
     cell.labelTitle.text = publish.title;
     cell.labelTitle.numberOfLines = 0;
