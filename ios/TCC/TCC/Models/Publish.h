@@ -24,6 +24,7 @@
 @property NSInteger user;
 @property NSString *user_name;
 @property NSMutableArray *tags;
+@property NSMutableArray *images;
 
 // Location
 @property float latitude;

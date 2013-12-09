@@ -10,7 +10,7 @@
 
 @implementation Publish
 
-@synthesize pk, title, description, created_at, date, location, city, user, tags, quant_views, quant_blocks;
+@synthesize pk, title, description, created_at, date, location, city, user, tags, images, quant_views, quant_blocks;
 
 - (id)activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController;
 {

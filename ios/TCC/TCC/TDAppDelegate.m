@@ -55,6 +55,7 @@
     [publishMapping mapKeyPath:@"user" toAttribute:@"user"];
     [publishMapping mapKeyPath:@"user_name" toAttribute:@"user_name"];
     [publishMapping mapKeyPath:@"tags" toAttribute:@"tags"];
+    [publishMapping mapKeyPath:@"images" toAttribute:@"images"];    
     [publishMapping mapKeyPath:@"created_at" toAttribute:@"date"];
     [objectManager.mappingProvider setMapping:publishMapping forKeyPath:@"results"];
     [objectManager.router routeClass:[Publish class] toResourcePath:@"/publishs/"];
