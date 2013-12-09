@@ -26,6 +26,8 @@
 @synthesize labelUserName, labelTotalPublishs, labelUserCreated;
 @synthesize user;
 
+#pragma mark - Views
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -59,10 +61,15 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - Search refresh
+
 - (void)refresh:(UIRefreshControl *)refreshControl {
     [self sendRequest:[NSString stringWithFormat:URL_USERS, self.user.pk]];
     [refreshControl endRefreshing];
 }
+
+
+#pragma mark - RestKit Delegate
 
 -(void)sendRequest:(NSString*)URL
 {
@@ -72,8 +79,6 @@
     RKURL *KURL = [RKURL URLWithBaseURL:[objectManager baseURL] resourcePath:URL];
     [objectManager loadObjectsAtResourcePath:[KURL resourcePath] delegate:self];
 }
-
-#pragma mark - RestKit Delegate
 
 - (void)requestWillPrepareForSend:(RKRequest *)request
 {
