@@ -27,14 +27,6 @@
     return self;
 }
 
-- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
-{
-//    if ([item.title isEqualToString:@"Novo"]) {
-//        NewViewController *newViewController  = [NewViewController new];
-//        [self presentViewController:newViewController animated:YES completion:nil];
-//    }
-    NSLog(@"selecionou");
-}
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
     NSLog(@"bbb");
