@@ -39,8 +39,7 @@
 {
     [super viewDidLoad];
 
-    TDAppDelegate* appDelegate = (TDAppDelegate*)[[UIApplication sharedApplication] delegate];
-    user = [appDelegate loadCustomObjectWithKey:@"user"];
+    user = [User getUser];
     
     NSDateFormatter *format = [NSDateFormatter new];
     [format setDateFormat:@"MM/yyyy"];
@@ -124,8 +123,13 @@
     
     Publish *publish = [self.user.publishs objectAtIndex:indexPath.row];
     
-    cell.image.frame = CGRectMake(0, 7, 126, 91);
-    cell.image.image = [UIImage imageNamed:@"acidente"];
+    if ([publish.thumbs count] > 0) {
+        NSString *imageUrl = [NSString stringWithFormat:@"%@%@", URL_MEDIA, [publish.thumbs objectAtIndex:0]];
+        NSURL *URL = [NSURL URLWithString:imageUrl];
+        NSData *data = [NSData dataWithContentsOfURL:URL];
+        cell.image.image = [UIImage imageWithData:data];
+    }
+    
     cell.labelTitle.numberOfLines = 0;
     cell.labelTitle.text = publish.title;
     cell.labelUser.text = publish.user_name;
