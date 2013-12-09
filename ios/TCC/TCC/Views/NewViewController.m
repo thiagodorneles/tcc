@@ -19,7 +19,7 @@ const static CGFloat kJVFieldHMargin = 10.0f;
 const static CGFloat kJVFieldFontSize = 16.0f;
 const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
-@interface NewViewController () <UITextFieldDelegate, UITextViewDelegate, RKObjectLoaderDelegate>
+@interface NewViewController () <UITextFieldDelegate, UITextViewDelegate, RKObjectLoaderDelegate, RKRequestDelegate>
 {
     RKClient *client;
 }
@@ -218,6 +218,26 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     [manager.router routeClass:[Publish class] toResourcePath:@"/publishs/" forMethod:RKRequestMethodPOST];
     
     [manager postObject:publish delegate:self];
+    [self uploadImage:publish];
+}
+
+-(void)uploadImage:(Publish*)publish
+{
+    client = [[RKClient alloc] initWithBaseURLString:URL_SERVER];
+    RKParams* params = [RKParams params];
+//    RKParams *params = [RKParams paramsWithDictionary:[NSDictionary dictionaryWithKeysAndObjects:@"publish_id", publish.pk, nil]];
+
+    // Attach the Image from Image View
+    UIImage* image = [UIImage imageNamed:@"acidente.png"];
+    NSData* imageData = UIImagePNGRepresentation(image);
+    [params setData:imageData MIMEType:@"image/png" forParam:@"image"];
+
+    // Log info about the serialization
+//    NSLog(@"RKParams HTTPHeaderValueForContentType = %@", [params HTTPHeaderValueForContentType]);
+//    NSLog(@"RKParams HTTPHeaderValueForContentLength = %d", [params HTTPHeaderValueForContentLength]);
+
+    // Send it for processing!
+    [client post:@"/upload/" params:params delegate:self];
 }
 
 - (void)requestDidStartLoad:(RKRequest *)request {

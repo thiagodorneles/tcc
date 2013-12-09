@@ -21,6 +21,7 @@
 		5E47A42218542DAF00685BF2 /* ProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5E47A41F18542DAF00685BF2 /* ProgressHUD.bundle */; };
 		5E47A42318542DAF00685BF2 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E47A42118542DAF00685BF2 /* ProgressHUD.m */; };
 		5E4C80441829D4FF00368270 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E4C80431829D4FF00368270 /* BaseViewController.m */; };
+		5E60F6AC185598EC00DDB2AA /* PublishBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E60F6AB185598EC00DDB2AA /* PublishBlock.m */; };
 		5E7AE1741841385800F2E276 /* Publish.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7AE1731841385800F2E276 /* Publish.m */; };
 		5E7AE17818413C0F00F2E276 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7AE17718413C0F00F2E276 /* CFNetwork.framework */; };
 		5E7AE17A18413C2100F2E276 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7AE17918413C2100F2E276 /* CoreData.framework */; };
@@ -127,6 +128,8 @@
 		5E47A42118542DAF00685BF2 /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
 		5E4C80421829D4FF00368270 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseViewController.h; path = Views/BaseViewController.h; sourceTree = "<group>"; };
 		5E4C80431829D4FF00368270 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseViewController.m; path = Views/BaseViewController.m; sourceTree = "<group>"; };
+		5E60F6AA185598EC00DDB2AA /* PublishBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublishBlock.h; path = Models/PublishBlock.h; sourceTree = "<group>"; };
+		5E60F6AB185598EC00DDB2AA /* PublishBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PublishBlock.m; path = Models/PublishBlock.m; sourceTree = "<group>"; };
 		5E7AE1721841385800F2E276 /* Publish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Publish.h; path = Models/Publish.h; sourceTree = "<group>"; };
 		5E7AE1731841385800F2E276 /* Publish.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Publish.m; path = Models/Publish.m; sourceTree = "<group>"; };
 		5E7AE17718413C0F00F2E276 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -253,6 +256,8 @@
 		5E7AE1711841383200F2E276 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5E60F6AA185598EC00DDB2AA /* PublishBlock.h */,
+				5E60F6AB185598EC00DDB2AA /* PublishBlock.m */,
 				5E7AE1721841385800F2E276 /* Publish.h */,
 				5E7AE1731841385800F2E276 /* Publish.m */,
 				5E0D499818429BAF007BDB31 /* BaseRequest.h */,
@@ -515,6 +520,7 @@
 				5E4C80441829D4FF00368270 /* BaseViewController.m in Sources */,
 				5E20D8DA184564F900A67746 /* NewViewController.m in Sources */,
 				5EBC501017EFD57B0082BFB7 /* TDAppDelegate.m in Sources */,
+				5E60F6AC185598EC00DDB2AA /* PublishBlock.m in Sources */,
 				5E0E58D0184241C600C0135C /* PublishCell.m in Sources */,
 				5E20D8DF1845659B00A67746 /* JVFloatLabeledTextField.m in Sources */,
 				5E47A42318542DAF00685BF2 /* ProgressHUD.m in Sources */,
