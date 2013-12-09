@@ -139,12 +139,13 @@
     return [publishData count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)table cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"PublishCell";
-    PublishCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    PublishCell *cell = (PublishCell*)[table dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    cell.autoresizesSubviews = YES;
     
-    cell.frame = CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height);
+//    cell.frame = CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height);
     
     Publish *publish = [self.publishData objectAtIndex:indexPath.row];
     
@@ -154,9 +155,9 @@
         NSData *data = [NSData dataWithContentsOfURL:URL];
         cell.image.image = [UIImage imageWithData:data];
     }
-    
-    cell.labelTitle.numberOfLines = 0;
+
     cell.labelTitle.text = publish.title;
+    cell.labelTitle.numberOfLines = 0;
     cell.labelUser.text = publish.user_name;
     cell.labelTags.text = [publish.tags componentsJoinedByString:@", "];
 //    cell.labelDate.text= publish.date;
@@ -168,11 +169,16 @@
     return cell;
 }
 
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    [cell sizeToFit];
+//    [((PublishCell *)cell).labelTitle sizeToFit];
+//}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 110.0f;
 }
-
 
 #pragma mark - Navigation
 
