@@ -10,6 +10,7 @@
 #import <RestKit/RestKit.h>
 #import "ProgressHUD.h"
 #import "PublishBlock.h"
+#import "constants.h"
 
 //#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
@@ -79,6 +80,13 @@
         NSMutableString *tag = [[NSMutableString alloc] initWithString:@"Tags: "];
         [tag appendString:[self.publish.tags componentsJoinedByString:@","]];;
         labelTags.text = tag;
+    }
+    
+    if ([self.publish.images count] > 0) {
+        NSString *imageUrl = [NSString stringWithFormat:@"%@%@", URL_MEDIA, [self.publish.images objectAtIndex:0]];
+        NSURL *URL = [NSURL URLWithString:imageUrl];
+        NSData *data = [NSData dataWithContentsOfURL:URL];
+        self.imagePicture.image = [UIImage imageWithData:data];
     }
     
 //    [labelTitle sizeToFit];
