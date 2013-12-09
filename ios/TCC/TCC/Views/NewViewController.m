@@ -19,11 +19,12 @@ const static CGFloat kJVFieldHMargin = 10.0f;
 const static CGFloat kJVFieldFontSize = 16.0f;
 const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
-@interface NewViewController () <UITextFieldDelegate, UITextViewDelegate, RKObjectLoaderDelegate, RKRequestDelegate>
+@interface NewViewController () <UITextFieldDelegate, UITextViewDelegate, RKObjectLoaderDelegate, RKRequestDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate>
 {
     RKClient *client;
 }
 
+@property UIImage *photo;
 @property JVFloatLabeledTextField *titleField, *tagsField;
 @property JVFloatLabeledTextView *descriptionField;
 
@@ -31,7 +32,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
 @implementation NewViewController
 
-@synthesize titleField, tagsField, descriptionField;
+@synthesize titleField, tagsField, descriptionField, photo;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -74,7 +75,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     btnLocalizacao.titleLabel.font = [UIFont systemFontOfSize:13.0f];
     [btnLocalizacao setImage:[UIImage imageNamed:@"722-location-pin.png"] forState:UIControlStateNormal];
     [btnLocalizacao setImageEdgeInsets:UIEdgeInsetsMake(10.0f, 00.0f, 10.0f, 10.0f)];
-    
+    [btnLocalizacao addTarget:self action:@selector(buttonLocationTouched:) forControlEvents:UIControlEventTouchUpInside];
     [buttons addSubview:btnLocalizacao];
     
     UIButton *btnFotos = [UIButton new];
@@ -90,6 +91,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     btnFotos.titleLabel.font = [UIFont systemFontOfSize:13.0f];
     [btnFotos setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
     [btnFotos setImageEdgeInsets:UIEdgeInsetsMake(10.0f, 00.0f, 10.0f, 10.0f)];
+    [btnFotos addTarget:self action:@selector(buttonCameraTouched:) forControlEvents:UIControlEventTouchUpInside];
     [buttons addSubview:btnFotos];
     
     
@@ -186,6 +188,172 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     return TRUE;
 }
 
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:
+            [self takePhoto:FALSE];
+            break;
+            
+        case 1:
+            [self takePhoto:TRUE];
+            break;
+    }
+}
+
+-(void)takePhoto:(BOOL)openLibray {
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+#if TARGET_IPHONE_SIMULATOR
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+#else
+    if (openLibray) {
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    else {;
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
+#endif
+//    imagePickerController.editing = YES;
+    imagePickerController.delegate = (id)self;
+    [self.navigationController presentViewController:imagePickerController animated:YES completion:nil];
+}
+
+#pragma mark - Image picker delegate methdos
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    self.photo = [self scaleAndRotateImage:image];
+    [picker dismissViewControllerAnimated:NO completion:nil];
+}
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:NO completion:nil];
+}
+
+- (UIImage*)scaleAndRotateImage:(UIImage *)image
+{
+    int kMaxResolution = 600; // Or whatever
+    
+    CGImageRef imgRef = image.CGImage;
+    
+    CGFloat width = CGImageGetWidth(imgRef);
+    CGFloat height = CGImageGetHeight(imgRef);
+    
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    CGRect bounds = CGRectMake(0, 0, width, height);
+    if (width > kMaxResolution || height > kMaxResolution) {
+        CGFloat ratio = width/height;
+        if (ratio > 1) {
+            bounds.size.width = kMaxResolution;
+            bounds.size.height = bounds.size.width / ratio;
+        }
+        else {
+            bounds.size.height = kMaxResolution;
+            bounds.size.width = bounds.size.height * ratio;
+        }
+    }
+    
+    CGFloat scaleRatio = bounds.size.width / width;
+    CGSize imageSize = CGSizeMake(CGImageGetWidth(imgRef), CGImageGetHeight(imgRef));
+    CGFloat boundHeight;
+    UIImageOrientation orient = image.imageOrientation;
+    switch(orient) {
+            
+        case UIImageOrientationUp: //EXIF = 1
+            transform = CGAffineTransformIdentity;
+            break;
+            
+        case UIImageOrientationUpMirrored: //EXIF = 2
+            transform = CGAffineTransformMakeTranslation(imageSize.width, 0.0);
+            transform = CGAffineTransformScale(transform, -1.0, 1.0);
+            break;
+            
+        case UIImageOrientationDown: //EXIF = 3
+            transform = CGAffineTransformMakeTranslation(imageSize.width, imageSize.height);
+            transform = CGAffineTransformRotate(transform, M_PI);
+            break;
+            
+        case UIImageOrientationDownMirrored: //EXIF = 4
+            transform = CGAffineTransformMakeTranslation(0.0, imageSize.height);
+            transform = CGAffineTransformScale(transform, 1.0, -1.0);
+            break;
+            
+        case UIImageOrientationLeftMirrored: //EXIF = 5
+            boundHeight = bounds.size.height;
+            bounds.size.height = bounds.size.width;
+            bounds.size.width = boundHeight;
+            transform = CGAffineTransformMakeTranslation(imageSize.height, imageSize.width);
+            transform = CGAffineTransformScale(transform, -1.0, 1.0);
+            transform = CGAffineTransformRotate(transform, 3.0 * M_PI / 2.0);
+            break;
+            
+        case UIImageOrientationLeft: //EXIF = 6
+            boundHeight = bounds.size.height;
+            bounds.size.height = bounds.size.width;
+            bounds.size.width = boundHeight;
+            transform = CGAffineTransformMakeTranslation(0.0, imageSize.width);
+            transform = CGAffineTransformRotate(transform, 3.0 * M_PI / 2.0);
+            break;
+            
+        case UIImageOrientationRightMirrored: //EXIF = 7
+            boundHeight = bounds.size.height;
+            bounds.size.height = bounds.size.width;
+            bounds.size.width = boundHeight;
+            transform = CGAffineTransformMakeScale(-1.0, 1.0);
+            transform = CGAffineTransformRotate(transform, M_PI / 2.0);
+            break;
+            
+        case UIImageOrientationRight: //EXIF = 8
+            boundHeight = bounds.size.height;
+            bounds.size.height = bounds.size.width;
+            bounds.size.width = boundHeight;
+            transform = CGAffineTransformMakeTranslation(imageSize.height, 0.0);
+            transform = CGAffineTransformRotate(transform, M_PI / 2.0);
+            break;
+            
+        default:
+            [NSException raise:NSInternalInconsistencyException format:@"Invalid image orientation"];
+            
+    }
+    
+    UIGraphicsBeginImageContext(bounds.size);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    if (orient == UIImageOrientationRight || orient == UIImageOrientationLeft) {
+        CGContextScaleCTM(context, -scaleRatio, scaleRatio);
+        CGContextTranslateCTM(context, -height, 0);
+    }
+    else {
+        CGContextScaleCTM(context, scaleRatio, -scaleRatio);
+        CGContextTranslateCTM(context, 0, -height);
+    }
+    
+    CGContextConcatCTM(context, transform);
+    
+    CGContextDrawImage(UIGraphicsGetCurrentContext(), CGRectMake(0, 0, width, height), imgRef);
+    UIImage *imageCopy = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    return imageCopy;
+}
+
+
+-(IBAction)buttonLocationTouched:(id)sender
+{
+    
+}
+
+-(IBAction)buttonCameraTouched:(id)sender
+{
+    UIActionSheet *options = [[UIActionSheet alloc] initWithTitle:nil
+                                                         delegate:self
+                                                cancelButtonTitle:@"Cancelar"
+                                           destructiveButtonTitle:nil
+                                                otherButtonTitles:@"Camera", @"Rolo de camera", nil];
+    [options showInView:self.view];
+}
+
 - (IBAction)buttonSaveTouched:(id)sender
 {
     [ProgressHUD show:@"Enviando..."];
@@ -223,14 +391,14 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
 -(void)uploadImage:(NSInteger)publish_id
 {
+    [ProgressHUD show:@"Enviando imagens"];
+    
     client = [[RKClient alloc] initWithBaseURLString:URL_SERVER];
-//    RKParams* params = [RKParams params];
     NSDictionary *dict = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%d", publish_id] forKey:@"publish_id"];
     RKParams *params = [RKParams paramsWithDictionary:dict];
 
     // Attach the Image from Image View
-    UIImage* image = [UIImage imageNamed:@"acidente.png"];
-    NSData* imageData = UIImagePNGRepresentation(image);
+    NSData* imageData = UIImagePNGRepresentation(self.photo);
     [params setData:imageData MIMEType:@"image/png" forParam:@"image"];
 
     // Log info about the serialization
@@ -243,7 +411,6 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
 - (void)requestDidStartLoad:(RKRequest *)request {
     NSLog(@"requestDidStartLoad");
-
 }
 
 - (void)request:(RKRequest *)request didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
@@ -252,14 +419,14 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
 - (void)request:(RKRequest *)request didLoadResponse:(RKResponse *)response {
     [self.descriptionField resignFirstResponder];
-    [ProgressHUD dismiss];
-    
-    if ([[request resourcePath] rangeOfString:@"upload"].location == NSNotFound) {
-        if ([response statusCode] == 201) {
+//    [ProgressHUD dismiss];
+
+    if ([response statusCode] == 201) {
+        if ([[request resourcePath] rangeOfString:@"upload"].location == NSNotFound && self.photo == nil) {
             [ProgressHUD showSuccess:@"Sucesso!"];
-//            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[response body] options:nil error:nil];
-//            NSInteger publish_id = (NSInteger)[dict objectForKey:@"id"];
-//            [self uploadImage:publish_id];
+        }
+        else {
+            [ProgressHUD showSuccess:@"Sucesso!"];
         }
     }
 }
@@ -268,12 +435,8 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 {
     if ([[objectLoader resourcePath] rangeOfString:@"upload"].location == NSNotFound) {
         Publish *p = (Publish*)[objects objectAtIndex:0];
-//        [ProgressHUD showSuccess:@"Sucesso!"];
-//        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[response body] options:nil error:nil];
-//        NSInteger publish_id = (NSInteger)[dict objectForKey:@"id"];
         [self uploadImage:p.pk];
     }
-    
 }
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didFailWithError:(NSError *)error
