@@ -8,6 +8,7 @@
 
 #import "DetailViewController.h"
 #import <RestKit/RestKit.h>
+#import <UIKit/UIActivityViewController.h>
 #import "ProgressHUD.h"
 #import "PublishBlock.h"
 #import "constants.h"
@@ -16,20 +17,13 @@
 #define CELL_CONTENT_WIDTH 280.0f
 #define CELL_CONTENT_MARGIN 10.0f
 
-//#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
-
-@interface DetailViewController () <RKObjectLoaderDelegate, MKMapViewDelegate>
-
-
-//@property (strong, nonatomic) UIPopoverController *activityPopover;
+@interface DetailViewController () <RKObjectLoaderDelegate, MKMapViewDelegate, UIActivityItemSource>
 
 @end
 
 @implementation DetailViewController
 
 @synthesize publish;
-@synthesize labelTitle, labelUser, labelDate, labelTags, labelDescription, imagePicture;
-//@synthesize  activityPopover;
 
 #pragma mark - View
 
@@ -48,60 +42,31 @@
     self.navigationController.navigationBar.tintColor = [UIColor redColor];
     
     [[UIBarButtonItem appearance] setTintColor:[UIColor redColor]];
-
     
     self.tableView.allowsSelection = NO;
     self.tableView.dataSource = self;
     
-    UIBarButtonItem *buttonShare = [[UIBarButtonItem alloc] init];
-    buttonShare.image = [UIImage imageNamed:@"share"];
-    buttonShare.style = UIBarButtonItemStylePlain;
-    buttonShare.target = self;
-    buttonShare.action = @selector(buttonSharedTouched:);
+    if (self.publish.quant_blocks < 3)
+    {
+        UIBarButtonItem *buttonShare = [[UIBarButtonItem alloc] init];
+        buttonShare.image = [UIImage imageNamed:@"share"];
+        buttonShare.style = UIBarButtonItemStylePlain;
+        buttonShare.target = self;
+        buttonShare.action = @selector(buttonSharedTouched:);
+        
+        UIBarButtonItem *buttonBlock = [[UIBarButtonItem alloc] init];
+        buttonBlock.image = [UIImage imageNamed:@"block"];
+        buttonBlock.style = UIBarButtonItemStylePlain;
+        buttonBlock.target = self;
+        buttonBlock.action = @selector(buttonBlockedTouched:);
+        
+        NSMutableArray *arrayButtons = [NSMutableArray arrayWithObjects:buttonShare, buttonBlock, nil];
+        self.navigationItem.rightBarButtonItems = arrayButtons;
+    }
     
-    UIBarButtonItem *buttonBlock = [[UIBarButtonItem alloc] init];
-    buttonBlock.image = [UIImage imageNamed:@"block"];
-    buttonBlock.style = UIBarButtonItemStylePlain;
-    buttonBlock.target = self;
-    buttonBlock.action = @selector(buttonBlockedTouched:);
-    
-    NSMutableArray *arrayButtons = [NSMutableArray arrayWithObjects:buttonShare, buttonBlock, nil];
-    self.navigationItem.rightBarButtonItems = arrayButtons;
-    
-    
-    // Carregando os dados
-//    labelTitle.numberOfLines = 0;
-//    labelDescription.numberOfLines = 0;
-//    
-//    labelTitle.text = self.publish.title;
-//    [labelTitle sizeToFit];
-//    labelUser.text = self.publish.user_name;
-//    labelDate.text = [inFormat stringFromDate:self.publish.date];
-//    labelDescription.text = self.publish.description;
-//    
-//    if (self.publish.tags)
-//    {
-//        NSMutableString *tag = [[NSMutableString alloc] initWithString:@"Tags: "];
-//        [tag appendString:[self.publish.tags componentsJoinedByString:@","]];;
-//        labelTags.text = tag;
-//    }
-//    
-//    if ([self.publish.images count] > 0) {
-//        NSString *imageUrl = [NSString stringWithFormat:@"%@%@", URL_MEDIA, [self.publish.images objectAtIndex:0]];
-//        NSURL *URL = [NSURL URLWithString:imageUrl];
-//        NSData *data = [NSData dataWithContentsOfURL:URL];
-//        self.imagePicture.image = [UIImage imageWithData:data];
-//    }
-//    
-////    [labelTitle sizeToFit];
-//    [labelUser sizeToFit];
-//    [labelDate sizeToFit];
-//    [labelTags sizeToFit];
-//    [labelDescription sizeToFit];
-    
-//    RKObjectManager *manager = [RKObjectManager sharedManager];
-//    RKURL *KURL = [RKURL URLWithBaseURL:[manager baseURL] resourcePath:[NSString stringWithFormat:@"/publishs/%ld/", (long)self.publish.pk]];
-//    [manager loadObjectsAtResourcePath:[KURL resourcePath] delegate:self];
+    RKObjectManager *manager = [RKObjectManager sharedManager];
+    RKURL *KURL = [RKURL URLWithBaseURL:[manager baseURL] resourcePath:[NSString stringWithFormat:@"/publishs/%ld/", (long)self.publish.pk]];
+    [manager loadObjectsAtResourcePath:[KURL resourcePath] delegate:self];
 
 }
 
@@ -112,28 +77,14 @@
 
 #pragma mark - Buttons navigation bar
 
-- (IBAction)buttonSharedTouched:(id)sender {
-    NSLog(@"Shared");
+- (IBAction)buttonSharedTouched:(id)sender
+{
+    UIActivityViewController *shareViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self.publish]
+                                                                                      applicationActivities:nil];
     
-    //    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self.publish] applicationActivities:nil];
-//    
-//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-//        //iPhone, present activity view controller as is.
-//        [self presentViewController:activityViewController animated:YES completion:nil];
-//    }
-//    else
-//    {
-//        //iPad, present the view controller inside a popover.
-//        if (![self.activityPopover isPopoverVisible]) {
-//            self.activityPopover = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
-//            [self.activityPopover presentPopoverFromBarButtonItem:self.buttonShare permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-//        }
-//        else
-//        {
-//            //Dismiss if the button is tapped while popover is visible.
-//            [self.activityPopover dismissPopoverAnimated:YES];
-//        }
-//    }
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        [self presentViewController:shareViewController animated:YES completion:nil];
+    }
 }
 
 - (IBAction)buttonBlockedTouched:(id)sender {
@@ -219,8 +170,6 @@
                 
             case 1:
             {
-                
-                
                 UILabel *lblUser = [UILabel new];
                 lblUser.text = self.publish.user_name;
                 lblUser.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
@@ -348,6 +297,16 @@
     return size.height + (CELL_CONTENT_MARGIN * 2);
 }
 
+#pragma mark - UIActivityView
+
+- (id)activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController
+{
+    return nil;
+}
+- (id)activityViewController:(UIActivityViewController *)activityViewController itemForActivityType:(NSString *)activityType
+{
+    return activityType;
+}
 
 #pragma mark - RestKit
 
