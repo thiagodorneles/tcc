@@ -417,7 +417,7 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
         <!--Detail View Controller-->
         <scene sceneID="Nj8-nd-Hu4">
             <objects>
-                <tableViewController hidesBottomBarWhenPushed="YES" id="Gio-aV-Tve" customClass="DetailViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="DetailView" hidesBottomBarWhenPushed="YES" id="Gio-aV-Tve" customClass="DetailViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="r6s-Yj-zG6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

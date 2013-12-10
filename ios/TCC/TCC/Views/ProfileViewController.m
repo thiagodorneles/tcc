@@ -139,15 +139,15 @@
         cell.image.image = [UIImage imageNamed:@"nao_disponivel"];
     }
     
-    cell.labelTitle.numberOfLines = 0;
+//    cell.labelTitle.numberOfLines = 0;
     cell.labelTitle.text = publish.title;
     cell.labelUser.text = publish.user_name;
     cell.labelTags.text = [publish.tags componentsJoinedByString:@", "];
     //    cell.labelDate.text= publish.date;
     
-    [cell.labelTitle sizeToFit];
-    [cell.labelTags sizeToFit];
-    [cell.labelUser sizeToFit];
+//    [cell.labelTitle sizeToFit];
+//    [cell.labelTags sizeToFit];
+//    [cell.labelUser sizeToFit];
     
     return cell;
  
