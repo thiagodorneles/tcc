@@ -9,11 +9,13 @@
 #ifndef TCC_constants_h
 #define TCC_constants_h
 
-#define URL_DETALHES_SITE @"http://192.168.1.7:8000/publicacao/"
-#define URL_MEDIA @"http://192.168.1.7:8000"
-#define URL_SERVER @"http://192.168.1.7:8000/api/"
-//#define URL_SERVER @"http://127.0.0.1:8000/api/"
-//#define URL_SERVER @"http://plataformaugc.herokuapp.com/api/"
+#define URL_PREFFIX @"http://192.168.1.7:8000"
+//#define URL_PREFFIX @"http://127.0.0.1:8000"
+//#define URL_PREFFIX @"http://plataformaugc.herokuapp.com"
+
+#define URL_DETALHES_SITE URL_PREFFIX@"/publicacao/"
+#define URL_MEDIA URL_PREFFIX
+#define URL_SERVER URL_PREFFIX@"/api/"
 #define URL_DEFAULT @"/publishs/"
 #define URL_SEARCH @"/search/"
 #define URL_USERS @"/users/%d/"
