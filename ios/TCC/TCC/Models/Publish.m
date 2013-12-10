@@ -7,6 +7,7 @@
 //
 
 #import "Publish.h"
+#import "constants.h"
 
 @implementation Publish
 
@@ -19,10 +20,6 @@
 // called to determine data type. only the class of the return type is consulted. it should match what -itemForActivityType: returns later
 - (id)activityViewController:(UIActivityViewController *)activityViewController itemForActivityType:(NSString *)activityType
 {
-    return self.title;
+    return [NSString stringWithFormat:@"%@ %@%d/", self.title, URL_DETALHES_SITE, self.pk];
 }
-// called to fetch data after an activity is selected. you can return nil.
-
-
-
 @end
