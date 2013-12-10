@@ -96,7 +96,10 @@
         if (granted) {
             NSArray *acc = [accountStore accountsWithAccountType:accountType];
             NSMutableArray *accounts = [NSMutableArray arrayWithArray:acc];
-            [accounts removeObjectAtIndex:0];
+            
+            if ([accounts count] > 1) {
+                [accounts removeObjectAtIndex:0];
+            }
 
             if ([accounts count] > 0) {
                 NSURL *urlAuthenticate = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.twitter.com/oauth/authenticate?%@", TWITTER_TOKEN]];
@@ -207,8 +210,8 @@
     
     [self saveUser:user];
     [ProgressHUD dismiss];
-    
     [self dismissViewControllerAnimated:YES completion:nil];
+    
 //    FBProfilePictureView *profilePicture = [FBProfilePictureView new];
 //    profilePicture.profileID = user.facebook_id;
 }
