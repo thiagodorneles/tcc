@@ -101,7 +101,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     btnFotos = [UIButton new];
     btnFotos.highlighted =YES;
     btnFotos.frame = CGRectMake(btnLocalizacao.frame.origin.x + btnLocalizacao.frame.size.width + 10.0f, 10.0f, larguraBotoes, 40.0f);
-    [btnFotos setTitle:@"Fotos" forState:UIControlStateNormal];
+    [btnFotos setTitle:@"Câmera" forState:UIControlStateNormal];
     btnFotos.layer.borderWidth = 1.0f;
     btnFotos.layer.borderColor = [UIColor grayColor].CGColor;
     btnFotos.layer.cornerRadius = 20;
@@ -231,13 +231,14 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
                                                          delegate:self
                                                 cancelButtonTitle:@"Cancelar"
                                            destructiveButtonTitle:nil
-                                                otherButtonTitles:@"Camera", @"Rolo de camera", @"Ver fotos", nil];
+                                                otherButtonTitles:@"Camera", @"Rolo de camera", nil];
     [options showInView:self.view];
 }
 
 - (IBAction)buttonCancelTouched:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self clearForm];
+//    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)buttonSaveTouched:(id)sender
