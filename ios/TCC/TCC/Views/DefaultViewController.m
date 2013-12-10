@@ -19,12 +19,13 @@
 @interface DefaultViewController () <RKObjectLoaderDelegate, RKRequestDelegate>
 
 @property NSMutableArray *publishData;
+@property NSMutableArray *searchResults;
 
 @end
 
 @implementation DefaultViewController
 
-@synthesize tableView, publishData;
+@synthesize tableView, publishData, searchResults;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -134,7 +135,7 @@
 {
     if (table == self.searchDisplayController.searchResultsTableView)
     {
-        return [publishData count];
+        return [self.searchResults count];
     }
     return [publishData count];
 }
@@ -142,34 +143,54 @@
 - (UITableViewCell *)tableView:(UITableView *)table cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"PublishCell";
-    PublishCell *cell = (PublishCell*)[table dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.autoresizesSubviews = YES;
+    Publish *publish;
+    UITableViewCell *genericCell;
     
-//    cell.frame = CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height);
-    
-    Publish *publish = [self.publishData objectAtIndex:indexPath.row];
-    
-    if ([publish.thumbs count] > 0) {
-        NSString *imageUrl = [NSString stringWithFormat:@"%@%@", URL_MEDIA, [publish.thumbs objectAtIndex:0]];
-        NSURL *URL = [NSURL URLWithString:imageUrl];
-        NSData *data = [NSData dataWithContentsOfURL:URL];
-        cell.image.image = [UIImage imageWithData:data];
+    if (table == self.searchDisplayController.searchResultsTableView) {
+        UITableViewCell *cell = [table dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        
+        publish = [self.searchResults objectAtIndex:indexPath.row];
+        cell.textLabel.numberOfLines = 0;
+        cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        cell.textLabel.text = publish.title;
+        genericCell = cell;
+        
     }
     else {
-        cell.image.image = [UIImage imageNamed:@"nao_disponivel"];
-    }
+        PublishCell *cell = (PublishCell*)[table dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        cell.frame = CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height);
+        cell.autoresizesSubviews = YES;
+        
+        publish = [self.publishData objectAtIndex:indexPath.row];
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        [dateFormatter setDateFormat:@"dd/MM HH:mm"];
+        
+        cell.labelTitle.text = publish.title;
+//        cell.labelTitle.numberOfLines = 0;
+        cell.labelUser.text = publish.user_name;
+        cell.labelTags.text = [publish.tags componentsJoinedByString:@", "];
+        cell.labelDate.text= [dateFormatter stringFromDate:publish.date];
 
-    cell.labelTitle.text = publish.title;
-    cell.labelTitle.numberOfLines = 0;
-    cell.labelUser.text = publish.user_name;
-    cell.labelTags.text = [publish.tags componentsJoinedByString:@", "];
-//    cell.labelDate.text= publish.date;
-    
-    [cell.labelTitle sizeToFit];
-    [cell.labelTags sizeToFit];
-    [cell.labelUser sizeToFit];
-    
-    return cell;
+        if ([publish.thumbs count] > 0) {
+            NSString *imageUrl = [NSString stringWithFormat:@"%@%@", URL_MEDIA, [publish.thumbs objectAtIndex:0]];
+            NSURL *URL = [NSURL URLWithString:imageUrl];
+            NSData *data = [NSData dataWithContentsOfURL:URL];
+            cell.image.image = [UIImage imageWithData:data];
+        }
+        else {
+            cell.image.image = [UIImage imageNamed:@"nao_disponivel"];
+        }
+
+        
+//        [cell.labelTitle sizeToFit];
+//        [cell.labelTags sizeToFit];
+//        [cell.labelUser sizeToFit];
+        genericCell = cell;
+    }
+    return genericCell;
 }
 
 //- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -178,9 +199,30 @@
 //    [((PublishCell *)cell).labelTitle sizeToFit];
 //}
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+-(CGFloat)tableView:(UITableView *)table heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (table == self.searchDisplayController.searchResultsTableView)
+        return 44;
     return 110.0f;
+}
+
+- (void)tableView:(UITableView *)table didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (table == self.searchDisplayController.searchResultsTableView) {
+//        DetailViewController *detailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailView"];
+//        detailVC.publish = [self.searchResults objectAtIndex:indexPath.row];
+//        [self.navigationController pushViewController:detailVC animated:YES];
+        [self performSegueWithIdentifier:@"publishDetail" sender:self.searchDisplayController.searchResultsTableView];
+    }
+}
+
+- (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller
+{
+    [self.searchResults removeAllObjects];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
+                  withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                          atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 
 #pragma mark - Navigation
@@ -198,69 +240,41 @@
 
 #pragma mark - Content Filtering
 
-- (void)updateFilteredContentForProductName:(NSString *)productName type:(NSString *)typeName
+- (void)updateFilteredContent:(NSString *)text
 {
-//    /*
-//     Update the filtered array based on the search text and scope.
-//     */
-//    if ((productName == nil) || [productName length] == 0)
-//    {
-//        // If there is no search string and the scope is "All".
-//        if (typeName == nil)
-//        {
-//            self.searchResults = [self.products mutableCopy];
-//        }
-//        else
-//        {
-//            // If there is no search string and the scope is chosen.
-//            NSMutableArray *searchResults = [[NSMutableArray alloc] init];
-//            for (APLProduct *product in self.products)
-//            {
-//                if ([product.type isEqualToString:typeName])
-//                {
-//                    [searchResults addObject:product];
-//                }
-//            }
-//            self.searchResults = searchResults;
-//        }
-//        return;
-//    }
-//    
-//    
-//    [self.searchResults removeAllObjects]; // First clear the filtered array.
-//    /*
-//     Search the main list for products whose type matches the scope (if selected) and whose name matches searchText; add items that match to the filtered array.
-//     */
-//    for (APLProduct *product in self.products)
-//    {
-//        if ((typeName == nil) || [product.type isEqualToString:typeName])
-//        {
-//            NSUInteger searchOptions = NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch;
-//            NSRange productNameRange = NSMakeRange(0, product.name.length);
-//            NSRange foundRange = [product.name rangeOfString:productName options:searchOptions range:productNameRange];
-//            if (foundRange.length > 0)
-//            {
-//                [self.searchResults addObject:product];
-//            }
-//        }
-//    }
+    [self.searchResults removeAllObjects]; // First clear the filtered array.
+    self.searchResults = [NSMutableArray array];
+    
+    NSUInteger searchOptions = NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch;
+
+    for (Publish *publish in self.publishData)
+    {
+        
+        if ([publish.title rangeOfString:text options:searchOptions].length > 0) {
+            [self.searchResults addObject:publish];
+            continue;
+        }
+        else if ([publish.description rangeOfString:text options:searchOptions].length > 0) {
+            [self.searchResults addObject:publish];
+            continue;
+        }
+        else if ([[publish.tags componentsJoinedByString:@"," ] rangeOfString:text options:searchOptions].length > 0) {
+            [self.searchResults addObject:publish];
+            continue;
+        }
+        
+    }
 }
 
 #pragma mark - UISearchDisplayController Delegate Methods
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
-    NSString *scope;
-    
-    NSInteger selectedScopeButtonIndex = [self.searchDisplayController.searchBar selectedScopeButtonIndex];
-    if (selectedScopeButtonIndex > 0)
-    {
-//        scope = [[APLProduct deviceTypeNames] objectAtIndex:(selectedScopeButtonIndex - 1)];
+    if (searchString.length < 3) {
+        return NO;
     }
     
-    [self updateFilteredContentForProductName:searchString type:scope];
-    
-    // Return YES to cause the search result table view to be reloaded.
+    [self updateFilteredContent:searchString];
     return YES;
 }
 
@@ -268,103 +282,94 @@
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
 {
     NSString *searchString = [self.searchDisplayController.searchBar text];
-    NSString *scope;
-    
-    if (searchOption > 0)
-    {
-//        scope = [[APLProduct deviceTypeNames] objectAtIndex:(searchOption - 1)];
-    }
-    
-    [self updateFilteredContentForProductName:searchString type:scope];
-    
-    // Return YES to cause the search result table view to be reloaded.
+    [self updateFilteredContent:searchString];
     return YES;
 }
 
 
-#pragma mark - State restoration
-
-static NSString *SearchDisplayControllerIsActiveKey = @"SearchDisplayControllerIsActiveKey";
-static NSString *SearchBarScopeIndexKey = @"SearchBarScopeIndexKey";
-static NSString *SearchBarTextKey = @"SearchBarTextKey";
-static NSString *SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
-
-static NSString *SearchDisplayControllerSelectedRowKey = @"SearchDisplayControllerSelectedRowKey";
-static NSString *TableViewSelectedRowKey = @"TableViewSelectedRowKey";
-
-
-- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    [super encodeRestorableStateWithCoder:coder];
-    
-    UISearchDisplayController *searchDisplayController = self.searchDisplayController;
-    
-    BOOL searchDisplayControllerIsActive = [searchDisplayController isActive];
-    [coder encodeBool:searchDisplayControllerIsActive forKey:SearchDisplayControllerIsActiveKey];
-    
-    if (searchDisplayControllerIsActive)
-    {
-        [coder encodeObject:[searchDisplayController.searchBar text] forKey:SearchBarTextKey];
-        [coder encodeInteger:[searchDisplayController.searchBar selectedScopeButtonIndex] forKey:SearchBarScopeIndexKey];
-        
-        NSIndexPath *selectedIndexPath = [searchDisplayController.searchResultsTableView indexPathForSelectedRow];
-        if (selectedIndexPath != nil)
-        {
-            [coder encodeObject:selectedIndexPath forKey:SearchDisplayControllerSelectedRowKey];
-        }
-        
-        BOOL searchFieldIsFirstResponder = [searchDisplayController.searchBar isFirstResponder];
-        [coder encodeBool:searchFieldIsFirstResponder forKey:SearchBarIsFirstResponderKey];
-    }
-    
-    NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
-    if (selectedIndexPath != nil)
-    {
-        [coder encodeObject:selectedIndexPath forKey:TableViewSelectedRowKey];
-    }
-}
-
-
-- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    [super decodeRestorableStateWithCoder:coder];
-    
-    BOOL searchDisplayControllerIsActive = [coder decodeBoolForKey:SearchDisplayControllerIsActiveKey];
-    
-    if (searchDisplayControllerIsActive)
-    {
-        [self.searchDisplayController setActive:YES];
-        
-        /*
-         Order is important here. Setting the search bar text causes searchDisplayController:shouldReloadTableForSearchString: to be invoked.
-         */
-        NSInteger searchBarScopeIndex = [coder decodeIntegerForKey:SearchBarScopeIndexKey];
-        [self.searchDisplayController.searchBar setSelectedScopeButtonIndex:searchBarScopeIndex];
-        
-        NSString *searchBarText = [coder decodeObjectForKey:SearchBarTextKey];
-        if (searchBarText != nil)
-        {
-            [self.searchDisplayController.searchBar setText:searchBarText];
-        }
-        
-        NSIndexPath *selectedIndexPath = [coder decodeObjectForKey:SearchDisplayControllerSelectedRowKey];
-        if (selectedIndexPath != nil)
-        {
-            [self.searchDisplayController.searchResultsTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
-        }
-        
-        BOOL searchFieldIsFirstResponder = [coder decodeBoolForKey:SearchBarIsFirstResponderKey];
-        if (searchFieldIsFirstResponder)
-        {
-            [self.searchDisplayController.searchBar becomeFirstResponder];
-        }
-        
-    }
-    NSIndexPath *selectedIndexPath = [coder decodeObjectForKey:TableViewSelectedRowKey];
-    if (selectedIndexPath != nil)
-    {
-        [self.tableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
-    }
-}
+//#pragma mark - State restoration
+//
+//static NSString *SearchDisplayControllerIsActiveKey = @"SearchDisplayControllerIsActiveKey";
+//static NSString *SearchBarScopeIndexKey = @"SearchBarScopeIndexKey";
+//static NSString *SearchBarTextKey = @"SearchBarTextKey";
+//static NSString *SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
+//
+//static NSString *SearchDisplayControllerSelectedRowKey = @"SearchDisplayControllerSelectedRowKey";
+//static NSString *TableViewSelectedRowKey = @"TableViewSelectedRowKey";
+//
+//
+//- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
+//{
+//    [super encodeRestorableStateWithCoder:coder];
+//    
+//    UISearchDisplayController *searchDisplayController = self.searchDisplayController;
+//    
+//    BOOL searchDisplayControllerIsActive = [searchDisplayController isActive];
+//    [coder encodeBool:searchDisplayControllerIsActive forKey:SearchDisplayControllerIsActiveKey];
+//    
+//    if (searchDisplayControllerIsActive)
+//    {
+//        [coder encodeObject:[searchDisplayController.searchBar text] forKey:SearchBarTextKey];
+//        [coder encodeInteger:[searchDisplayController.searchBar selectedScopeButtonIndex] forKey:SearchBarScopeIndexKey];
+//        
+//        NSIndexPath *selectedIndexPath = [searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+//        if (selectedIndexPath != nil)
+//        {
+//            [coder encodeObject:selectedIndexPath forKey:SearchDisplayControllerSelectedRowKey];
+//        }
+//        
+//        BOOL searchFieldIsFirstResponder = [searchDisplayController.searchBar isFirstResponder];
+//        [coder encodeBool:searchFieldIsFirstResponder forKey:SearchBarIsFirstResponderKey];
+//    }
+//    
+//    NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+//    if (selectedIndexPath != nil)
+//    {
+//        [coder encodeObject:selectedIndexPath forKey:TableViewSelectedRowKey];
+//    }
+//}
+//
+//
+//- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
+//{
+//    [super decodeRestorableStateWithCoder:coder];
+//    
+//    BOOL searchDisplayControllerIsActive = [coder decodeBoolForKey:SearchDisplayControllerIsActiveKey];
+//    
+//    if (searchDisplayControllerIsActive)
+//    {
+//        [self.searchDisplayController setActive:YES];
+//        
+//        /*
+//         Order is important here. Setting the search bar text causes searchDisplayController:shouldReloadTableForSearchString: to be invoked.
+//         */
+//        NSInteger searchBarScopeIndex = [coder decodeIntegerForKey:SearchBarScopeIndexKey];
+//        [self.searchDisplayController.searchBar setSelectedScopeButtonIndex:searchBarScopeIndex];
+//        
+//        NSString *searchBarText = [coder decodeObjectForKey:SearchBarTextKey];
+//        if (searchBarText != nil)
+//        {
+//            [self.searchDisplayController.searchBar setText:searchBarText];
+//        }
+//        
+//        NSIndexPath *selectedIndexPath = [coder decodeObjectForKey:SearchDisplayControllerSelectedRowKey];
+//        if (selectedIndexPath != nil)
+//        {
+//            [self.searchDisplayController.searchResultsTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
+//        }
+//        
+//        BOOL searchFieldIsFirstResponder = [coder decodeBoolForKey:SearchBarIsFirstResponderKey];
+//        if (searchFieldIsFirstResponder)
+//        {
+//            [self.searchDisplayController.searchBar becomeFirstResponder];
+//        }
+//        
+//    }
+//    NSIndexPath *selectedIndexPath = [coder decodeObjectForKey:TableViewSelectedRowKey];
+//    if (selectedIndexPath != nil)
+//    {
+//        [self.tableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
+//    }
+//}
 
 @end
