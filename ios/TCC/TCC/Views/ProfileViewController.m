@@ -46,7 +46,6 @@
     NSDateFormatter *format = [NSDateFormatter new];
     [format setDateFormat:@"MM/yyyy"];
     
-
     self.labelUserName.text = self.user.name;
     self.labelUserCreated.text = [NSString stringWithFormat:@"Desde: %@", [format stringFromDate:self.user.created_at]];
 
@@ -64,6 +63,7 @@
 #pragma mark - Search refresh
 
 - (void)refresh:(UIRefreshControl *)refreshControl {
+    user = [User getUser];
     [self sendRequest:[NSString stringWithFormat:URL_USERS, self.user.pk]];
     [refreshControl endRefreshing];
 }
@@ -87,6 +87,7 @@
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didFailWithError:(NSError *)error
 {
+    [ProgressHUD dismiss];
     NSLog(@"Error: %@", [error localizedDescription]);
 }
 
