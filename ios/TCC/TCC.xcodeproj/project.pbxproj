@@ -22,6 +22,10 @@
 		5E47A42318542DAF00685BF2 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E47A42118542DAF00685BF2 /* ProgressHUD.m */; };
 		5E4C80441829D4FF00368270 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E4C80431829D4FF00368270 /* BaseViewController.m */; };
 		5E60F6AC185598EC00DDB2AA /* PublishBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E60F6AB185598EC00DDB2AA /* PublishBlock.m */; };
+		5E60F6BB1855FD2900DDB2AA /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E60F6B61855FD2900DDB2AA /* UIImage+Alpha.m */; };
+		5E60F6BC1855FD2900DDB2AA /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E60F6B81855FD2900DDB2AA /* UIImage+Resize.m */; };
+		5E60F6BD1855FD2900DDB2AA /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E60F6BA1855FD2900DDB2AA /* UIImage+RoundedCorner.m */; };
+		5E60F6C0185601BE00DDB2AA /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E60F6BF185601BE00DDB2AA /* UIImage+fixOrientation.m */; };
 		5E7AE1741841385800F2E276 /* Publish.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7AE1731841385800F2E276 /* Publish.m */; };
 		5E7AE17818413C0F00F2E276 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7AE17718413C0F00F2E276 /* CFNetwork.framework */; };
 		5E7AE17A18413C2100F2E276 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7AE17918413C2100F2E276 /* CoreData.framework */; };
@@ -31,6 +35,7 @@
 		5E7AE18218413C4600F2E276 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7AE18118413C4600F2E276 /* Security.framework */; };
 		5E7AE18418413C5000F2E276 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7AE18318413C5000F2E276 /* SystemConfiguration.framework */; };
 		5E859403183D174200738FCC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E859402183D174200738FCC /* MapKit.framework */; };
+		5E85CA2518563CAF00CFE941 /* PreNewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E85CA2418563CAF00CFE941 /* PreNewViewController.m */; };
 		5EBAB22B18418F9500A6A0DF /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EFD607C18418EF000C7EC21 /* libRestKit.a */; };
 		5EBAC28C1842DB59001042B8 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EBAC28B1842DB59001042B8 /* ProfileViewController.m */; };
 		5EBC500017EFD57B0082BFB7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EBC4FFF17EFD57B0082BFB7 /* Foundation.framework */; };
@@ -130,6 +135,14 @@
 		5E4C80431829D4FF00368270 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseViewController.m; path = Views/BaseViewController.m; sourceTree = "<group>"; };
 		5E60F6AA185598EC00DDB2AA /* PublishBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublishBlock.h; path = Models/PublishBlock.h; sourceTree = "<group>"; };
 		5E60F6AB185598EC00DDB2AA /* PublishBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PublishBlock.m; path = Models/PublishBlock.m; sourceTree = "<group>"; };
+		5E60F6B51855FD2900DDB2AA /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Alpha.h"; path = "Categories/UIImage+Alpha.h"; sourceTree = SOURCE_ROOT; };
+		5E60F6B61855FD2900DDB2AA /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Alpha.m"; path = "Categories/UIImage+Alpha.m"; sourceTree = SOURCE_ROOT; };
+		5E60F6B71855FD2900DDB2AA /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "Categories/UIImage+Resize.h"; sourceTree = SOURCE_ROOT; };
+		5E60F6B81855FD2900DDB2AA /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "Categories/UIImage+Resize.m"; sourceTree = SOURCE_ROOT; };
+		5E60F6B91855FD2900DDB2AA /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+RoundedCorner.h"; path = "Categories/UIImage+RoundedCorner.h"; sourceTree = SOURCE_ROOT; };
+		5E60F6BA1855FD2900DDB2AA /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RoundedCorner.m"; path = "Categories/UIImage+RoundedCorner.m"; sourceTree = SOURCE_ROOT; };
+		5E60F6BE185601BE00DDB2AA /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+fixOrientation.h"; path = "Categories/UIImage+fixOrientation.h"; sourceTree = SOURCE_ROOT; };
+		5E60F6BF185601BE00DDB2AA /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+fixOrientation.m"; path = "Categories/UIImage+fixOrientation.m"; sourceTree = SOURCE_ROOT; };
 		5E7AE1721841385800F2E276 /* Publish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Publish.h; path = Models/Publish.h; sourceTree = "<group>"; };
 		5E7AE1731841385800F2E276 /* Publish.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Publish.m; path = Models/Publish.m; sourceTree = "<group>"; };
 		5E7AE17718413C0F00F2E276 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -140,6 +153,8 @@
 		5E7AE18118413C4600F2E276 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		5E7AE18318413C5000F2E276 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		5E859402183D174200738FCC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		5E85CA2318563CAF00CFE941 /* PreNewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreNewViewController.h; path = Views/PreNewViewController.h; sourceTree = "<group>"; };
+		5E85CA2418563CAF00CFE941 /* PreNewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreNewViewController.m; path = Views/PreNewViewController.m; sourceTree = "<group>"; };
 		5EBAC28A1842DB59001042B8 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileViewController.h; path = Views/ProfileViewController.h; sourceTree = "<group>"; };
 		5EBAC28B1842DB59001042B8 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileViewController.m; path = Views/ProfileViewController.m; sourceTree = "<group>"; };
 		5EBC4FFC17EFD57B0082BFB7 /* TCC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TCC.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -229,6 +244,8 @@
 				5E20D8D9184564F900A67746 /* NewViewController.m */,
 				5E4338A31846A74D00E32D92 /* ConfigViewController.h */,
 				5E4338A41846A74D00E32D92 /* ConfigViewController.m */,
+				5E85CA2318563CAF00CFE941 /* PreNewViewController.h */,
+				5E85CA2418563CAF00CFE941 /* PreNewViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -251,6 +268,21 @@
 			);
 			name = ProgressHUD;
 			path = ../Libraries/ProgressHUD;
+			sourceTree = "<group>";
+		};
+		5E60F6B41855FCDD00DDB2AA /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				5E60F6B51855FD2900DDB2AA /* UIImage+Alpha.h */,
+				5E60F6B61855FD2900DDB2AA /* UIImage+Alpha.m */,
+				5E60F6B71855FD2900DDB2AA /* UIImage+Resize.h */,
+				5E60F6B81855FD2900DDB2AA /* UIImage+Resize.m */,
+				5E60F6B91855FD2900DDB2AA /* UIImage+RoundedCorner.h */,
+				5E60F6BA1855FD2900DDB2AA /* UIImage+RoundedCorner.m */,
+				5E60F6BE185601BE00DDB2AA /* UIImage+fixOrientation.h */,
+				5E60F6BF185601BE00DDB2AA /* UIImage+fixOrientation.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		5E7AE1711841383200F2E276 /* Models */ = {
@@ -314,6 +346,7 @@
 		5EBC500517EFD57B0082BFB7 /* TCC */ = {
 			isa = PBXGroup;
 			children = (
+				5E60F6B41855FCDD00DDB2AA /* Categories */,
 				5EBC501117EFD57B0082BFB7 /* Main.storyboard */,
 				5EBC500E17EFD57B0082BFB7 /* TDAppDelegate.h */,
 				5EBC500F17EFD57B0082BFB7 /* TDAppDelegate.m */,
@@ -518,9 +551,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E4C80441829D4FF00368270 /* BaseViewController.m in Sources */,
+				5E85CA2518563CAF00CFE941 /* PreNewViewController.m in Sources */,
 				5E20D8DA184564F900A67746 /* NewViewController.m in Sources */,
+				5E60F6BB1855FD2900DDB2AA /* UIImage+Alpha.m in Sources */,
 				5EBC501017EFD57B0082BFB7 /* TDAppDelegate.m in Sources */,
 				5E60F6AC185598EC00DDB2AA /* PublishBlock.m in Sources */,
+				5E60F6BC1855FD2900DDB2AA /* UIImage+Resize.m in Sources */,
 				5E0E58D0184241C600C0135C /* PublishCell.m in Sources */,
 				5E20D8DF1845659B00A67746 /* JVFloatLabeledTextField.m in Sources */,
 				5E47A42318542DAF00685BF2 /* ProgressHUD.m in Sources */,
@@ -530,7 +566,9 @@
 				5EBC500C17EFD57B0082BFB7 /* main.m in Sources */,
 				5E20D8E01845659B00A67746 /* JVFloatLabeledTextView.m in Sources */,
 				5E15DBAE183CC2B0008A6CD7 /* LoginViewController.m in Sources */,
+				5E60F6C0185601BE00DDB2AA /* UIImage+fixOrientation.m in Sources */,
 				5E20D8D3184557E200A67746 /* User.m in Sources */,
+				5E60F6BD1855FD2900DDB2AA /* UIImage+RoundedCorner.m in Sources */,
 				5EBAC28C1842DB59001042B8 /* ProfileViewController.m in Sources */,
 				5EFD602F1841846B00C7EC21 /* DefaultViewController.m in Sources */,
 				5E0D499A18429BAF007BDB31 /* BaseRequest.m in Sources */,
