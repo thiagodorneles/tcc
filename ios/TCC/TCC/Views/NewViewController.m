@@ -11,6 +11,7 @@
 #import "JVFloatLabeledTextView.h"
 #import <RestKit/RestKit.h>
 #import "Publish.h"
+#import "User.h"
 #import "constants.h"
 #import "ProgressHUD.h"
 #import <CoreLocation/CoreLocation.h>
@@ -257,7 +258,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     publish.title = self.titleField.text;
     publish.description = self.descriptionField.text;
     publish.tags = [NSMutableArray arrayWithArray:[[self.tagsField.text lowercaseString] componentsSeparatedByString:@","]];
-    publish.user = 1;
+    publish.user = [User getUser].pk;
     
     if (locationManager) {
         publish.location = [NSString stringWithFormat:@"%f, %f", locationManager.location.coordinate.latitude, locationManager.location.coordinate.longitude];
