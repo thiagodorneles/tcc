@@ -9,6 +9,7 @@
 #ifndef TCC_constants_h
 #define TCC_constants_h
 
+#define URL_DETALHES_SITE @"http://192.168.1.7:8000/publicacao/"
 #define URL_MEDIA @"http://192.168.1.7:8000"
 #define URL_SERVER @"http://192.168.1.7:8000/api/"
 //#define URL_SERVER @"http://127.0.0.1:8000/api/"
