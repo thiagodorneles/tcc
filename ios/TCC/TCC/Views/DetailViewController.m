@@ -12,18 +12,21 @@
 #import "ProgressHUD.h"
 #import "PublishBlock.h"
 #import "constants.h"
+#import "MWPhotoBrowser.h"
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 280.0f
 #define CELL_CONTENT_MARGIN 10.0f
 
-@interface DetailViewController () <RKObjectLoaderDelegate, MKMapViewDelegate, UIActivityItemSource>
+@interface DetailViewController () <RKObjectLoaderDelegate, MKMapViewDelegate, UIActivityItemSource, MWPhotoBrowserDelegate>
+
+@property NSMutableArray *photosBrowser;
 
 @end
 
 @implementation DetailViewController
 
-@synthesize publish;
+@synthesize publish, photosBrowser;
 
 #pragma mark - View
 
@@ -43,7 +46,7 @@
     
     [[UIBarButtonItem appearance] setTintColor:[UIColor redColor]];
     
-    self.tableView.allowsSelection = NO;
+//    self.tableView.allowsSelection = NO;
     self.tableView.dataSource = self;
     
     if (self.publish.quant_blocks < 3)
@@ -67,7 +70,6 @@
     RKObjectManager *manager = [RKObjectManager sharedManager];
     RKURL *KURL = [RKURL URLWithBaseURL:[manager baseURL] resourcePath:[NSString stringWithFormat:@"/publishs/%ld/", (long)self.publish.pk]];
     [manager loadObjectsAtResourcePath:[KURL resourcePath] delegate:self];
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -147,6 +149,41 @@
     return 35;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1) {
+//        
+//        NSMutableArray *photos = [[NSMutableArray alloc] init];
+        
+        self.photosBrowser = [[NSMutableArray alloc] init];
+        
+        MWPhoto *photo;
+        for(NSString* imageStr in self.publish.images){
+            NSString *imageUrl = [NSString stringWithFormat:@"%@%@", URL_MEDIA, imageStr];
+            NSURL * imageURL = [NSURL URLWithString:imageUrl];
+            photo = [MWPhoto photoWithURL:imageURL];
+            [photosBrowser addObject:photo];
+        }
+
+        MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+        browser.displayActionButton = NO; // Show action button to allow sharing, copying, etc (defaults to YES)
+        browser.displayNavArrows = NO; // Whether to display left and right nav arrows on toolbar (defaults to NO)
+        browser.zoomPhotosToFill = YES; // Images that almost fill the screen will be initially zoomed to fill (defaults to YES)
+        [browser setCurrentPhotoIndex:1]; // Example: allows second image to be presented first
+
+        
+        UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:browser];
+        nc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self.navigationController presentViewController:nc animated:YES completion:nil];
+    
+        // Release
+        
+        // Deselect
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    }
+}
+
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
@@ -206,9 +243,10 @@
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, 150.0f)];
         if ([publish.thumbs count] > 0) {
             NSString *imageUrl = [NSString stringWithFormat:@"%@%@", URL_MEDIA, [publish.thumbs objectAtIndex:0]];
-            NSURL *URL = [NSURL URLWithString:imageUrl];
-            NSData *data = [NSData dataWithContentsOfURL:URL];
+            NSURL *dataUrl = [NSURL URLWithString:imageUrl];
+            NSData *data = [NSData dataWithContentsOfURL:dataUrl];
             imageView.image = [UIImage imageWithData:data];
+            cell.userInteractionEnabled = YES;
         }
         else {
             imageView.image = [UIImage imageNamed:@"nao_disponivel"];
@@ -306,6 +344,18 @@
 - (id)activityViewController:(UIActivityViewController *)activityViewController itemForActivityType:(NSString *)activityType
 {
     return activityType;
+}
+
+#pragma mark - MWPhotoBrowser
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+    return self.photosBrowser.count;
+}
+
+- (MWPhoto *)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    if (index < self.photosBrowser.count)
+        return [self.photosBrowser objectAtIndex:index];
+    return nil;
 }
 
 #pragma mark - RestKit
