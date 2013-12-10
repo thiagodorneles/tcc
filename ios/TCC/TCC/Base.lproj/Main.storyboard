@@ -16,13 +16,13 @@
                     </tabBar>
                     <connections>
                         <segue destination="bgf-gd-PaD" kind="relationship" relationship="viewControllers" id="Y51-Zm-tfi"/>
-                        <segue destination="vMm-iB-rOF" kind="relationship" relationship="viewControllers" id="Byk-XB-Gvi"/>
+                        <segue destination="v2t-gz-qVt" kind="relationship" relationship="viewControllers" id="fcx-6Q-vhl"/>
                         <segue destination="diP-yL-jpD" kind="relationship" relationship="viewControllers" id="RgX-TV-soI"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mpN-hg-HhM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1036" y="-473"/>
+            <point key="canvasLocation" x="1030" y="-473"/>
         </scene>
         <!--Config View Controller - Configurações-->
         <scene sceneID="DSs-DZ-b1e">
@@ -425,55 +425,52 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
                         <sections>
                             <tableViewSection id="gus-tB-puV">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="hfU-x4-aXG">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="title" textLabel="MQP-he-sTV" style="IBUITableViewCellStyleDefault" id="hfU-x4-aXG">
                                         <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hfU-x4-aXG" id="BHt-fy-LaV">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Protesto moradores Asa Branca" lineBreakMode="wordWrap" numberOfLines="2" minimumScaleFactor="0.5" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="c7p-6M-OxM">
-                                                    <rect key="frame" x="20" y="11" width="280" height="26"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MQP-he-sTV">
+                                                    <rect key="frame" x="15" y="0.0" width="290" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="34" id="aZ4-yK-Fpf">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="user" textLabel="nbd-3S-NtZ" rowHeight="34" style="IBUITableViewCellStyleDefault" id="aZ4-yK-Fpf">
                                         <rect key="frame" x="0.0" y="108" width="320" height="34"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aZ4-yK-Fpf" id="8k8-10-Os4">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="34"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Fulano" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TLJ-B3-lTi">
-                                                    <rect key="frame" x="20" y="11" width="182" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="20/10 19:45" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Es5-yh-CSS">
-                                                    <rect key="frame" x="223" y="11" width="77" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nbd-3S-NtZ">
+                                                    <rect key="frame" x="15" y="0.0" width="290" height="34"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="34" id="NwA-Gi-O84">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tags" textLabel="1Zf-Pv-BcY" rowHeight="34" style="IBUITableViewCellStyleDefault" id="NwA-Gi-O84">
                                         <rect key="frame" x="0.0" y="142" width="320" height="34"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NwA-Gi-O84" id="P4r-Nt-ece">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="34"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tags: protesto, transito" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dD3-7d-Iju">
-                                                    <rect key="frame" x="20" y="6" width="280" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1Zf-Pv-BcY">
+                                                    <rect key="frame" x="15" y="0.0" width="290" height="34"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -483,35 +480,29 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
                             </tableViewSection>
                             <tableViewSection headerTitle="Fotos" id="XYQ-Ie-esm">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="149" id="tEA-KA-RLU">
-                                        <rect key="frame" x="0.0" y="198" width="320" height="149"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="pictures" rowHeight="150" id="tEA-KA-RLU">
+                                        <rect key="frame" x="0.0" y="198" width="320" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tEA-KA-RLU" id="CqO-Bu-DfQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="149"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PeC-cm-85n">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="149"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                </imageView>
-                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Descrição" id="BA4-1a-KoK">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="149" id="yZz-Xu-5k5">
-                                        <rect key="frame" x="0.0" y="369" width="320" height="149"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="description" textLabel="CTU-tJ-3Oc" rowHeight="23" style="IBUITableViewCellStyleDefault" id="yZz-Xu-5k5">
+                                        <rect key="frame" x="0.0" y="370" width="320" height="23"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yZz-Xu-5k5" id="qSp-jj-jzU">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="149"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="23"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3sH-Jj-cej">
-                                                    <rect key="frame" x="20" y="10" width="42" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CTU-tJ-3Oc">
+                                                    <rect key="frame" x="15" y="0.0" width="290" height="23"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -522,21 +513,12 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
                             </tableViewSection>
                             <tableViewSection headerTitle="Localização" id="Gjv-Ir-GV6">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="149" id="oX7-VJ-gwv">
-                                        <rect key="frame" x="0.0" y="540" width="320" height="149"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellMap" rowHeight="200" id="oX7-VJ-gwv">
+                                        <rect key="frame" x="0.0" y="415" width="320" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oX7-VJ-gwv" id="egp-Q9-T8A">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="149"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Manifestantes realizam protesto na Avenida Assis Brasil por causa dos alagamentos redidenciais" translatesAutoresizingMaskIntoConstraints="NO" id="o5E-0d-eiB">
-                                                    <rect key="frame" x="15" y="11" width="290" height="63"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                </textView>
-                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -548,43 +530,15 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="8iv-Iz-on1"/>
-                    <connections>
-                        <outlet property="imagePicture" destination="PeC-cm-85n" id="GE2-aL-79P"/>
-                        <outlet property="labelDate" destination="Es5-yh-CSS" id="ZwO-2Z-8G7"/>
-                        <outlet property="labelDescription" destination="3sH-Jj-cej" id="IM2-k6-XPB"/>
-                        <outlet property="labelTags" destination="dD3-7d-Iju" id="WB7-Jh-KKn"/>
-                        <outlet property="labelTitle" destination="c7p-6M-OxM" id="7OJ-rF-DbI"/>
-                        <outlet property="labelUser" destination="TLJ-B3-lTi" id="zed-el-LzW"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Go4-q7-FXy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2759" y="-1193"/>
         </scene>
-        <!--Navigation Controller - Novo-->
-        <scene sceneID="5wo-jN-qOm">
-            <objects>
-                <navigationController storyboardIdentifier="NewView" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="vMm-iB-rOF" sceneMemberID="viewController">
-                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
-                    <tabBarItem key="tabBarItem" title="Novo" image="plus" id="tpf-Zd-qXK"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mhn-ea-hOv">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="qiQ-ps-zSJ" kind="relationship" relationship="rootViewController" id="ySc-XQ-IV1"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dDi-QT-vrT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1590" y="272"/>
-        </scene>
         <!--New View Controller-->
         <scene sceneID="2ty-6E-GCB">
             <objects>
-                <viewController id="qiQ-ps-zSJ" customClass="NewViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewController" id="qiQ-ps-zSJ" customClass="NewViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eaK-Nf-TNL"/>
                         <viewControllerLayoutGuide type="bottom" id="ss2-gD-a6i"/>
@@ -595,16 +549,21 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="bIt-au-n40">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="jof-gW-hpo">
+                            <connections>
+                                <action selector="buttonCancelTouched:" destination="qiQ-ps-zSJ" id="WKt-ev-KBc"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="wWr-qn-6Dg">
                             <connections>
-                                <action selector="buttonSaveTouched:" destination="qiQ-ps-zSJ" id="8eY-5F-K7h"/>
+                                <action selector="buttonSaveTouched:" destination="qiQ-ps-zSJ" id="IKu-yD-4oz"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EDv-lQ-haZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2116" y="272"/>
+            <point key="canvasLocation" x="2642" y="260"/>
         </scene>
         <!--Navigation Controller - Noticias-->
         <scene sceneID="KPL-Wr-zd1">
@@ -802,7 +761,26 @@ Nossos usuários são o máximo. Além deles gerarem a informação, também con
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sWh-xc-cf9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3874" y="272"/>
+            <point key="canvasLocation" x="5452" y="272"/>
+        </scene>
+        <!--Navigation Controller - Novo-->
+        <scene sceneID="pz0-Ga-Z91">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="v2t-gz-qVt" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Novo" image="plus" id="Lgq-xD-7wT"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="biO-6W-ji7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="qiQ-ps-zSJ" kind="relationship" relationship="rootViewController" id="8oa-Wi-uIl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3oN-fX-XMP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1590" y="252"/>
         </scene>
     </scenes>
     <resources>

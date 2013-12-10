@@ -12,9 +12,13 @@
 #import "PublishBlock.h"
 #import "constants.h"
 
+#define FONT_SIZE 14.0f
+#define CELL_CONTENT_WIDTH 280.0f
+#define CELL_CONTENT_MARGIN 10.0f
+
 //#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
-@interface DetailViewController () <RKObjectLoaderDelegate>
+@interface DetailViewController () <RKObjectLoaderDelegate, MKMapViewDelegate>
 
 
 //@property (strong, nonatomic) UIPopoverController *activityPopover;
@@ -44,10 +48,10 @@
     self.navigationController.navigationBar.tintColor = [UIColor redColor];
     
     [[UIBarButtonItem appearance] setTintColor:[UIColor redColor]];
-    NSDateFormatter *inFormat = [[NSDateFormatter alloc] init];
-    [inFormat setDateFormat:@"dd/MM HH:mm"];
+
     
     self.tableView.allowsSelection = NO;
+    self.tableView.dataSource = self;
     
     UIBarButtonItem *buttonShare = [[UIBarButtonItem alloc] init];
     buttonShare.image = [UIImage imageNamed:@"share"];
@@ -66,38 +70,38 @@
     
     
     // Carregando os dados
-    labelTitle.numberOfLines = 0;
-    labelDescription.numberOfLines = 0;
-    
-    labelTitle.text = self.publish.title;
-    [labelTitle sizeToFit];
-    labelUser.text = self.publish.user_name;
-    labelDate.text = [inFormat stringFromDate:self.publish.date];
-    labelDescription.text = self.publish.description;
-    
-    if (self.publish.tags)
-    {
-        NSMutableString *tag = [[NSMutableString alloc] initWithString:@"Tags: "];
-        [tag appendString:[self.publish.tags componentsJoinedByString:@","]];;
-        labelTags.text = tag;
-    }
-    
-    if ([self.publish.images count] > 0) {
-        NSString *imageUrl = [NSString stringWithFormat:@"%@%@", URL_MEDIA, [self.publish.images objectAtIndex:0]];
-        NSURL *URL = [NSURL URLWithString:imageUrl];
-        NSData *data = [NSData dataWithContentsOfURL:URL];
-        self.imagePicture.image = [UIImage imageWithData:data];
-    }
-    
+//    labelTitle.numberOfLines = 0;
+//    labelDescription.numberOfLines = 0;
+//    
+//    labelTitle.text = self.publish.title;
 //    [labelTitle sizeToFit];
-    [labelUser sizeToFit];
-    [labelDate sizeToFit];
-    [labelTags sizeToFit];
-    [labelDescription sizeToFit];
+//    labelUser.text = self.publish.user_name;
+//    labelDate.text = [inFormat stringFromDate:self.publish.date];
+//    labelDescription.text = self.publish.description;
+//    
+//    if (self.publish.tags)
+//    {
+//        NSMutableString *tag = [[NSMutableString alloc] initWithString:@"Tags: "];
+//        [tag appendString:[self.publish.tags componentsJoinedByString:@","]];;
+//        labelTags.text = tag;
+//    }
+//    
+//    if ([self.publish.images count] > 0) {
+//        NSString *imageUrl = [NSString stringWithFormat:@"%@%@", URL_MEDIA, [self.publish.images objectAtIndex:0]];
+//        NSURL *URL = [NSURL URLWithString:imageUrl];
+//        NSData *data = [NSData dataWithContentsOfURL:URL];
+//        self.imagePicture.image = [UIImage imageWithData:data];
+//    }
+//    
+////    [labelTitle sizeToFit];
+//    [labelUser sizeToFit];
+//    [labelDate sizeToFit];
+//    [labelTags sizeToFit];
+//    [labelDescription sizeToFit];
     
-    RKObjectManager *manager = [RKObjectManager sharedManager];
-    RKURL *KURL = [RKURL URLWithBaseURL:[manager baseURL] resourcePath:[NSString stringWithFormat:@"/publishs/%ld/", (long)self.publish.pk]];
-    [manager loadObjectsAtResourcePath:[KURL resourcePath] delegate:self];
+//    RKObjectManager *manager = [RKObjectManager sharedManager];
+//    RKURL *KURL = [RKURL URLWithBaseURL:[manager baseURL] resourcePath:[NSString stringWithFormat:@"/publishs/%ld/", (long)self.publish.pk]];
+//    [manager loadObjectsAtResourcePath:[KURL resourcePath] delegate:self];
 
 }
 
@@ -177,6 +181,173 @@
     }
     return 3;
 }
+
+ - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (section == 0)
+        return 3;
+    else
+        return 1;
+}
+
+- (float)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 0)
+        return 0;
+    return 35;
+}
+
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell;
+    
+    if (indexPath.section == 0) {
+        static NSString *cellPrincipal = @"cell";
+        cell = [tableView dequeueReusableCellWithIdentifier:cellPrincipal];
+        
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellPrincipal];
+        }
+        
+        cell.textLabel.numberOfLines = 0;
+        cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        
+        switch (indexPath.row) {
+            case 0:
+                cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+                cell.textLabel.text = self.publish.title;
+                break;
+                
+            case 1:
+            {
+                
+                
+                UILabel *lblUser = [UILabel new];
+                lblUser.text = self.publish.user_name;
+                lblUser.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+                lblUser.frame = CGRectMake(25.0f, CELL_CONTENT_MARGIN, cell.frame.size.width / 2 - 25.0f, 44);
+                [cell addSubview:lblUser];
+                
+                NSDateFormatter *inFormat = [[NSDateFormatter alloc] init];
+                [inFormat setDateFormat:@"dd/MM HH:mm"];
+
+                UILabel *lblDate = [UILabel new];
+                lblDate.textAlignment = NSTextAlignmentRight;
+                lblDate.text = [inFormat stringFromDate:self.publish.date];
+                lblDate.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+                lblDate.frame = CGRectMake(cell.frame.size.width - 105.0f, CELL_CONTENT_MARGIN, 80.0f, 44);
+                [cell addSubview:lblDate];
+                
+                break;
+            }
+                
+            case 2:
+                cell.textLabel.text = [NSString stringWithFormat:@"Tags: %@", [self.publish.tags componentsJoinedByString:@", "]];
+                cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+                break;
+        }
+    }
+    else if (indexPath.section == 1) {
+        static NSString *cellPictures = @"cellPictures";
+        cell = [tableView dequeueReusableCellWithIdentifier:cellPictures];
+        
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellPictures];
+        }
+        
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, 150.0f)];
+        if ([publish.thumbs count] > 0) {
+            NSString *imageUrl = [NSString stringWithFormat:@"%@%@", URL_MEDIA, [publish.thumbs objectAtIndex:0]];
+            NSURL *URL = [NSURL URLWithString:imageUrl];
+            NSData *data = [NSData dataWithContentsOfURL:URL];
+            imageView.image = [UIImage imageWithData:data];
+        }
+        else {
+            imageView.image = [UIImage imageNamed:@"nao_disponivel"];
+        }
+        
+        [cell addSubview:imageView];
+    }
+    else if (indexPath.section == 2) {
+        static NSString *cellDescription = @"cellDescription";
+        cell = [tableView dequeueReusableCellWithIdentifier:cellDescription];
+        
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellDescription];
+        }
+        
+        cell.textLabel.textAlignment = NSTextAlignmentJustified;
+        cell.textLabel.text = self.publish.description;
+        cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+        cell.textLabel.numberOfLines = 0;
+        [cell.textLabel sizeToFit];
+        
+    }
+    else if (indexPath.section == 3 && self.publish.location) {
+        static NSString *cellMap = @"cellMap";
+        cell = [tableView dequeueReusableCellWithIdentifier:cellMap];
+        
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellMap];
+        }
+        
+        NSArray *location = [self.publish.location componentsSeparatedByString:@", " ];
+        MKMapView *map = [[MKMapView alloc] init];
+        map.delegate = self;
+        map.userInteractionEnabled = false;
+        map.frame = CGRectMake(0, 0, cell.frame.size.width, 200.0f);
+        
+        CLLocationCoordinate2D startCoord;
+        startCoord.latitude = [[location objectAtIndex:0] floatValue];
+        startCoord.longitude = [[location objectAtIndex:1] floatValue];
+        
+        MKAnnotationView *point = [[MKAnnotationView alloc] init];
+        [point.annotation setCoordinate:startCoord];
+        [map addAnnotation:point.annotation];
+        [map setRegion:MKCoordinateRegionMakeWithDistance(startCoord, 200, 200) animated:YES];
+        [cell addSubview:map];
+    }
+    
+    return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+{
+    if (indexPath.section == 3) {
+        return 200;
+    }
+    else if (indexPath.section == 1) {
+        return 150;
+    }
+    else if (indexPath.section == 2) {
+        return [self calculateHeightForTableViewCellwithText:self.publish.description
+                                                     andFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
+    }
+    else if (indexPath.section == 0) {
+        if (indexPath.row == 0){
+            return [self calculateHeightForTableViewCellwithText:self.publish.title
+                                                         andFont:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]];
+        }
+        else if (indexPath.row == 2) {
+            NSString *tags = [self.publish.tags componentsJoinedByString:@", "];
+            return [self calculateHeightForTableViewCellwithText:tags
+                                                         andFont:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]];
+        }
+    }
+    return 44;
+}
+
+-(CGFloat)calculateHeightForTableViewCellwithText:(NSString *)text andFont:(UIFont*)font
+{
+    CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
+    CGSize size = CGSizeZero;
+    size = [text boundingRectWithSize: constraint
+                              options: NSStringDrawingUsesLineFragmentOrigin
+                           attributes: @{ NSFontAttributeName: font }
+                              context: nil].size;
+    
+    return size.height + (CELL_CONTENT_MARGIN * 2);
+}
+
 
 #pragma mark - RestKit
 
