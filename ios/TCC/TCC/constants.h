@@ -9,8 +9,9 @@
 #ifndef TCC_constants_h
 #define TCC_constants_h
 
-#define URL_PREFFIX @"http://192.168.1.7:8000"
+//#define URL_PREFFIX @"http://192.168.1.7:8000"
 //#define URL_PREFFIX @"http://127.0.0.1:8000"
+#define URL_PREFFIX @"http://192.168.101.171:8000"
 //#define URL_PREFFIX @"http://plataformaugc.herokuapp.com"
 
 #define URL_DETALHES_SITE URL_PREFFIX@"/publicacao/"

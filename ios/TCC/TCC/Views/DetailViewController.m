@@ -64,12 +64,16 @@
         buttonBlock.action = @selector(buttonBlockedTouched:);
         
         NSMutableArray *arrayButtons = [NSMutableArray arrayWithObjects:buttonShare, buttonBlock, nil];
+        
         self.navigationItem.rightBarButtonItems = arrayButtons;
+        
+        RKObjectManager *manager = [RKObjectManager sharedManager];
+        RKURL *KURL = [RKURL URLWithBaseURL:[manager baseURL] resourcePath:[NSString stringWithFormat:@"/publishs/%ld/", (long)self.publish.pk]];
+        [manager loadObjectsAtResourcePath:[KURL resourcePath] delegate:self];
     }
-    
-    RKObjectManager *manager = [RKObjectManager sharedManager];
-    RKURL *KURL = [RKURL URLWithBaseURL:[manager baseURL] resourcePath:[NSString stringWithFormat:@"/publishs/%ld/", (long)self.publish.pk]];
-    [manager loadObjectsAtResourcePath:[KURL resourcePath] delegate:self];
+    else {
+        self.navigationItem.title = @"Bloqueada";
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -198,7 +202,7 @@
         
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        
+        cell.userInteractionEnabled = NO;
         switch (indexPath.row) {
             case 0:
                 cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
@@ -372,11 +376,16 @@
         PublishBlock *p = (PublishBlock*)[objects objectAtIndex:0];
         
         if (p.quant_blocks >= 3) {
+            self.navigationController.navigationItem.rightBarButtonItems = nil;
             [self.navigationController popViewControllerAnimated:YES];
         }
         [NSThread sleepForTimeInterval:5];
     }
-    [ProgressHUD dismiss];
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [ProgressHUD dismiss];
+    });
 }
 
 @end

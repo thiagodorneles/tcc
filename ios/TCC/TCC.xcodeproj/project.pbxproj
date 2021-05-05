@@ -61,6 +61,7 @@
 		5E85CA7C1856C59400CFE941 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E85CA5E1856C59400CFE941 /* UIImage+WebP.m */; };
 		5E85CA7D1856C59400CFE941 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E85CA601856C59400CFE941 /* UIImageView+WebCache.m */; };
 		5E85CA7E1856C59400CFE941 /* MWPhotoBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5E85CA621856C59400CFE941 /* MWPhotoBrowser.bundle */; };
+		5E85CA8418578B4400CFE941 /* ConfigNewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E85CA8318578B4400CFE941 /* ConfigNewViewController.m */; };
 		5EBAB22B18418F9500A6A0DF /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EFD607C18418EF000C7EC21 /* libRestKit.a */; };
 		5EBAC28C1842DB59001042B8 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EBAC28B1842DB59001042B8 /* ProfileViewController.m */; };
 		5EBC500017EFD57B0082BFB7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EBC4FFF17EFD57B0082BFB7 /* Foundation.framework */; };
@@ -238,6 +239,8 @@
 		5E85CA611856C59400CFE941 /* MWPhotoBrowser-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MWPhotoBrowser-Prefix.pch"; sourceTree = "<group>"; };
 		5E85CA621856C59400CFE941 /* MWPhotoBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MWPhotoBrowser.bundle; sourceTree = "<group>"; };
 		5E85CA631856C59400CFE941 /* MWPhotoBrowser.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MWPhotoBrowser.xcodeproj; sourceTree = "<group>"; };
+		5E85CA8218578B4400CFE941 /* ConfigNewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfigNewViewController.h; path = Views/ConfigNewViewController.h; sourceTree = "<group>"; };
+		5E85CA8318578B4400CFE941 /* ConfigNewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfigNewViewController.m; path = Views/ConfigNewViewController.m; sourceTree = "<group>"; };
 		5EBAC28A1842DB59001042B8 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileViewController.h; path = Views/ProfileViewController.h; sourceTree = "<group>"; };
 		5EBAC28B1842DB59001042B8 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileViewController.m; path = Views/ProfileViewController.m; sourceTree = "<group>"; };
 		5EBC4FFC17EFD57B0082BFB7 /* TCC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TCC.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -329,6 +332,8 @@
 				5E4338A41846A74D00E32D92 /* ConfigViewController.m */,
 				5E85CA2318563CAF00CFE941 /* PreNewViewController.h */,
 				5E85CA2418563CAF00CFE941 /* PreNewViewController.m */,
+				5E85CA8218578B4400CFE941 /* ConfigNewViewController.h */,
+				5E85CA8318578B4400CFE941 /* ConfigNewViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -795,6 +800,7 @@
 				5EBC500C17EFD57B0082BFB7 /* main.m in Sources */,
 				5E85CA6C1856C59400CFE941 /* DACircularProgressView.m in Sources */,
 				5E20D8E01845659B00A67746 /* JVFloatLabeledTextView.m in Sources */,
+				5E85CA8418578B4400CFE941 /* ConfigNewViewController.m in Sources */,
 				5E85CA731856C59400CFE941 /* SDWebImageCompat.m in Sources */,
 				5E15DBAE183CC2B0008A6CD7 /* LoginViewController.m in Sources */,
 				5E85CA741856C59400CFE941 /* SDWebImageDecoder.m in Sources */,

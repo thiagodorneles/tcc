@@ -15,21 +15,26 @@
 #import "constants.h"
 #import "ProgressHUD.h"
 #import <CoreLocation/CoreLocation.h>
+#import "MWPhotoBrowser.h"
 
 const static CGFloat kJVFieldHeight = 44.0f;
 const static CGFloat kJVFieldHMargin = 10.0f;
 const static CGFloat kJVFieldFontSize = 16.0f;
 const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
-@interface NewViewController () <UITextFieldDelegate, UITextViewDelegate, RKObjectLoaderDelegate, RKRequestDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate>
+@interface NewViewController () <UITextFieldDelegate, UITextViewDelegate, RKObjectLoaderDelegate, RKRequestDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate, MWPhotoBrowserDelegate>
 {
     RKClient *client;
     UIButton *btnFotos, *btnLocalizacao;
     CLLocationManager *locationManager;
     BOOL firstView;
+    BOOL openCameraBefore;
 }
 
+@property UIScrollView *scrollView;
 @property UIImage *photo;
+@property NSMutableArray *multiplePhotos;
+@property NSMutableArray *photosBrowser;
 @property JVFloatLabeledTextField *titleField, *tagsField;
 @property JVFloatLabeledTextView *descriptionField;
 
@@ -38,6 +43,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 @implementation NewViewController
 
 @synthesize titleField, tagsField, descriptionField, photo;
+@synthesize multiplePhotos, photosBrowser;
 
 #pragma mark - View
 
@@ -50,11 +56,6 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     return self;
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -62,6 +63,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     [self setTitle: NSLocalizedString(@"Novo", @"")];
     [self createView];
     firstView = TRUE;
+    openCameraBefore = FALSE;
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,8 +71,24 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     [super didReceiveMemoryWarning];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"NewRecordCamera"] && !openCameraBefore) {
+        [self takePhoto:FALSE];
+    }
+}
+
 -(void)createView
 {
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+    self.scrollView.scrollEnabled = YES;
+    self.scrollView.pagingEnabled = YES;
+    self.scrollView.showsVerticalScrollIndicator = YES;
+    self.scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height * 2);
+    [self.view addSubview:self.scrollView];
+    
     CGFloat topOffset = [[UIApplication sharedApplication] statusBarFrame].size.height + self.navigationController.navigationBar.frame.size.height;
     
     UIColor *floatingLabelColor = [UIColor grayColor];
@@ -117,7 +135,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     [buttons addSubview:btnFotos];
     
     
-    [self.view addSubview:buttons];
+    [self.scrollView addSubview:buttons];
     
     
     self.titleField = [[JVFloatLabeledTextField alloc] initWithFrame:
@@ -129,7 +147,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     self.titleField.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.titleField.delegate = self;
     self.titleField.returnKeyType = UIReturnKeyNext;
-    [self.view addSubview:self.titleField];
+    [self.scrollView addSubview:self.titleField];
     
     UIView *div1 = [UIView new];
     div1.frame = CGRectMake(kJVFieldHMargin, titleField.frame.origin.y + titleField.frame.size.height,
@@ -145,13 +163,13 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     self.tagsField.floatingLabelTextColor = floatingLabelColor;
     self.tagsField.delegate = self;
     self.tagsField.returnKeyType = UIReturnKeyNext;
-    [self.view addSubview:self.tagsField];
+    [self.scrollView addSubview:self.tagsField];
     
     UIView *div3 = [UIView new];
     div3.frame = CGRectMake(kJVFieldHMargin, self.tagsField.frame.origin.y + self.tagsField.frame.size.height,
                             self.view.frame.size.width - 2*kJVFieldHMargin, 1.0f);
     div3.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3f];
-    [self.view addSubview:div3];
+    [self.scrollView addSubview:div3];
     
     self.descriptionField = [[JVFloatLabeledTextView alloc] initWithFrame:CGRectZero];
     self.descriptionField.frame = CGRectMake(kJVFieldHMargin - self.descriptionField.textContainer.lineFragmentPadding,
@@ -164,7 +182,9 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     self.descriptionField.floatingLabelTextColor = floatingLabelColor;
     self.descriptionField.delegate = self;
     self.descriptionField.returnKeyType = UIReturnKeyDone;
-    [self.view addSubview:self.descriptionField];
+    self.descriptionField.scrollEnabled = YES;
+    self.descriptionField.showsHorizontalScrollIndicator = YES;
+    [self.scrollView addSubview:self.descriptionField];
 
 }
 
@@ -174,6 +194,33 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 {
     return true;
 }
+
+//- (void)textViewDidBeginEditing:(UITextView *)textView;
+//{
+//    if (textView == self.descriptionField) {
+//
+//    }
+//}
+
+//-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+//{
+//    CGPoint point = textView.frame.origin;
+//    .descriptionField.contentOffset = point;
+////    self.scrollView.contentOffset = point;
+//    return YES;
+//}
+
+//-(void)textViewDidChange:(UITextView *)textView
+//{
+//    if ([textView.text hasSuffix:@"\n"]) {
+//        double delayInSeconds = 2.0;
+//        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+//        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//            CGPoint bottomOffset = CGPointMake(0, self.descriptionField.contentSize.height - self.descriptionField.bounds.size.height);
+//            [self.descriptionField setContentOffset:bottomOffset animated:YES];
+//        });
+//    }
+//}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -228,18 +275,30 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
 -(IBAction)buttonCameraTouched:(id)sender
 {
-    UIActionSheet *options = [[UIActionSheet alloc] initWithTitle:nil
-                                                         delegate:self
-                                                cancelButtonTitle:@"Cancelar"
-                                           destructiveButtonTitle:nil
-                                                otherButtonTitles:@"Camera", @"Rolo de camera", nil];
+
+    UIActionSheet *options = [UIActionSheet alloc];
+    if (self.multiplePhotos.count > 0) {
+        options = [[UIActionSheet alloc] initWithTitle:nil
+                                              delegate:self
+                                     cancelButtonTitle:@"Cancelar"
+                                destructiveButtonTitle:nil
+                                     otherButtonTitles:@"Camera", @"Rolo de camera", [NSString stringWithFormat:@"Ver fotos (%d)", self.multiplePhotos.count], @"Apagar fotos", nil];
+    }
+    else {
+        options = [[UIActionSheet alloc] initWithTitle:nil
+                                              delegate:self
+                                     cancelButtonTitle:@"Cancelar"
+                                destructiveButtonTitle:nil
+                                     otherButtonTitles:@"Camera", @"Rolo de camera", nil];
+    }
+    
     [options showInView:self.view];
 }
 
 - (IBAction)buttonCancelTouched:(id)sender
 {
     [self clearForm];
-//    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.view endEditing:YES];
 }
 
 - (IBAction)buttonSaveTouched:(id)sender
@@ -247,6 +306,9 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     if (![self validForm]) {
         return;
     }
+    
+    firstView = TRUE;
+    openCameraBefore = FALSE;
     
     [ProgressHUD show:@"Enviando..."];
     
@@ -257,8 +319,19 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     Publish *publish = [Publish new];
     publish.title = self.titleField.text;
     publish.description = self.descriptionField.text;
-    publish.tags = [NSMutableArray arrayWithArray:[[self.tagsField.text lowercaseString] componentsSeparatedByString:@","]];
     publish.user = [User getUser].pk;
+    
+    //    publish.tags = [NSMutableArray arrayWithArray:[[self.tagsField.text lowercaseString] componentsSeparatedByString:@","]];
+    
+    if (![self.tagsField.text isEqualToString:@""])
+    {   publish.tags = [NSMutableArray array];
+        NSMutableArray *t = [NSMutableArray arrayWithArray:[[self.tagsField.text lowercaseString] componentsSeparatedByString:@","]];
+        for (NSString *tmp in t) {
+            NSString *trimmedString = [tmp stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            [publish.tags addObject:trimmedString];
+        }
+    }
+    
     
     if (locationManager) {
         publish.location = [NSString stringWithFormat:@"%f, %f", locationManager.location.coordinate.latitude, locationManager.location.coordinate.longitude];
@@ -298,9 +371,11 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
         imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
     }
 #endif
-//    imagePickerController.editing = YES;
+    imagePickerController.editing = YES;
     imagePickerController.delegate = (id)self;
-    [self.navigationController presentViewController:imagePickerController animated:YES completion:nil];
+    [self.navigationController presentViewController:imagePickerController animated:YES completion:^{
+        openCameraBefore = TRUE;
+    }];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -312,6 +387,33 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
         case 1:
             [self takePhoto:TRUE];
             break;
+        case 2:
+        {
+            self.photosBrowser = [[NSMutableArray alloc] init];
+            MWPhoto *p;
+            for(UIImage* img in self.multiplePhotos){
+                p = [MWPhoto photoWithImage:img];
+                [self.photosBrowser addObject:p];
+            }
+            
+            MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+            browser.displayActionButton = NO; // Show action button to allow sharing, copying, etc (defaults to YES)
+            browser.displayNavArrows = NO; // Whether to display left and right nav arrows on toolbar (defaults to NO)
+            browser.zoomPhotosToFill = YES; // Images that almost fill the screen will be initially zoomed to fill (defaults to YES)
+            [browser setCurrentPhotoIndex:1]; // Example: allows second image to be presented first
+            
+            UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:browser];
+            nc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            [self.navigationController presentViewController:nc animated:YES completion:nil];
+        }
+            
+            break;
+        case 3:
+            self.photo = nil;
+            [self.multiplePhotos removeAllObjects];
+            btnFotos.selected = NO;
+            break;
+
     }
 }
 
@@ -320,6 +422,12 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     self.photo = [self scaleAndRotateImage:image];
+    btnFotos.selected = YES;
+    
+    if (self.multiplePhotos == nil)
+        self.multiplePhotos = [NSMutableArray array];
+    
+    [self.multiplePhotos addObject:self.photo];
     [picker dismissViewControllerAnimated:NO completion:nil];
 }
 
@@ -441,8 +549,11 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     self.tagsField.text = @"";
     self.descriptionField.text = @"";
     self.photo = nil;
+    self.multiplePhotos = nil;
+    self.photosBrowser =nil;
     locationManager = nil;
     btnLocalizacao.selected = NO;
+    btnFotos.selected = NO;
 }
 
 -(BOOL)validForm
@@ -452,7 +563,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
         valid = false;
     }
     
-    if (valid && [self.descriptionField.text isEqualToString:@""] && self.photo == nil)
+    if (valid && [self.descriptionField.text isEqualToString:@""] && self.photo == nil && (self.multiplePhotos == nil || self.multiplePhotos.count ==0))
     {
         valid = false;
     }
@@ -474,15 +585,20 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
 -(void)uploadImage:(NSInteger)publish_id
 {
-    [ProgressHUD show:@"Enviando imagens"];
+//    [ProgressHUD show:@"Enviando imagens"];
     
     client = [[RKClient alloc] initWithBaseURLString:URL_SERVER];
     NSDictionary *dict = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%d", publish_id] forKey:@"publish_id"];
     RKParams *params = [RKParams paramsWithDictionary:dict];
     
     // Attach the Image from Image View
-    NSData* imageData = UIImagePNGRepresentation(self.photo);
-    [params setData:imageData MIMEType:@"image/png" forParam:@"image"];
+//    NSData* imageData = UIImagePNGRepresentation(self.photo);
+//    [params setData:imageData MIMEType:@"image/png" forParam:@"image"];
+    
+    for (int i=0; i < self.multiplePhotos.count; i++) {
+        NSData* imageData = UIImagePNGRepresentation([self.multiplePhotos objectAtIndex:i]);
+        [params setData:imageData MIMEType:@"image/png" forParam:[NSString stringWithFormat:@"image_%d", i]];
+    }
     
     // Send it for processing!
     [client post:@"/upload/" params:params delegate:self];
@@ -501,10 +617,10 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 //    [ProgressHUD dismiss];
 
     if ([response statusCode] == 201) {
-        if ([[request resourcePath] rangeOfString:@"upload"].location == NSNotFound && self.photo == nil) {
+        if ([[request resourcePath] rangeOfString:@"upload"].location == NSNotFound && (self.multiplePhotos == nil || self.multiplePhotos.count == 0)) {
             [ProgressHUD showSuccess:@"Sucesso!"];
         }
-        else {
+        else if ([[request resourcePath] rangeOfString:@"upload"].length > 0) {
             [ProgressHUD showSuccess:@"Sucesso!"];
         }
     }
@@ -513,18 +629,23 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 - (void)objectLoader:(RKObjectLoader *)objectLoader didLoadObjects:(NSArray *)objects
 {
     if ([[objectLoader resourcePath] rangeOfString:@"upload"].location == NSNotFound) {
-        if (self.photo != nil) {
+        if (self.multiplePhotos != nil && self.multiplePhotos.count > 0) {
             Publish *p = (Publish*)[objects objectAtIndex:0];
             [self uploadImage:p.pk];
         }
         [self clearForm];
+        [ProgressHUD dismiss];
     }
 }
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didFailWithError:(NSError *)error
 {
     [ProgressHUD dismiss];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erro" message:@"Não foi possível completar a operação." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erro"
+                                                    message:@"Não foi possível completar a operação."
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
     [alert show];
 }
 
@@ -549,6 +670,18 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
                                               otherButtonTitles:nil, nil];
         [alert show];
     }
+}
+
+#pragma mark - MWPhotoBrowser
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+    return self.photosBrowser.count;
+}
+
+- (MWPhoto *)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    if (index < self.photosBrowser.count)
+        return [self.photosBrowser objectAtIndex:index];
+    return nil;
 }
 
 
